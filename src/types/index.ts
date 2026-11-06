@@ -67,7 +67,7 @@ export interface ActivityLog {
   product_id?: string | null;
   action: 'CREATE' | 'UPDATE' | 'ARCHIVE' | 'RESTORE' | 'DELETE' | 'STOCK_ADJUSTMENT' | 'IMPORT';
   description: string;
-  metadata?: Record<string, any> | null;
+  metadata?: Record<string, unknown> | null;
   created_at: string;
   product_name?: string;
 }
@@ -108,4 +108,3 @@ export interface UserProfile {
   created_at: string;
   updated_at: string;
 }
-
