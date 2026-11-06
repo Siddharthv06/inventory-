@@ -284,3 +284,4 @@ export function CategoryManager({ categories }: CategoryManagerProps) {
     </div>
   );
 }
+

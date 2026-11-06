@@ -18,34 +18,30 @@ export function ThemeProvider({ children }: { children: React.ReactNode }) {
 
   useEffect(() => {
     const saved = localStorage.getItem("innovexa-theme") as Theme | null;
-    if (saved) {
-      setThemeState(saved);
-    } else {
-      const prefersDark = window.matchMedia("(prefers-color-scheme: dark)").matches;
-      setThemeState(prefersDark ? "dark" : "light");
-    }
+    const initialTheme = saved || (window.matchMedia("(prefers-color-scheme: dark)").matches ? "dark" : "light");
+    setThemeState(initialTheme);
   }, []);
 
   useEffect(() => {
     const root = document.documentElement;
-    let effective: "light" | "dark" = "light";
+    const isDark =
+      theme === "dark" ||
+      (theme === "system" && window.matchMedia("(prefers-color-scheme: dark)").matches);
 
-    if (theme === "system") {
-      const isDark = window.matchMedia("(prefers-color-scheme: dark)").matches;
-      effective = isDark ? "dark" : "light";
-    } else {
-      effective = theme;
-    }
+    const nextResolved = isDark ? "dark" : "light";
+    setResolvedTheme(nextResolved);
 
-    setResolvedTheme(effective);
-
-    if (effective === "dark") {
+    if (isDark) {
       root.classList.add("dark");
     } else {
       root.classList.remove("dark");
     }
 
-    localStorage.setItem("innovexa-theme", theme);
+    try {
+      localStorage.setItem("innovexa-theme", theme);
+    } catch {
+      // Ignore in restricted storage environments
+    }
   }, [theme]);
 
   const setTheme = (t: Theme) => {

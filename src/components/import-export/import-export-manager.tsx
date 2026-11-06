@@ -323,3 +323,4 @@ DEMO-SKU-103,Nylon Braided USB-C Cable 2M,Accessories,150,499,120,25,Listed,60,g
     </div>
   );
 }
+

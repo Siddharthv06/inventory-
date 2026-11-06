@@ -680,3 +680,4 @@ export function ProductForm({ categories, initialData }: ProductFormProps) {
     </form>
   );
 }
+

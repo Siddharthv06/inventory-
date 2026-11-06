@@ -129,3 +129,4 @@ export function MobileNav({ isOpen, onClose, user }: MobileNavProps) {
     </div>
   );
 }
+

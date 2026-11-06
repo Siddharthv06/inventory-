@@ -26,7 +26,7 @@ export default async function DashboardPage() {
           {greeting}, {user.full_name}
         </h1>
         <p className="text-sm text-slate-500 dark:text-slate-400 mt-1">
-          Here's what's happening with your product inventory.
+          Here&apos;s what&apos;s happening with your product inventory.
         </p>
       </div>
 
@@ -55,3 +55,4 @@ export default async function DashboardPage() {
     </div>
   );
 }
+

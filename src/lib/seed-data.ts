@@ -710,3 +710,4 @@ export const INITIAL_ACTIVITIES: ActivityLog[] = [
     created_at: new Date(Date.now() - 2 * 3600000).toISOString(),
   },
 ];
+

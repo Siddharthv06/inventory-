@@ -200,3 +200,4 @@ CREATE POLICY "Users can view own stock movements"
 CREATE POLICY "Users can insert own stock movements"
     ON public.stock_movements FOR INSERT
     WITH CHECK (auth.uid() = user_id);
+

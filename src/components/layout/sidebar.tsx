@@ -137,3 +137,4 @@ export function Sidebar({ user }: SidebarProps) {
     </aside>
   );
 }
+

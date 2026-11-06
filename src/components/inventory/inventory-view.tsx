@@ -310,3 +310,4 @@ export function InventoryView({ products, categories }: InventoryViewProps) {
     </div>
   );
 }
+

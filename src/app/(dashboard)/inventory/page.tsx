@@ -14,3 +14,4 @@ export default async function InventoryPage() {
 
   return <InventoryView products={products} categories={categories} />;
 }
+

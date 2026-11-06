@@ -123,3 +123,4 @@ export function RecentProductsTable({ products }: RecentProductsTableProps) {
     </div>
   );
 }
+

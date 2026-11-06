@@ -204,3 +204,4 @@ export async function deleteCategory(id: string) {
   revalidatePath("/dashboard/categories");
   return { success: true };
 }
+

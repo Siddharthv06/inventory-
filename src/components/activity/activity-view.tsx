@@ -156,3 +156,4 @@ export function ActivityView({ initialActivities }: ActivityViewProps) {
     </div>
   );
 }
+

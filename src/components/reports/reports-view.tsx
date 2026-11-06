@@ -223,3 +223,4 @@ export function ReportsView({ data }: ReportsViewProps) {
     </div>
   );
 }
+

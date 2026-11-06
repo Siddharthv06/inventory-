@@ -17,3 +17,4 @@ export async function GET(request: NextRequest) {
   // Return user to login with error if code exchange fails
   return NextResponse.redirect(new URL("/login?error=Authentication%20failed", requestUrl.origin));
 }
+

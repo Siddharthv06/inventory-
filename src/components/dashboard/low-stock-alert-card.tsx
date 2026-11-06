@@ -82,3 +82,4 @@ export function LowStockAlertCard({ products }: LowStockAlertCardProps) {
     </div>
   );
 }
+

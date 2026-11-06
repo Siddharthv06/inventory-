@@ -129,3 +129,4 @@ export function InventoryOverviewCard({ stats }: InventoryOverviewProps) {
     </div>
   );
 }
+

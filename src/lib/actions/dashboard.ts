@@ -166,3 +166,4 @@ export async function getReportsData() {
     avgSellingPrice,
   };
 }
+

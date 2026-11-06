@@ -28,3 +28,4 @@ export default async function EditProductPage({ params }: EditProductPageProps) 
     </div>
   );
 }
+

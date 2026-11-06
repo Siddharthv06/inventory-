@@ -10,3 +10,4 @@ export default async function ActivityPage() {
 
   return <ActivityView initialActivities={activities} />;
 }
+

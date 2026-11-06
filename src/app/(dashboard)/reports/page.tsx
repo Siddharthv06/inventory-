@@ -10,3 +10,4 @@ export default async function ReportsPage() {
 
   return <ReportsView data={data} />;
 }
+

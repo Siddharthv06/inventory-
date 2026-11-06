@@ -72,3 +72,4 @@ export function ActivityFeed({ activities }: ActivityFeedProps) {
     </div>
   );
 }
+
