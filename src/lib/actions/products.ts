@@ -2,7 +2,7 @@
 
 import { createClient } from "@/lib/supabase/server";
 import { productSchema, ProductFormValues } from "@/lib/validations/product";
-import { Product, ProductStatus } from "@/types";
+import { Product } from "@/types";
 import { INITIAL_PRODUCTS, INITIAL_CATEGORIES } from "@/lib/seed-data";
 import { revalidatePath } from "next/cache";
 
@@ -222,9 +222,10 @@ export async function createProduct(rawData: ProductFormValues) {
         return { success: true, data };
       }
     }
-  } catch (err: any) {
+  } catch (err: unknown) {
     console.warn("Supabase createProduct fallback:", err);
-    if (err?.message?.includes("unique")) {
+    const errorMsg = err instanceof Error ? err.message : String(err);
+    if (errorMsg.includes("unique")) {
       return { success: false, error: "SKU already exists in your workspace." };
     }
   }

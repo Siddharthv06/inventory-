@@ -27,7 +27,15 @@ export async function getCategories(): Promise<Category[]> {
           .order("name", { ascending: true });
 
         if (!error && categories) {
-          return categories.map((c: any) => ({
+          return categories.map((c: {
+            id: string;
+            user_id: string;
+            name: string;
+            description?: string | null;
+            created_at: string;
+            updated_at: string;
+            products?: { id: string }[];
+          }) => ({
             id: c.id,
             user_id: c.user_id,
             name: c.name,
@@ -81,7 +89,7 @@ export async function createCategory(rawData: CategoryFormValues) {
         return { success: true, data };
       }
     }
-  } catch (err: any) {
+  } catch (err: unknown) {
     console.warn("Supabase createCategory fallback:", err);
   }
 

@@ -14,35 +14,39 @@ const ThemeContext = createContext<ThemeContextType | undefined>(undefined);
 
 export function ThemeProvider({ children }: { children: React.ReactNode }) {
   const [theme, setThemeState] = useState<Theme>("light");
-  const [resolvedTheme, setResolvedTheme] = useState<"light" | "dark">("light");
 
   useEffect(() => {
-    const saved = localStorage.getItem("innovexa-theme") as Theme | null;
-    const initialTheme = saved || (window.matchMedia("(prefers-color-scheme: dark)").matches ? "dark" : "light");
-    setThemeState(initialTheme);
+    try {
+      const saved = localStorage.getItem("innovexa-theme") as Theme | null;
+      if (saved) {
+        setThemeState(saved);
+      }
+    } catch {
+      // Ignore in restricted environments
+    }
   }, []);
+
+  const isDark =
+    theme === "dark" ||
+    (theme === "system" &&
+      typeof window !== "undefined" &&
+      window.matchMedia("(prefers-color-scheme: dark)").matches);
+
+  const resolvedTheme: "light" | "dark" = isDark ? "dark" : "light";
 
   useEffect(() => {
     const root = document.documentElement;
-    const isDark =
-      theme === "dark" ||
-      (theme === "system" && window.matchMedia("(prefers-color-scheme: dark)").matches);
-
-    const nextResolved = isDark ? "dark" : "light";
-    setResolvedTheme(nextResolved);
-
-    if (isDark) {
+    if (resolvedTheme === "dark") {
       root.classList.add("dark");
     } else {
       root.classList.remove("dark");
     }
-
     try {
       localStorage.setItem("innovexa-theme", theme);
     } catch {
-      // Ignore in restricted storage environments
+      // Ignore
     }
-  }, [theme]);
+  }, [theme, resolvedTheme]);
 
   const setTheme = (t: Theme) => {
     setThemeState(t);

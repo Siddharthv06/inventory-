@@ -34,7 +34,16 @@ export async function getActivityLogs(options?: {
 
         const { data, error } = await query;
         if (!error && data) {
-          return data.map((item: any) => ({
+          return data.map((item: {
+            id: string;
+            user_id: string;
+            product_id?: string | null;
+            action: ActivityLog["action"];
+            description: string;
+            metadata?: Record<string, unknown> | null;
+            created_at: string;
+            products?: { product_name: string } | null;
+          }) => ({
             id: item.id,
             user_id: item.user_id,
             product_id: item.product_id,

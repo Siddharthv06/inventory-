@@ -1,12 +1,11 @@
 "use client";
 
 import { formatCurrencyINR } from "@/lib/utils";
+import { DashboardStats } from "@/types";
 import {
   BarChart3,
   PieChart as PieChartIcon,
-  TrendingUp,
   Coins,
-  Package,
   AlertTriangle,
   Boxes,
   CheckCircle2,
@@ -15,7 +14,7 @@ import {
 
 interface ReportsViewProps {
   data: {
-    stats: any;
+    stats: DashboardStats;
     categoryStats: { name: string; count: number; units: number; value: number }[];
     statusStats: { name: string; count: number; color: string }[];
     stockHealth: { name: string; count: number; color: string }[];

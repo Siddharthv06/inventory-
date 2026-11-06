@@ -1,9 +1,7 @@
 "use server";
 
-import { createClient } from "@/lib/supabase/server";
-import { Product } from "@/types";
-import { INITIAL_PRODUCTS, INITIAL_CATEGORIES } from "@/lib/seed-data";
-import { productSchema } from "@/lib/validations/product";
+import { Product, ProductStatus } from "@/types";
+import { INITIAL_CATEGORIES } from "@/lib/seed-data";
 import { createProduct, getProducts } from "@/lib/actions/products";
 import { revalidatePath } from "next/cache";
 
@@ -47,7 +45,7 @@ export async function parseAndValidateCsv(csvText: string): Promise<ImportPrevie
     const rawCols = parseCsvLine(lines[i]);
     if (rawCols.length === 0 || rawCols.every((c) => c.trim() === "")) continue;
 
-    const rowObj: Record<string, any> = {};
+    const rowObj: Record<string, string> = {};
     headers.forEach((h, idx) => {
       rowObj[h] = rawCols[idx]?.trim() || "";
     });
@@ -84,7 +82,7 @@ export async function parseAndValidateCsv(csvText: string): Promise<ImportPrevie
     const status = validStatuses.includes(statusVal) ? statusVal : "Draft";
 
     // Match or create category
-    let matchedCat = INITIAL_CATEGORIES.find(
+    const matchedCat = INITIAL_CATEGORIES.find(
       (c) => c.name.toLowerCase() === categoryName.toLowerCase()
     );
     const categoryId = matchedCat ? matchedCat.id : INITIAL_CATEGORIES[0].id;
@@ -98,7 +96,7 @@ export async function parseAndValidateCsv(csvText: string): Promise<ImportPrevie
       currency: "INR",
       stock_quantity: stock,
       low_stock_threshold: parseInt(rowObj["low stock threshold"] || "10", 10) || 10,
-      status: status as any,
+      status: status as ProductStatus,
       weight_value: parseFloat(rowObj["weight"] || "0") || 0,
       weight_unit: (rowObj["weight unit"]?.toLowerCase() === "kg" ? "kg" : "g"),
       length: parseFloat(rowObj["length"] || "0") || 0,
@@ -171,8 +169,9 @@ export async function executeCsvImport(validItems: Partial<Product>[]) {
       } else {
         errors.push(`Failed for SKU ${item.sku}: ${res.error}`);
       }
-    } catch (err: any) {
-      errors.push(`Error on SKU ${item.sku}: ${err.message}`);
+    } catch (err: unknown) {
+      const msg = err instanceof Error ? err.message : String(err);
+      errors.push(`Error on SKU ${item.sku}: ${msg}`);
     }
   }
 
