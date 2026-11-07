@@ -84,10 +84,10 @@ export function MobileNav({ isOpen, onClose, user }: MobileNavProps) {
                 href={item.href}
                 onClick={onClose}
                 className={cn(
-                  "flex items-center gap-3 px-3 py-2.5 rounded-lg text-sm font-medium transition-colors",
+                  "flex items-center gap-3 px-3.5 py-2.5 rounded-xl text-sm font-medium transition-all",
                   isActive
-                    ? "bg-blue-50 text-blue-700 dark:bg-blue-500/10 dark:text-blue-400 font-semibold"
-                    : "text-slate-600 hover:text-slate-900 hover:bg-slate-50 dark:text-slate-400 dark:hover:text-slate-100 dark:hover:bg-slate-800"
+                    ? "liquid-glass-lens-tab text-blue-700 dark:text-blue-300 font-semibold shadow-md shadow-blue-500/10"
+                    : "text-slate-600 hover:text-slate-900 hover:liquid-glass-lens-tab dark:text-slate-400 dark:hover:text-slate-100"
                 )}
               >
                 <Icon

@@ -223,9 +223,9 @@ export function LiquidGlassCard({
   }, [waveTimestamp]);
 
   const intensityStyles = {
-    subtle: "bg-white/35 dark:bg-[#0F172A]/40",
-    medium: "bg-white/45 dark:bg-[#0F172A]/50",
-    vivid: "bg-white/60 dark:bg-[#0B1120]/65",
+    subtle: "bg-white/20 dark:bg-[#0F172A]/25",
+    medium: "bg-white/28 dark:bg-[#0F172A]/35",
+    vivid: "bg-white/45 dark:bg-[#0B1120]/50",
   }[intensity];
 
   const handleMouseMove = (e: React.MouseEvent<HTMLDivElement>) => {
@@ -311,13 +311,13 @@ export function LiquidGlassCard({
       } ${className}`}
       style={{
         backdropFilter: isSupported
-          ? `url(#${filterId}) blur(20px) saturate(190%) contrast(104%)`
-          : "blur(22px) saturate(190%) contrast(104%)",
+          ? `url(#${filterId}) blur(8px) saturate(220%) contrast(108%)`
+          : "blur(8px) saturate(220%) contrast(108%)",
         WebkitBackdropFilter: isSupported
-          ? `url(#${filterId}) blur(20px) saturate(190%) contrast(104%)`
-          : "blur(22px) saturate(190%) contrast(104%)",
+          ? `url(#${filterId}) blur(8px) saturate(220%) contrast(108%)`
+          : "blur(8px) saturate(220%) contrast(108%)",
         boxShadow:
-          "inset 0 1.5px 1px 0 rgba(255, 255, 255, 0.9), inset 0 -1px 1px 0 rgba(0, 0, 0, 0.04), 0 20px 45px -12px rgba(15, 23, 42, 0.08)",
+          "inset 0 1.5px 2px 0 rgba(255, 255, 255, 0.95), inset 0 -1px 2px 0 rgba(0, 0, 0, 0.05), 0 20px 45px -12px rgba(15, 23, 42, 0.10)",
         transformStyle: "preserve-3d",
         ...style,
       }}

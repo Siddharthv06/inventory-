@@ -127,10 +127,10 @@ export function ProductTable({
   };
 
   const statusStyles: Record<string, string> = {
-    Listed: "bg-emerald-50 text-emerald-700 dark:bg-emerald-950/40 dark:text-emerald-400 border-emerald-200 dark:border-emerald-800",
-    "Ready for Listing": "bg-amber-50 text-amber-700 dark:bg-amber-950/40 dark:text-amber-400 border-amber-200 dark:border-amber-800",
-    Draft: "bg-slate-100 text-slate-700 dark:bg-slate-800 dark:text-slate-300 border-slate-200 dark:border-slate-700",
-    Archived: "bg-zinc-100 text-zinc-500 dark:bg-zinc-800/80 dark:text-zinc-400 border-zinc-200 dark:border-zinc-700",
+    Listed: "liquid-glass-lens-tab px-2.5 py-0.5 text-[11px] font-semibold text-emerald-700 dark:text-emerald-300 border-emerald-400/40 bg-emerald-500/10 inline-block",
+    "Ready for Listing": "liquid-glass-lens-tab px-2.5 py-0.5 text-[11px] font-semibold text-amber-700 dark:text-amber-300 border-amber-400/40 bg-amber-500/10 inline-block",
+    Draft: "liquid-glass-lens-tab px-2.5 py-0.5 text-[11px] font-semibold text-slate-700 dark:text-slate-300 border-slate-400/30 bg-slate-500/10 inline-block",
+    Archived: "liquid-glass-lens-tab px-2.5 py-0.5 text-[11px] font-semibold text-zinc-500 dark:text-zinc-400 border-zinc-400/30 bg-zinc-500/10 inline-block",
   };
 
   return (
@@ -514,17 +514,17 @@ export function ProductTable({
             <button
               disabled={currentPage <= 1}
               onClick={() => applyFilters({ page: currentPage - 1 })}
-              className="px-2.5 py-1.5 rounded-lg border border-white/60 dark:border-white/10 bg-white/40 dark:bg-slate-900/40 disabled:opacity-40 disabled:cursor-not-allowed hover:bg-white/60 dark:hover:bg-slate-800 transition-colors shadow-xs"
+              className="liquid-glass-lens-tab px-3 py-1 text-xs font-medium text-slate-700 dark:text-slate-300 disabled:opacity-40 disabled:cursor-not-allowed hover:scale-105 transition-all"
             >
               Previous
             </button>
-            <span className="px-2 font-medium">
+            <span className="liquid-glass-lens-tab px-3 py-1 font-medium text-xs text-slate-700 dark:text-slate-300">
               Page {currentPage} of {Math.max(totalPages, 1)}
             </span>
             <button
               disabled={currentPage >= totalPages}
               onClick={() => applyFilters({ page: currentPage + 1 })}
-              className="px-2.5 py-1.5 rounded-lg border border-white/60 dark:border-white/10 bg-white/40 dark:bg-slate-900/40 disabled:opacity-40 disabled:cursor-not-allowed hover:bg-white/60 dark:hover:bg-slate-800 transition-colors shadow-xs"
+              className="liquid-glass-lens-tab px-3 py-1 text-xs font-medium text-slate-700 dark:text-slate-300 disabled:opacity-40 disabled:cursor-not-allowed hover:scale-105 transition-all"
             >
               Next
             </button>

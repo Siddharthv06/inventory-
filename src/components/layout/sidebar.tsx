@@ -76,10 +76,10 @@ export function Sidebar({ user }: SidebarProps) {
               key={item.href}
               href={item.href}
               className={cn(
-                "flex items-center gap-3 px-3 py-2 rounded-xl text-sm font-medium transition-all group",
+                "flex items-center gap-3 px-3.5 py-2.5 rounded-xl text-sm font-medium transition-all group",
                 isActive
-                  ? "bg-blue-600/15 text-blue-700 dark:bg-blue-500/20 dark:text-blue-300 border border-blue-500/30 shadow-xs font-semibold"
-                  : "text-slate-600 hover:text-slate-900 hover:bg-white/40 dark:text-slate-400 dark:hover:text-slate-200 dark:hover:bg-white/5"
+                  ? "liquid-glass-lens-tab text-blue-700 dark:text-blue-300 font-semibold shadow-md shadow-blue-500/10"
+                  : "text-slate-600 hover:text-slate-900 hover:liquid-glass-lens-tab dark:text-slate-400 dark:hover:text-slate-100"
               )}
             >
               <Icon
