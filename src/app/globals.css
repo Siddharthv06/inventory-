@@ -9,58 +9,58 @@
 
 :root {
   /* ========================================================
-   * INSPIRATION DESIGN SYSTEM PALETTE (media_1794032225005)
-   * Matte Clay Canvas, Pure White Floating Cards, Vibrant Neo Accents
+   * INSPIRATION NEO-MINIMALIST PALETTE
+   * Crisp, high-contrast, effortless viewing & usability
    * ======================================================== */
-  --background: #ededf0;
-  --foreground: #111111;
+  --background: #f1f2f5;
+  --foreground: #0f172a;
   --card: #ffffff;
-  --card-foreground: #111111;
+  --card-foreground: #0f172a;
   --popover: #ffffff;
-  --popover-foreground: #111111;
+  --popover-foreground: #0f172a;
   --primary: #111111;
   --primary-foreground: #ffffff;
   --secondary: #f4f5f8;
-  --secondary-foreground: #111111;
+  --secondary-foreground: #0f172a;
   --muted: #f4f5f8;
-  --muted-foreground: #71717a;
+  --muted-foreground: #64748b;
   --accent: #d4f94a;
   --accent-foreground: #111111;
   --destructive: #ef4444;
   --destructive-foreground: #ffffff;
-  --border: #e2e4e8;
-  --input: #f4f5f8;
+  --border: #e2e8f0;
+  --input: #f8fafc;
   --ring: #72cbf6;
-  --radius: 1.75rem; /* 28px smooth rounded corners */
+  --radius: 1.5rem;
 
-  /* Reference image exact signature colors */
-  --neo-blue: #72cbf6;       /* "New Project Discussion" / Header cyan */
-  --neo-lime: #d4f94a;       /* "Devs Meetings" / Active tabs / Toggles */
-  --neo-mint: #a6f4b8;       /* "Today's Bookings" / In Stock */
-  --neo-yellow: #fef08a;     /* "Coder" pill / Warning / Ready */
-  --neo-black: #111111;      /* Contrast chips "+3", primary pills */
-  --neo-clay: #ededf0;       /* Matte canvas background */
+  /* Signature reference tokens */
+  --neo-blue: #72cbf6;
+  --neo-lime: #d4f94a;
+  --neo-mint: #a6f4b8;
+  --neo-yellow: #fef08a;
+  --neo-black: #111111;
+  --neo-clay: #f1f2f5;
 }
 
 .dark {
-  --background: #111215;
+  --background: #0f1117;
   --foreground: #f8fafc;
-  --card: #1a1c21;
+  --card: #181a20;
   --card-foreground: #f8fafc;
-  --popover: #1a1c21;
+  --popover: #181a20;
   --popover-foreground: #f8fafc;
   --primary: #d4f94a;
   --primary-foreground: #111111;
-  --secondary: #24262d;
+  --secondary: #22252d;
   --secondary-foreground: #f8fafc;
-  --muted: #24262d;
-  --muted-foreground: #a1a1aa;
+  --muted: #22252d;
+  --muted-foreground: #94a3b8;
   --accent: #72cbf6;
   --accent-foreground: #111111;
   --destructive: #dc2626;
   --destructive-foreground: #ffffff;
-  --border: #282a30;
-  --input: #24262d;
+  --border: #292d36;
+  --input: #22252d;
   --ring: #d4f94a;
 }
 
@@ -73,24 +73,24 @@ body {
 }
 
 /* ========================================================
- * 1. FLOATING BENTO TILES: 28px Radius & Diffuse Clay Shadow
+ * 1. FLOATING CARDS & BENTO GEOMETRY
+ * Smooth 24px-28px radius, crisp borders, diffuse floating shadow
  * ======================================================== */
 
 .rounded-xl,
 .rounded-2xl,
 .rounded-3xl,
-[class*="rounded-xl"],
 [class*="rounded-2xl"],
 [class*="rounded-3xl"] {
-  border-radius: 28px !important;
+  border-radius: 24px !important;
 }
 
-/* All Card Surfaces */
+/* Base Card Surfaces */
 .bg-white,
 .dark .bg-slate-900,
 .dark .bg-\[\#0F172A\],
 .dark .bg-\[\#0D1527\] {
-  border: 1px solid rgba(255, 255, 255, 0.95) !important;
+  border: 1px solid rgba(226, 232, 240, 0.7) !important;
   box-shadow: 0 4px 20px -4px rgba(0, 0, 0, 0.04), 0 2px 6px -2px rgba(0, 0, 0, 0.02) !important;
 }
 
@@ -98,65 +98,72 @@ body {
 .dark .bg-slate-900,
 .dark .bg-\[\#0F172A\] {
   border: 1px solid rgba(255, 255, 255, 0.06) !important;
-  box-shadow: 0 8px 30px -4px rgba(0, 0, 0, 0.45) !important;
+  box-shadow: 0 8px 30px -4px rgba(0, 0, 0, 0.5) !important;
 }
 
-/* Clean, high-contrast typography matching reference */
-h1, h2, h3, .text-2xl, .text-3xl {
-  color: #111111 !important;
+/* Typography Hierarchy */
+h1 {
   font-weight: 800 !important;
   letter-spacing: -0.03em !important;
 }
 
-.dark h1, .dark h2, .dark h3, .dark .text-2xl, .dark .text-3xl {
-  color: #f8fafc !important;
+h2, h3 {
+  font-weight: 700 !important;
+  letter-spacing: -0.02em !important;
 }
 
 /* ========================================================
- * 2. SIDEBAR & TOPBAR: Floating Rounded Slabs with Gradient Profile
+ * 2. SIDEBAR & TOPBAR: Responsive, Floating & Clean
  * ======================================================== */
 
-/* Floating Sidebar Slab */
-aside {
-  margin: 16px 0 16px 20px !important;
-  height: calc(100vh - 32px) !important;
-  border-radius: 32px !important;
-  background-color: #ffffff !important;
-  border: 1px solid rgba(255, 255, 255, 0.95) !important;
-  box-shadow: 0 8px 30px -6px rgba(0, 0, 0, 0.05) !important;
-  overflow: hidden !important;
+/* Desktop Floating Sidebar */
+@media (min-width: 1024px) {
+  aside {
+    margin: 16px 0 16px 20px !important;
+    height: calc(100vh - 32px) !important;
+    border-radius: 28px !important;
+    background-color: #ffffff !important;
+    border: 1px solid rgba(226, 232, 240, 0.7) !important;
+    box-shadow: 0 4px 24px -4px rgba(0, 0, 0, 0.05) !important;
+    display: flex !important;
+    flex-direction: column !important;
+  }
 }
 
 .dark aside {
-  background-color: #1a1c21 !important;
+  background-color: #181a20 !important;
   border: 1px solid rgba(255, 255, 255, 0.06) !important;
 }
 
-/* Sidebar Logo Badge: Solid Jet Black tile */
-aside .bg-blue-600 {
+/* Brand Logo (IX): Keep perfect square proportions */
+aside .w-8.h-8.rounded-lg,
+.w-8.h-8.rounded-lg {
+  border-radius: 12px !important;
   background-color: #111111 !important;
   color: #ffffff !important;
-  border-radius: 14px !important;
-  font-weight: 800 !important;
+  padding: 0 !important;
+  display: flex !important;
+  align-items: center !important;
+  justify-content: center !important;
 }
 
-/* Active Nav Link: Electric Lime Pill (#d4f94a) with Bold Black text */
+/* Active Nav Pill: Electric Lime (#d4f94a) with Bold Dark Text */
 aside nav a[class*="bg-blue"] {
   background-color: #d4f94a !important;
   color: #111111 !important;
   border-radius: 9999px !important;
   font-weight: 800 !important;
-  padding: 11px 18px !important;
-  box-shadow: 0 4px 16px rgba(212, 249, 74, 0.38) !important;
+  padding: 10px 18px !important;
+  box-shadow: 0 4px 14px rgba(212, 249, 74, 0.35) !important;
   border: none !important;
 }
 
 aside nav a[class*="bg-blue"] svg {
   color: #111111 !important;
-  stroke-width: 2.4 !important;
+  stroke-width: 2.2 !important;
 }
 
-/* Inactive Nav Links: Soft rounded pills */
+/* Inactive Nav Links */
 aside nav a {
   border-radius: 9999px !important;
   font-weight: 600 !important;
@@ -166,456 +173,378 @@ aside nav a {
 
 aside nav a:hover {
   background-color: #f4f5f8 !important;
-  color: #111111 !important;
-  transform: translateX(3px);
+  color: #0f172a !important;
+  transform: translateX(2px);
 }
 
 .dark aside nav a:hover {
-  background-color: #24262d !important;
+  background-color: #22252d !important;
   color: #ffffff !important;
 }
 
-/* Sidebar User Profile: The Reference Gradient Card (Sky Blue -> Lime Green) */
+/* Sidebar User Profile Card: Reference Gradient Card */
 aside .p-3:last-child > div {
   background: linear-gradient(135deg, #72cbf6 0%, #d4f94a 100%) !important;
-  border-radius: 22px !important;
+  border-radius: 20px !important;
   border: none !important;
   padding: 12px 14px !important;
-  box-shadow: 0 4px 16px rgba(114, 203, 246, 0.25) !important;
+  box-shadow: 0 4px 14px rgba(114, 203, 246, 0.25) !important;
 }
 
 aside .p-3:last-child > div p:first-child {
   font-weight: 800 !important;
-  color: #111111 !important;
+  color: #0f172a !important;
   font-size: 13px !important;
 }
 
 aside .p-3:last-child > div p:last-child {
   font-weight: 700 !important;
-  color: rgba(17, 17, 17, 0.7) !important;
+  color: rgba(15, 23, 42, 0.75) !important;
   font-size: 11px !important;
   text-transform: uppercase !important;
   letter-spacing: 0.04em !important;
 }
 
-/* User Avatar Disc: Black circle like the reference image */
+/* Avatar Disc */
 aside .p-3:last-child > div .rounded-full {
   background-color: #111111 !important;
   color: #ffffff !important;
   font-weight: 800 !important;
-  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.2) !important;
-}
-
-/* Sign out button in user card */
-aside .p-3:last-child button {
-  background-color: rgba(255, 255, 255, 0.6) !important;
-  border-radius: 9999px !important;
-  color: #111111 !important;
-}
-
-aside .p-3:last-child button:hover {
-  background-color: #111111 !important;
-  color: #ffffff !important;
+  box-shadow: 0 2px 6px rgba(0, 0, 0, 0.2) !important;
 }
 
 /* Floating Topbar Header */
-header {
-  margin: 16px 20px 0 20px !important;
-  height: 72px !important;
-  border-radius: 28px !important;
-  background-color: #ffffff !important;
-  border: 1px solid rgba(255, 255, 255, 0.95) !important;
-  box-shadow: 0 4px 20px -4px rgba(0, 0, 0, 0.04) !important;
-  padding: 0 24px !important;
+@media (min-width: 1024px) {
+  header {
+    margin: 16px 20px 0 20px !important;
+    height: 70px !important;
+    border-radius: 24px !important;
+    background-color: #ffffff !important;
+    border: 1px solid rgba(226, 232, 240, 0.7) !important;
+    box-shadow: 0 4px 20px -4px rgba(0, 0, 0, 0.04) !important;
+    padding: 0 24px !important;
+  }
+}
+
+@media (max-width: 1023px) {
+  header {
+    margin: 8px 12px 0 12px !important;
+    height: 58px !important;
+    border-radius: 16px !important;
+    background-color: #ffffff !important;
+    border: 1px solid rgba(226, 232, 240, 0.7) !important;
+    padding: 0 16px !important;
+  }
 }
 
 .dark header {
-  background-color: #1a1c21 !important;
+  background-color: #181a20 !important;
   border: 1px solid rgba(255, 255, 255, 0.06) !important;
 }
 
 /* ========================================================
- * 3. DASHBOARD ANALYTICS GRID: Exact Reference Colors
+ * 3. DASHBOARD TOP KPI CARDS: Exact Reference Palette & Legibility
  * ======================================================== */
 
-/* Top 6 Analytics Cards Grid */
-.grid.grid-cols-1.sm\:grid-cols-2.lg\:grid-cols-3 {
+/* Target the dashboard's top analytics cards specifically */
+main > div > .grid.grid-cols-1.sm\:grid-cols-2.lg\:grid-cols-3 {
   gap: 16px !important;
 }
 
-/* Card 1: Sky Blue (#72cbf6) like "New Project Discussion" */
-.grid.grid-cols-1.sm\:grid-cols-2.lg\:grid-cols-3 > div:nth-child(1) {
+/* Card 1: Sky Blue (#72cbf6) - "Total Products" */
+main > div > .grid.grid-cols-1.sm\:grid-cols-2.lg\:grid-cols-3 > div:nth-child(1) {
   background-color: #72cbf6 !important;
   border: none !important;
-  color: #111111 !important;
   box-shadow: 0 8px 24px -4px rgba(114, 203, 246, 0.35) !important;
   transition: transform 0.2s ease, box-shadow 0.2s ease !important;
 }
 
-.grid.grid-cols-1.sm\:grid-cols-2.lg\:grid-cols-3 > div:nth-child(1):hover {
+main > div > .grid.grid-cols-1.sm\:grid-cols-2.lg\:grid-cols-3 > div:nth-child(1):hover {
   transform: translateY(-2px);
   box-shadow: 0 12px 28px -4px rgba(114, 203, 246, 0.45) !important;
 }
 
-.grid.grid-cols-1.sm\:grid-cols-2.lg\:grid-cols-3 > div:nth-child(1) * {
-  color: #111111 !important;
-}
-
-.grid.grid-cols-1.sm\:grid-cols-2.lg\:grid-cols-3 > div:nth-child(1) span {
+main > div > .grid.grid-cols-1.sm\:grid-cols-2.lg\:grid-cols-3 > div:nth-child(1) span {
+  color: #0f172a !important;
   font-weight: 700 !important;
 }
 
-.grid.grid-cols-1.sm\:grid-cols-2.lg\:grid-cols-3 > div:nth-child(1) [class*="bg-"] {
-  background-color: rgba(255, 255, 255, 0.6) !important;
-  border-radius: 9999px !important;
-  padding: 10px !important;
+main > div > .grid.grid-cols-1.sm\:grid-cols-2.lg\:grid-cols-3 > div:nth-child(1) .text-2xl {
+  color: #0f172a !important;
+  font-weight: 800 !important;
 }
 
-/* Card 2: Electric Lime Green (#d4f94a) like "Devs Meetings" */
-.grid.grid-cols-1.sm\:grid-cols-2.lg\:grid-cols-3 > div:nth-child(2) {
+main > div > .grid.grid-cols-1.sm\:grid-cols-2.lg\:grid-cols-3 > div:nth-child(1) .text-xs {
+  color: #1e293b !important;
+}
+
+main > div > .grid.grid-cols-1.sm\:grid-cols-2.lg\:grid-cols-3 > div:nth-child(1) [class*="bg-"] {
+  background-color: rgba(255, 255, 255, 0.65) !important;
+  border-radius: 9999px !important;
+}
+
+main > div > .grid.grid-cols-1.sm\:grid-cols-2.lg\:grid-cols-3 > div:nth-child(1) svg {
+  color: #0f172a !important;
+}
+
+/* Card 2: Electric Lime Green (#d4f94a) - "Active Listings" */
+main > div > .grid.grid-cols-1.sm\:grid-cols-2.lg\:grid-cols-3 > div:nth-child(2) {
   background-color: #d4f94a !important;
   border: none !important;
-  color: #111111 !important;
   box-shadow: 0 8px 24px -4px rgba(212, 249, 74, 0.35) !important;
   transition: transform 0.2s ease, box-shadow 0.2s ease !important;
 }
 
-.grid.grid-cols-1.sm\:grid-cols-2.lg\:grid-cols-3 > div:nth-child(2):hover {
+main > div > .grid.grid-cols-1.sm\:grid-cols-2.lg\:grid-cols-3 > div:nth-child(2):hover {
   transform: translateY(-2px);
   box-shadow: 0 12px 28px -4px rgba(212, 249, 74, 0.45) !important;
 }
 
-.grid.grid-cols-1.sm\:grid-cols-2.lg\:grid-cols-3 > div:nth-child(2) * {
-  color: #111111 !important;
-}
-
-.grid.grid-cols-1.sm\:grid-cols-2.lg\:grid-cols-3 > div:nth-child(2) span {
+main > div > .grid.grid-cols-1.sm\:grid-cols-2.lg\:grid-cols-3 > div:nth-child(2) span {
+  color: #0f172a !important;
   font-weight: 700 !important;
 }
 
-.grid.grid-cols-1.sm\:grid-cols-2.lg\:grid-cols-3 > div:nth-child(2) [class*="bg-"] {
-  background-color: rgba(0, 0, 0, 0.08) !important;
-  border-radius: 9999px !important;
-  padding: 10px !important;
+main > div > .grid.grid-cols-1.sm\:grid-cols-2.lg\:grid-cols-3 > div:nth-child(2) .text-2xl {
+  color: #0f172a !important;
+  font-weight: 800 !important;
 }
 
-/* Card 3: Soft Mint Green (#a6f4b8) like "Today's Bookings" */
-.grid.grid-cols-1.sm\:grid-cols-2.lg\:grid-cols-3 > div:nth-child(3) {
+main > div > .grid.grid-cols-1.sm\:grid-cols-2.lg\:grid-cols-3 > div:nth-child(2) .text-xs {
+  color: #1e293b !important;
+}
+
+main > div > .grid.grid-cols-1.sm\:grid-cols-2.lg\:grid-cols-3 > div:nth-child(2) [class*="bg-"] {
+  background-color: rgba(0, 0, 0, 0.08) !important;
+  border-radius: 9999px !important;
+}
+
+main > div > .grid.grid-cols-1.sm\:grid-cols-2.lg\:grid-cols-3 > div:nth-child(2) svg {
+  color: #0f172a !important;
+}
+
+/* Card 3: Soft Mint Green (#a6f4b8) - "Ready for Listing" */
+main > div > .grid.grid-cols-1.sm\:grid-cols-2.lg\:grid-cols-3 > div:nth-child(3) {
   background-color: #a6f4b8 !important;
   border: none !important;
-  color: #111111 !important;
   box-shadow: 0 8px 24px -4px rgba(166, 244, 184, 0.35) !important;
   transition: transform 0.2s ease, box-shadow 0.2s ease !important;
 }
 
-.grid.grid-cols-1.sm\:grid-cols-2.lg\:grid-cols-3 > div:nth-child(3):hover {
+main > div > .grid.grid-cols-1.sm\:grid-cols-2.lg\:grid-cols-3 > div:nth-child(3):hover {
   transform: translateY(-2px);
   box-shadow: 0 12px 28px -4px rgba(166, 244, 184, 0.45) !important;
 }
 
-.grid.grid-cols-1.sm\:grid-cols-2.lg\:grid-cols-3 > div:nth-child(3) * {
-  color: #111111 !important;
-}
-
-.grid.grid-cols-1.sm\:grid-cols-2.lg\:grid-cols-3 > div:nth-child(3) span {
+main > div > .grid.grid-cols-1.sm\:grid-cols-2.lg\:grid-cols-3 > div:nth-child(3) span {
+  color: #0f172a !important;
   font-weight: 700 !important;
 }
 
-.grid.grid-cols-1.sm\:grid-cols-2.lg\:grid-cols-3 > div:nth-child(3) [class*="bg-"] {
-  background-color: rgba(255, 255, 255, 0.6) !important;
-  border-radius: 9999px !important;
-  padding: 10px !important;
+main > div > .grid.grid-cols-1.sm\:grid-cols-2.lg\:grid-cols-3 > div:nth-child(3) .text-2xl {
+  color: #0f172a !important;
+  font-weight: 800 !important;
 }
 
-/* Cards 4, 5, 6: Crisp Pure White Tiles with Tactile Accents */
-.grid.grid-cols-1.sm\:grid-cols-2.lg\:grid-cols-3 > div:nth-child(n+4) {
+main > div > .grid.grid-cols-1.sm\:grid-cols-2.lg\:grid-cols-3 > div:nth-child(3) .text-xs {
+  color: #1e293b !important;
+}
+
+main > div > .grid.grid-cols-1.sm\:grid-cols-2.lg\:grid-cols-3 > div:nth-child(3) [class*="bg-"] {
+  background-color: rgba(255, 255, 255, 0.65) !important;
+  border-radius: 9999px !important;
+}
+
+main > div > .grid.grid-cols-1.sm\:grid-cols-2.lg\:grid-cols-3 > div:nth-child(3) svg {
+  color: #0f172a !important;
+}
+
+/* Cards 4, 5, 6: Crisp White Tiles */
+main > div > .grid.grid-cols-1.sm\:grid-cols-2.lg\:grid-cols-3 > div:nth-child(n+4) {
   background-color: #ffffff !important;
-  border: 1px solid rgba(255, 255, 255, 0.95) !important;
-  box-shadow: 0 4px 20px -4px rgba(0, 0, 0, 0.04) !important;
   transition: transform 0.2s ease, box-shadow 0.2s ease !important;
 }
 
-.grid.grid-cols-1.sm\:grid-cols-2.lg\:grid-cols-3 > div:nth-child(n+4):hover {
+main > div > .grid.grid-cols-1.sm\:grid-cols-2.lg\:grid-cols-3 > div:nth-child(n+4):hover {
   transform: translateY(-2px);
-  box-shadow: 0 10px 24px -4px rgba(0, 0, 0, 0.07) !important;
+  box-shadow: 0 10px 24px -4px rgba(0, 0, 0, 0.06) !important;
 }
 
-.dark .grid.grid-cols-1.sm\:grid-cols-2.lg\:grid-cols-3 > div:nth-child(n+4) {
-  background-color: #1a1c21 !important;
+.dark main > div > .grid.grid-cols-1.sm\:grid-cols-2.lg\:grid-cols-3 > div:nth-child(n+4) {
+  background-color: #181a20 !important;
 }
 
-/* Circular icon badges on white cards */
-.grid.grid-cols-1.sm\:grid-cols-2.lg\:grid-cols-3 > div:nth-child(4) [class*="bg-"] {
-  background-color: #fef08a !important; /* Pastel Yellow */
+/* Icon badges on cards 4, 5, 6 */
+main > div > .grid.grid-cols-1.sm\:grid-cols-2.lg\:grid-cols-3 > div:nth-child(4) [class*="bg-"] {
+  background-color: #fef08a !important;
   color: #111111 !important;
   border-radius: 9999px !important;
-  padding: 10px !important;
 }
-.grid.grid-cols-1.sm\:grid-cols-2.lg\:grid-cols-3 > div:nth-child(4) svg {
+main > div > .grid.grid-cols-1.sm\:grid-cols-2.lg\:grid-cols-3 > div:nth-child(4) svg {
   color: #111111 !important;
 }
 
-.grid.grid-cols-1.sm\:grid-cols-2.lg\:grid-cols-3 > div:nth-child(5) [class*="bg-"] {
-  background-color: #111111 !important; /* Jet Black */
+main > div > .grid.grid-cols-1.sm\:grid-cols-2.lg\:grid-cols-3 > div:nth-child(5) [class*="bg-"] {
+  background-color: #111111 !important;
   color: #ffffff !important;
   border-radius: 9999px !important;
-  padding: 10px !important;
 }
-.grid.grid-cols-1.sm\:grid-cols-2.lg\:grid-cols-3 > div:nth-child(5) svg {
+main > div > .grid.grid-cols-1.sm\:grid-cols-2.lg\:grid-cols-3 > div:nth-child(5) svg {
   color: #ffffff !important;
 }
 
-.grid.grid-cols-1.sm\:grid-cols-2.lg\:grid-cols-3 > div:nth-child(6) [class*="bg-"] {
-  background-color: #72cbf6 !important; /* Sky Blue */
-  color: #111111 !important;
+main > div > .grid.grid-cols-1.sm\:grid-cols-2.lg\:grid-cols-3 > div:nth-child(6) [class*="bg-"] {
+  background-color: #72cbf6 !important;
+  color: #0f172a !important;
   border-radius: 9999px !important;
-  padding: 10px !important;
 }
-.grid.grid-cols-1.sm\:grid-cols-2.lg\:grid-cols-3 > div:nth-child(6) svg {
-  color: #111111 !important;
+main > div > .grid.grid-cols-1.sm\:grid-cols-2.lg\:grid-cols-3 > div:nth-child(6) svg {
+  color: #0f172a !important;
 }
 
 /* ========================================================
- * 4. SEGMENTED BAR: "Sales Data" Pastel Blocks from Reference
+ * 4. SEGMENTED BAR: "Sales Data" Pastel Blocks
  * ======================================================== */
 
-/* Inventory Overview Card Segmented Progress Bar */
 .h-3.w-full.rounded-full.overflow-hidden.flex {
-  height: 22px !important;
-  border-radius: 12px !important;
-  background-color: #f1f3f6 !important;
-  padding: 3px !important;
+  height: 20px !important;
+  border-radius: 10px !important;
+  background-color: #f1f5f9 !important;
+  padding: 2px !important;
   gap: 3px !important;
 }
 
 .h-3.w-full.rounded-full.overflow-hidden.flex > div {
-  border-radius: 8px !important;
+  border-radius: 6px !important;
   transition: all 0.3s ease !important;
 }
 
-/* Block 1: Soft Mint */
 .h-3.w-full.rounded-full.overflow-hidden.flex > div:nth-child(1) {
   background-color: #a6f4b8 !important;
 }
 
-/* Block 2: Vibrant Lime */
 .h-3.w-full.rounded-full.overflow-hidden.flex > div:nth-child(2) {
   background-color: #d4f94a !important;
 }
 
-/* Block 3: Sky Blue */
 .h-3.w-full.rounded-full.overflow-hidden.flex > div:nth-child(3) {
   background-color: #72cbf6 !important;
 }
 
-/* Block 4: Jet Black */
 .h-3.w-full.rounded-full.overflow-hidden.flex > div:nth-child(4) {
   background-color: #111111 !important;
 }
 
-/* Status breakdown mini tiles */
-.grid.grid-cols-2.gap-3 > div,
-.grid.grid-cols-2.gap-4 > div {
-  border-radius: 18px !important;
-  background-color: #f7f8fa !important;
-  border: 1px solid #edf0f3 !important;
-  padding: 12px 16px !important;
-  transition: background-color 0.2s ease !important;
-}
-
-.grid.grid-cols-2.gap-3 > div:hover,
-.grid.grid-cols-2.gap-4 > div:hover {
-  background-color: #ffffff !important;
-  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.03) !important;
-}
-
 /* ========================================================
- * 5. SCHEDULE & ACTIVITY TIMELINE: Floating Event Pills
+ * 5. BUTTONS & ACTIONS: Pure Tactile Usability
+ * Only targets actual buttons and action links (never icons/progress bars)
  * ======================================================== */
 
-/* Activity Feed timeline entries matching bottom-right schedule in reference */
-.space-y-4 > div[class*="flex items-start"] {
-  border-radius: 18px !important;
-  background-color: #f8f9fb !important;
-  border: 1px solid #edf0f4 !important;
-  padding: 12px 16px !important;
-  margin-bottom: 8px !important;
-  transition: all 0.2s ease !important;
-}
-
-.space-y-4 > div[class*="flex items-start"]:hover {
-  background-color: #ffffff !important;
-  transform: translateY(-1px);
-  box-shadow: 0 4px 14px rgba(0, 0, 0, 0.04) !important;
-}
-
-/* Timeline icon discs: Black circle with white icon */
-.space-y-4 > div[class*="flex items-start"] > div:first-child {
-  background-color: #111111 !important;
-  border-radius: 9999px !important;
-  padding: 7px !important;
-}
-
-.space-y-4 > div[class*="flex items-start"] > div:first-child svg {
-  color: #ffffff !important;
-}
-
-/* Low Stock Alert list items */
-.space-y-3 > div[class*="flex items-center"] {
-  border-radius: 18px !important;
-  background-color: #f8f9fb !important;
-  border: 1px solid #edf0f4 !important;
-  padding: 12px 16px !important;
-  transition: all 0.2s ease !important;
-}
-
-.space-y-3 > div[class*="flex items-center"]:hover {
-  background-color: #ffffff !important;
-  transform: translateY(-1px);
-  box-shadow: 0 4px 14px rgba(0, 0, 0, 0.04) !important;
-}
-
-/* ========================================================
- * 6. BUTTONS & PILLS: Solid Black & Tactile Accents
- * ======================================================== */
-
-/* Primary Action Buttons: Solid Jet Black pill (#111111) hovering to Lime Green (#d4f94a) */
-.bg-blue-600,
-button[class*="bg-blue-600"],
-a[class*="bg-blue-600"] {
+button.bg-blue-600,
+a.bg-blue-600,
+button[type="submit"].bg-blue-600,
+[role="button"].bg-blue-600 {
   background-color: #111111 !important;
   color: #ffffff !important;
   border-radius: 9999px !important;
-  font-weight: 800 !important;
-  padding: 10px 22px !important;
-  box-shadow: 0 4px 14px rgba(0, 0, 0, 0.15) !important;
+  font-weight: 700 !important;
+  padding: 9px 20px !important;
+  box-shadow: 0 4px 14px rgba(0, 0, 0, 0.12) !important;
   transition: all 0.2s cubic-bezier(0.16, 1, 0.3, 1) !important;
   border: none !important;
-  letter-spacing: -0.01em !important;
 }
 
-.bg-blue-600:hover,
-button[class*="bg-blue-600"]:hover,
-a[class*="bg-blue-600"]:hover {
+button.bg-blue-600:hover,
+a.bg-blue-600:hover,
+button[type="submit"].bg-blue-600:hover {
   background-color: #d4f94a !important;
   color: #111111 !important;
-  transform: translateY(-1px) scale(1.02);
-  box-shadow: 0 6px 20px rgba(212, 249, 74, 0.45) !important;
+  transform: translateY(-1px);
+  box-shadow: 0 6px 18px rgba(212, 249, 74, 0.4) !important;
 }
 
-.dark .bg-blue-600,
-.dark button[class*="bg-blue-600"],
-.dark a[class*="bg-blue-600"] {
+.dark button.bg-blue-600,
+.dark a.bg-blue-600 {
   background-color: #d4f94a !important;
   color: #111111 !important;
 }
 
-.dark .bg-blue-600:hover,
-.dark button[class*="bg-blue-600"]:hover,
-.dark a[class*="bg-blue-600"]:hover {
+.dark button.bg-blue-600:hover,
+.dark a.bg-blue-600:hover {
   background-color: #72cbf6 !important;
-  color: #111111 !important;
+  color: #0f172a !important;
 }
 
 /* Secondary Button Pills */
-button[class*="border-slate-200"],
+button[class*="border-slate-200"]:not([role="checkbox"]),
 a[class*="border-slate-200"],
 button[class*="bg-slate-100"] {
   border-radius: 9999px !important;
-  border: 1px solid #e2e4e8 !important;
+  border: 1px solid #e2e8f0 !important;
   background-color: #ffffff !important;
-  font-weight: 700 !important;
-  color: #111111 !important;
-  padding: 9px 20px !important;
+  font-weight: 600 !important;
+  color: #0f172a !important;
+  padding: 8px 18px !important;
   transition: all 0.2s ease !important;
 }
 
 button[class*="border-slate-200"]:hover,
 a[class*="border-slate-200"]:hover,
 button[class*="bg-slate-100"]:hover {
-  background-color: #f4f5f8 !important;
+  background-color: #f8fafc !important;
   border-color: #111111 !important;
   color: #111111 !important;
 }
 
 /* ========================================================
- * 7. STATUS BADGES & TAGS: Mint, Pale Yellow, Sky Blue & Black
+ * 6. FORM INPUTS & SEARCH BARS: Effortless Usability
  * ======================================================== */
 
-/* In Stock / Listed / Healthy: Mint Green (#a6f4b8) with Black Text */
-.bg-emerald-50,
-[class*="bg-emerald-50"],
-.text-emerald-700 {
-  background-color: #a6f4b8 !important;
-  color: #111111 !important;
-  border-radius: 9999px !important;
-  font-weight: 800 !important;
-  padding: 4px 14px !important;
-  border: none !important;
+/* Search input with icon padding preserved */
+input[class*="pl-9"],
+input[class*="pl-10"] {
+  padding-left: 2.5rem !important;
 }
-
-/* Ready for Listing / Warning / Low: Pale Yellow (#fef08a) with Black Text */
-.bg-amber-50,
-[class*="bg-amber-50"],
-.text-amber-700 {
-  background-color: #fef08a !important;
-  color: #111111 !important;
-  border-radius: 9999px !important;
-  font-weight: 800 !important;
-  padding: 4px 14px !important;
-  border: none !important;
-}
-
-/* Draft / Sky Blue Badges (#72cbf6) */
-.bg-blue-50,
-[class*="bg-blue-50"],
-.text-blue-700 {
-  background-color: #72cbf6 !important;
-  color: #111111 !important;
-  border-radius: 9999px !important;
-  font-weight: 800 !important;
-  padding: 4px 14px !important;
-  border: none !important;
-}
-
-/* Out of Stock / Critical / Archived / "+3" badges: Solid Black (#111111) with White Text */
-.bg-rose-50,
-[class*="bg-rose-50"],
-.text-rose-700,
-.bg-zinc-100 {
-  background-color: #111111 !important;
-  color: #ffffff !important;
-  border-radius: 9999px !important;
-  font-weight: 800 !important;
-  padding: 4px 14px !important;
-  border: none !important;
-}
-
-/* ========================================================
- * 8. SEARCH BARS & INPUTS: Smooth Rounded Pills
- * ======================================================== */
 
 input[type="text"],
 input[type="search"],
 input[type="email"],
 input[type="password"],
-input[type="number"],
-select {
-  border-radius: 9999px !important;
-  background-color: #f5f6f8 !important;
-  border: 1px solid #e5e7eb !important;
-  padding: 10px 20px !important;
-  font-size: 13px !important;
-  font-weight: 600 !important;
-  color: #111111 !important;
+input[type="number"] {
+  border-radius: 14px !important;
+  background-color: #f8fafc !important;
+  border: 1px solid #e2e8f0 !important;
+  padding: 9px 16px;
+  font-size: 13.5px !important;
+  color: #0f172a !important;
   transition: all 0.2s ease !important;
 }
 
+/* Search bars specifically get sleek pill radius */
+input[placeholder*="Search"],
+input[type="search"] {
+  border-radius: 9999px !important;
+}
+
+/* Select dropdowns in filter bars */
+select {
+  border-radius: 9999px !important;
+  background-color: #f8fafc !important;
+  border: 1px solid #e2e8f0 !important;
+  padding: 8px 16px !important;
+  font-size: 13px !important;
+  font-weight: 600 !important;
+  color: #0f172a !important;
+  cursor: pointer !important;
+}
+
+/* Focus styles */
 input:focus,
-select:focus {
+select:focus,
+textarea:focus {
   border-color: #72cbf6 !important;
   background-color: #ffffff !important;
-  box-shadow: 0 0 0 4px rgba(114, 203, 246, 0.3) !important;
+  box-shadow: 0 0 0 3px rgba(114, 203, 246, 0.3) !important;
   outline: none !important;
 }
 
@@ -623,20 +552,124 @@ select:focus {
 .dark input[type="search"],
 .dark input[type="email"],
 .dark input[type="password"],
-.dark select {
-  background-color: #24262d !important;
-  color: #ffffff !important;
+.dark select,
+.dark textarea {
+  background-color: #22252d !important;
+  color: #f8fafc !important;
   border-color: #2e313a !important;
 }
 
 .dark input:focus,
-.dark select:focus {
+.dark select:focus,
+.dark textarea:focus {
   border-color: #d4f94a !important;
-  box-shadow: 0 0 0 4px rgba(212, 249, 74, 0.3) !important;
+  box-shadow: 0 0 0 3px rgba(212, 249, 74, 0.3) !important;
+}
+
+textarea {
+  border-radius: 14px !important;
+  background-color: #f8fafc !important;
+  border: 1px solid #e2e8f0 !important;
+  padding: 10px 14px !important;
+  font-size: 13.5px !important;
+}
+
+/* Checkboxes */
+input[type="checkbox"] {
+  accent-color: #111111 !important;
+  border-radius: 6px !important;
+  cursor: pointer !important;
 }
 
 /* ========================================================
- * 9. TABLES: Clean Rounded Container & Soft Row Dividers
+ * 7. STATUS BADGES & CHIPS: Scoped Only to Badges
+ * Does NOT override error banners, alert messages, or counts
+ * ======================================================== */
+
+/* In Stock / Listed Badge: Mint Green (#a6f4b8) */
+span[class*="bg-emerald-50"][class*="rounded"],
+span[class*="bg-emerald-100"][class*="rounded"] {
+  background-color: #a6f4b8 !important;
+  color: #064e3b !important;
+  border-radius: 9999px !important;
+  font-weight: 700 !important;
+  padding: 4px 12px !important;
+  border: none !important;
+  display: inline-flex !important;
+  align-items: center !important;
+}
+
+/* Ready for Listing / Warning: Soft Yellow (#fef08a) */
+span[class*="bg-amber-50"][class*="rounded"],
+span[class*="bg-amber-100"][class*="rounded"] {
+  background-color: #fef08a !important;
+  color: #713f12 !important;
+  border-radius: 9999px !important;
+  font-weight: 700 !important;
+  padding: 4px 12px !important;
+  border: none !important;
+  display: inline-flex !important;
+  align-items: center !important;
+}
+
+/* Draft: Sky Blue (#72cbf6) */
+span[class*="bg-blue-50"][class*="rounded"] {
+  background-color: #72cbf6 !important;
+  color: #0c4a6e !important;
+  border-radius: 9999px !important;
+  font-weight: 700 !important;
+  padding: 4px 12px !important;
+  border: none !important;
+  display: inline-flex !important;
+  align-items: center !important;
+}
+
+/* Out of Stock / Archived: Solid Jet Black (#111111) */
+span[class*="bg-rose-100"][class*="rounded"],
+span[class*="bg-zinc-100"][class*="rounded"] {
+  background-color: #111111 !important;
+  color: #ffffff !important;
+  border-radius: 9999px !important;
+  font-weight: 700 !important;
+  padding: 4px 12px !important;
+  border: none !important;
+  display: inline-flex !important;
+  align-items: center !important;
+}
+
+/* Alert Boxes & Banners: Readable, normal padding, never pills */
+div[class*="bg-rose-50"],
+div[class*="bg-rose-950"] {
+  border-radius: 14px !important;
+  background-color: #fef2f2 !important;
+  border: 1px solid #fecaca !important;
+  color: #991b1b !important;
+}
+
+.dark div[class*="bg-rose-50"],
+.dark div[class*="bg-rose-950"] {
+  background-color: rgba(153, 27, 27, 0.2) !important;
+  border: 1px solid rgba(239, 68, 68, 0.3) !important;
+  color: #fca5a5 !important;
+}
+
+div[class*="bg-emerald-50"],
+div[class*="bg-emerald-950"] {
+  border-radius: 14px !important;
+  background-color: #f0fdf4 !important;
+  border: 1px solid #bbf7d0 !important;
+  color: #166534 !important;
+}
+
+.dark div[class*="bg-emerald-50"],
+.dark div[class*="bg-emerald-950"] {
+  background-color: rgba(22, 101, 52, 0.2) !important;
+  border: 1px solid rgba(34, 197, 94, 0.3) !important;
+  color: #86efac !important;
+}
+
+/* ========================================================
+ * 8. DATA TABLES: Spacious, Legible & Crisp
  * ======================================================== */
 
 table {
@@ -646,42 +679,43 @@ table {
 }
 
 thead tr {
-  background-color: #f7f8fa !important;
+  background-color: #f8fafc !important;
 }
 
 .dark thead tr {
-  background-color: #202227 !important;
+  background-color: #1e2129 !important;
 }
 
 thead th {
-  color: #71717a !important;
+  color: #64748b !important;
   font-size: 11px !important;
-  font-weight: 800 !important;
+  font-weight: 700 !important;
   text-transform: uppercase !important;
-  letter-spacing: 0.06em !important;
-  border-bottom: 1px solid #edf0f3 !important;
-  padding: 14px 18px !important;
+  letter-spacing: 0.05em !important;
+  border-bottom: 1px solid #e2e8f0 !important;
+  padding: 13px 16px !important;
 }
 
 tbody tr {
   transition: background-color 0.15s ease !important;
-  border-bottom: 1px solid #f1f3f6 !important;
+  border-bottom: 1px solid #f1f5f9 !important;
 }
 
 tbody td {
-  padding: 14px 18px !important;
+  padding: 13px 16px !important;
+  font-size: 13px !important;
 }
 
 tbody tr:hover {
-  background-color: #f9fafb !important;
+  background-color: #f8fafc !important;
 }
 
 .dark tbody tr:hover {
-  background-color: #24262d !important;
+  background-color: #22252d !important;
 }
 
 /* ========================================================
- * 10. ANIMATIONS & SCROLLBAR
+ * 9. SCROLLBARS & SMOOTH FADE
  * ======================================================== */
 
 @keyframes fadeIn {
