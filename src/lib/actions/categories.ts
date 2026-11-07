@@ -1,6 +1,6 @@
 "use server";
 
-import { createClient } from "@/lib/supabase/server";
+import { createClient, getAuthUser } from "@/lib/supabase/server";
 import { categorySchema, CategoryFormValues } from "@/lib/validations/product";
 import { Category } from "@/types";
 import { INITIAL_CATEGORIES, INITIAL_PRODUCTS } from "@/lib/seed-data";
@@ -16,10 +16,10 @@ function isSupabaseConfigured(): boolean {
 export async function getCategories(): Promise<Category[]> {
   try {
     if (isSupabaseConfigured()) {
-      const supabase = await createClient();
-      const { data: { user } } = await supabase.auth.getUser();
+      const user = await getAuthUser();
 
       if (user) {
+        const supabase = await createClient();
         const { data: categories, error } = await supabase
           .from("categories")
           .select("*, products(id)")
@@ -63,10 +63,10 @@ export async function createCategory(rawData: CategoryFormValues) {
 
   try {
     if (isSupabaseConfigured()) {
-      const supabase = await createClient();
-      const { data: { user } } = await supabase.auth.getUser();
+      const user = await getAuthUser();
 
       if (user) {
+        const supabase = await createClient();
         const { data, error } = await supabase
           .from("categories")
           .insert({
@@ -120,10 +120,10 @@ export async function updateCategory(id: string, rawData: CategoryFormValues) {
 
   try {
     if (isSupabaseConfigured()) {
-      const supabase = await createClient();
-      const { data: { user } } = await supabase.auth.getUser();
+      const user = await getAuthUser();
 
       if (user) {
+        const supabase = await createClient();
         const { data, error } = await supabase
           .from("categories")
           .update({
@@ -163,10 +163,10 @@ export async function updateCategory(id: string, rawData: CategoryFormValues) {
 export async function deleteCategory(id: string) {
   try {
     if (isSupabaseConfigured()) {
-      const supabase = await createClient();
-      const { data: { user } } = await supabase.auth.getUser();
+      const user = await getAuthUser();
 
       if (user) {
+        const supabase = await createClient();
         // Check if any product is assigned to this category
         const { count } = await supabase
           .from("products")

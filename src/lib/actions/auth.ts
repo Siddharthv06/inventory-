@@ -1,9 +1,10 @@
 "use server";
 
-import { createClient } from "@/lib/supabase/server";
+import { createClient, getAuthUser } from "@/lib/supabase/server";
 import { loginSchema, signupSchema, forgotPasswordSchema, resetPasswordSchema } from "@/lib/validations/auth";
 import { redirect } from "next/navigation";
 import { revalidatePath } from "next/cache";
+import { cache } from "react";
 
 function isSupabaseConfigured(): boolean {
   const url = process.env.NEXT_PUBLIC_SUPABASE_URL;
@@ -150,11 +151,11 @@ export async function signOutAction() {
   redirect("/login");
 }
 
-export async function getCurrentUser() {
+export const getCurrentUser = cache(async () => {
   if (isSupabaseConfigured()) {
-    const supabase = await createClient();
-    const { data: { user } } = await supabase.auth.getUser();
+    const user = await getAuthUser();
     if (user) {
+      const supabase = await createClient();
       const { data: profile } = await supabase
         .from("profiles")
         .select("*")
@@ -180,7 +181,7 @@ export async function getCurrentUser() {
     company_name: "Innovexa Technologies",
     avatar_url: null,
   };
-}
+});
 
 export async function updateProfileAction(formData: FormData) {
   const fullName = formData.get("fullName") as string;

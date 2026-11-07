@@ -1,5 +1,6 @@
 import { createServerClient, type CookieOptions } from "@supabase/ssr";
 import { cookies } from "next/headers";
+import { cache } from "react";
 
 export async function createClient() {
   const cookieStore = await cookies();
@@ -30,3 +31,35 @@ export async function createClient() {
   });
 }
 
+/**
+ * Cached per-request authenticated user lookup.
+ * Eliminates redundant network calls to Supabase on navigation.
+ * Instantly returns null if no Supabase session cookie is present.
+ */
+export const getAuthUser = cache(async () => {
+  try {
+    const cookieStore = await cookies();
+    const allCookies = cookieStore.getAll();
+    const hasAuthCookie = allCookies.some(
+      (c) => c.name.startsWith("sb-") && Boolean(c.value)
+    );
+
+    if (!hasAuthCookie) {
+      return null;
+    }
+
+    const supabase = await createClient();
+    const {
+      data: { user },
+      error,
+    } = await supabase.auth.getUser();
+
+    if (error || !user) {
+      return null;
+    }
+
+    return user;
+  } catch {
+    return null;
+  }
+});

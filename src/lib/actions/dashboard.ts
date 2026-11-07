@@ -1,6 +1,6 @@
 "use server";
 
-import { createClient } from "@/lib/supabase/server";
+import { createClient, getAuthUser } from "@/lib/supabase/server";
 import { DashboardStats, Product, ActivityLog } from "@/types";
 import { INITIAL_PRODUCTS, INITIAL_CATEGORIES, INITIAL_ACTIVITIES } from "@/lib/seed-data";
 
@@ -12,10 +12,10 @@ function isSupabaseConfigured(): boolean {
 export async function getDashboardData() {
   try {
     if (isSupabaseConfigured()) {
-      const supabase = await createClient();
-      const { data: { user } } = await supabase.auth.getUser();
+      const user = await getAuthUser();
 
       if (user) {
+        const supabase = await createClient();
         // Fetch all user products
         const { data: products, error } = await supabase
           .from("products")

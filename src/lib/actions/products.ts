@@ -1,6 +1,6 @@
 "use server";
 
-import { createClient } from "@/lib/supabase/server";
+import { createClient, getAuthUser } from "@/lib/supabase/server";
 import { productSchema, ProductFormValues } from "@/lib/validations/product";
 import { Product } from "@/types";
 import { INITIAL_PRODUCTS, INITIAL_CATEGORIES } from "@/lib/seed-data";
@@ -37,10 +37,10 @@ export async function getProducts(options?: {
 
   try {
     if (isSupabaseConfigured()) {
-      const supabase = await createClient();
-      const { data: { user } } = await supabase.auth.getUser();
+      const user = await getAuthUser();
 
       if (user) {
+        const supabase = await createClient();
         let query = supabase
           .from("products")
           .select("*, category:categories(*)", { count: "exact" })
@@ -181,10 +181,10 @@ export async function createProduct(rawData: ProductFormValues) {
 
   try {
     if (isSupabaseConfigured()) {
-      const supabase = await createClient();
-      const { data: { user } } = await supabase.auth.getUser();
+      const user = await getAuthUser();
 
       if (user) {
+        const supabase = await createClient();
         // Enforce SKU uniqueness
         const { data: existing } = await supabase
           .from("products")
@@ -253,10 +253,10 @@ export async function createProduct(rawData: ProductFormValues) {
 export async function updateProduct(id: string, rawData: Partial<ProductFormValues>) {
   try {
     if (isSupabaseConfigured()) {
-      const supabase = await createClient();
-      const { data: { user } } = await supabase.auth.getUser();
+      const user = await getAuthUser();
 
       if (user) {
+        const supabase = await createClient();
         if (rawData.sku) {
           const { data: existing } = await supabase
             .from("products")
@@ -319,10 +319,10 @@ export async function updateProduct(id: string, rawData: Partial<ProductFormValu
 export async function archiveProduct(id: string) {
   try {
     if (isSupabaseConfigured()) {
-      const supabase = await createClient();
-      const { data: { user } } = await supabase.auth.getUser();
+      const user = await getAuthUser();
 
       if (user) {
+        const supabase = await createClient();
         const { data, error } = await supabase
           .from("products")
           .update({
@@ -368,10 +368,10 @@ export async function archiveProduct(id: string) {
 export async function restoreProduct(id: string) {
   try {
     if (isSupabaseConfigured()) {
-      const supabase = await createClient();
-      const { data: { user } } = await supabase.auth.getUser();
+      const user = await getAuthUser();
 
       if (user) {
+        const supabase = await createClient();
         const { data, error } = await supabase
           .from("products")
           .update({
@@ -417,10 +417,10 @@ export async function restoreProduct(id: string) {
 export async function deleteProduct(id: string) {
   try {
     if (isSupabaseConfigured()) {
-      const supabase = await createClient();
-      const { data: { user } } = await supabase.auth.getUser();
+      const user = await getAuthUser();
 
       if (user) {
+        const supabase = await createClient();
         const { error } = await supabase
           .from("products")
           .delete()
@@ -455,10 +455,10 @@ export async function bulkArchiveProducts(ids: string[]) {
 
   try {
     if (isSupabaseConfigured()) {
-      const supabase = await createClient();
-      const { data: { user } } = await supabase.auth.getUser();
+      const user = await getAuthUser();
 
       if (user) {
+        const supabase = await createClient();
         const { error } = await supabase
           .from("products")
           .update({
@@ -505,10 +505,10 @@ export async function adjustProductStock(id: string, newQuantity: number, reason
 
   try {
     if (isSupabaseConfigured()) {
-      const supabase = await createClient();
-      const { data: { user } } = await supabase.auth.getUser();
+      const user = await getAuthUser();
 
       if (user) {
+        const supabase = await createClient();
         const { data: prod } = await supabase
           .from("products")
           .select("stock_quantity, product_name, sku")
@@ -575,10 +575,10 @@ export async function adjustProductStock(id: string, newQuantity: number, reason
 export async function seedDemoData() {
   try {
     if (isSupabaseConfigured()) {
-      const supabase = await createClient();
-      const { data: { user } } = await supabase.auth.getUser();
+      const user = await getAuthUser();
 
       if (user) {
+        const supabase = await createClient();
         // Execute the PostgreSQL stored function
         const { error } = await supabase.rpc("seed_demo_data_for_user", {
           target_user_id: user.id,

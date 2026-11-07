@@ -1,6 +1,6 @@
 "use server";
 
-import { createClient } from "@/lib/supabase/server";
+import { createClient, getAuthUser } from "@/lib/supabase/server";
 import { ActivityLog } from "@/types";
 import { INITIAL_ACTIVITIES } from "@/lib/seed-data";
 
@@ -17,10 +17,10 @@ export async function getActivityLogs(options?: {
 
   try {
     if (isSupabaseConfigured()) {
-      const supabase = await createClient();
-      const { data: { user } } = await supabase.auth.getUser();
+      const user = await getAuthUser();
 
       if (user) {
+        const supabase = await createClient();
         let query = supabase
           .from("activity_logs")
           .select("*, products(product_name)")
