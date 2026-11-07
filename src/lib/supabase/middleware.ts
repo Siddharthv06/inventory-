@@ -89,6 +89,13 @@ export async function updateSession(request: NextRequest) {
     request.nextUrl.pathname.startsWith("/activity") ||
     request.nextUrl.pathname.startsWith("/settings");
 
+  // Root path (/): Remove landing page; send straight to /login (or /dashboard if signed in)
+  if (request.nextUrl.pathname === "/") {
+    const url = request.nextUrl.clone();
+    url.pathname = isAuthenticated ? "/dashboard" : "/login";
+    return NextResponse.redirect(url);
+  }
+
   // If user is authenticated and visits an auth page (login/signup), redirect to dashboard
   if (isAuthenticated && isAuthRoute) {
     const url = request.nextUrl.clone();
