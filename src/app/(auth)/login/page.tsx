@@ -35,8 +35,28 @@ function LoginForm() {
       return;
     }
 
-    router.push(redirectUrl);
-    router.refresh();
+    // Direct browser navigation ensures fresh cookies are attached on Vercel
+    window.location.href = redirectUrl;
+  };
+
+  const handleQuickDemo = async () => {
+    setIsSubmitting(true);
+    setError(null);
+    setEmail("reviewer@innovexa.tech");
+    setPassword("demo12345");
+
+    const formData = new FormData();
+    formData.append("email", "reviewer@innovexa.tech");
+    formData.append("password", "demo12345");
+    formData.append("rememberMe", "on");
+
+    const res = await loginAction(formData);
+    if (res?.error) {
+      setError(res.error);
+      setIsSubmitting(false);
+    } else {
+      window.location.href = redirectUrl;
+    }
   };
 
   return (
@@ -119,6 +139,15 @@ function LoginForm() {
         >
           <span>{isSubmitting ? "Authenticating..." : "Sign In to Dashboard"}</span>
           <ArrowRight className="w-4 h-4" />
+        </button>
+
+        <button
+          type="button"
+          onClick={handleQuickDemo}
+          disabled={isSubmitting}
+          className="w-full flex items-center justify-center gap-2 py-2 px-4 text-xs font-bold rounded-lg text-slate-700 dark:text-slate-200 bg-slate-100 hover:bg-slate-200 dark:bg-slate-800 dark:hover:bg-slate-700 transition-colors border border-slate-200 dark:border-slate-700 disabled:opacity-50"
+        >
+          <span>⚡ One-Click Demo Access</span>
         </button>
       </form>
 

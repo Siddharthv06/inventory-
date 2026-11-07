@@ -54,10 +54,10 @@ export async function updateSession(request: NextRequest) {
   });
 
   // Check user authentication fast-path:
-  // If no Supabase auth cookie exists, skip the slow remote HTTP call
   const hasAuthCookie = request.cookies
     .getAll()
     .some((c) => c.name.startsWith("sb-") && Boolean(c.value));
+  const hasDemoCookie = request.cookies.get("innovexa_demo_session")?.value === "active";
 
   let user = null;
   if (hasAuthCookie) {
@@ -70,6 +70,8 @@ export async function updateSession(request: NextRequest) {
       user = null;
     }
   }
+
+  const isAuthenticated = Boolean(user || hasDemoCookie);
 
   const isAuthRoute =
     request.nextUrl.pathname.startsWith("/login") ||
@@ -88,14 +90,14 @@ export async function updateSession(request: NextRequest) {
     request.nextUrl.pathname.startsWith("/settings");
 
   // If user is authenticated and visits an auth page (login/signup), redirect to dashboard
-  if (user && isAuthRoute) {
+  if (isAuthenticated && isAuthRoute) {
     const url = request.nextUrl.clone();
     url.pathname = "/dashboard";
     return NextResponse.redirect(url);
   }
 
   // If user has an expired/invalid auth cookie and visits dashboard, redirect to login
-  if (!user && hasAuthCookie && isDashboardRoute) {
+  if (!isAuthenticated && hasAuthCookie && isDashboardRoute) {
     const url = request.nextUrl.clone();
     url.pathname = "/login";
     url.searchParams.set("redirect", request.nextUrl.pathname);
