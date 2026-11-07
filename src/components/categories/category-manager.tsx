@@ -15,6 +15,7 @@ import {
   ExternalLink,
 } from "lucide-react";
 import Link from "next/link";
+import { LiquidGlassCard } from "@/components/ui/liquid-glass";
 
 interface CategoryManagerProps {
   categories: Category[];
@@ -124,9 +125,9 @@ export function CategoryManager({ categories }: CategoryManagerProps) {
       {/* Categories Grid */}
       <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4">
         {categories.map((cat) => (
-          <div
+          <LiquidGlassCard
             key={cat.id}
-            className="p-5 rounded-xl bg-white dark:bg-[#0F172A] border border-slate-200 dark:border-slate-800 shadow-sm hover:border-slate-300 dark:hover:border-slate-700 transition-all flex flex-col justify-between"
+            className="p-5 flex flex-col justify-between"
           >
             <div>
               <div className="flex items-center justify-between mb-2">
@@ -172,7 +173,7 @@ export function CategoryManager({ categories }: CategoryManagerProps) {
                 </button>
               </div>
             </div>
-          </div>
+          </LiquidGlassCard>
         ))}
       </div>
 

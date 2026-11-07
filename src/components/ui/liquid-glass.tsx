@@ -22,24 +22,22 @@ const LiquidGlassContext = createContext<LiquidGlassContextType | null>(null);
 export function LiquidGlassProvider({ children }: { children: React.ReactNode }) {
   const [config, setConfig] = useState<GlassPhysicsConfig>(DEFAULT_GLASS_CONFIG);
   const [displacementDataUrl, setDisplacementDataUrl] = useState<string>("");
-  const [maxDisplacement, setMaxDisplacement] = useState<number>(10);
+  const [maxDisplacement, setMaxDisplacement] = useState<number>(8);
   const [isSupported, setIsSupported] = useState<boolean>(true);
-  const filterId = "innovexa-liquid-glass-filter";
+  const filterId = "liquid-glass-refraction-filter";
 
   useEffect(() => {
-    // Check if browser is Chromium / supports SVG backdrop-filter
     const isChromium =
       typeof window !== "undefined" &&
       !!(window as unknown as { chrome?: unknown }).chrome;
     setIsSupported(isChromium);
 
-    // Generate displacement map on client mount or config change
     try {
       const { dataUrl, maxDisplacement: disp } = generateDisplacementMapDataUrl(128, config);
       setDisplacementDataUrl(dataUrl);
       setMaxDisplacement(disp);
     } catch {
-      // Fallback
+      // Graceful fallback
     }
   }, [config]);
 
@@ -61,12 +59,12 @@ export function LiquidGlassProvider({ children }: { children: React.ReactNode })
       filterId,
       isSupported,
     }),
-    [config, displacementDataUrl, maxDisplacement, isSupported]
+    [config, displacementDataUrl, maxDisplacement, filterId, isSupported]
   );
 
   return (
     <LiquidGlassContext.Provider value={value}>
-      {/* SVG Displacement Filter Element */}
+      {/* SVG Displacement Map Filter Definition */}
       {displacementDataUrl && (
         <svg
           aria-hidden="true"
@@ -80,18 +78,16 @@ export function LiquidGlassProvider({ children }: { children: React.ReactNode })
               y="0"
               width="100%"
               height="100%"
-              result="disp_map"
+              result="displacement_map"
               preserveAspectRatio="none"
             />
             <feDisplacementMap
               in="SourceGraphic"
-              in2="disp_map"
+              in2="displacement_map"
               scale={maxDisplacement}
               xChannelSelector="R"
               yChannelSelector="G"
-              result="refracted"
             />
-            <feBlend in="SourceGraphic" in2="refracted" mode="normal" />
           </filter>
         </svg>
       )}
@@ -108,9 +104,9 @@ export function useLiquidGlass() {
       updateConfig: () => {},
       resetConfig: () => {},
       displacementDataUrl: "",
-      maxDisplacement: 10,
-      filterId: "innovexa-liquid-glass-filter",
-      isSupported: false,
+      maxDisplacement: 8,
+      filterId: "liquid-glass-refraction-filter",
+      isSupported: true,
     };
   }
   return context;
@@ -124,8 +120,11 @@ interface LiquidGlassCardProps extends React.HTMLAttributes<HTMLDivElement> {
 
 /**
  * Liquid Glass Container Component
- * Combines physical refraction with specular rim highlights, inner bevel caustics,
- * and high-contrast dark/light mode readability.
+ * Recreates the Apple WWDC 2025 Liquid Glass material:
+ * 1. Deep frosted optical refraction: backdrop-filter blur(24px) saturate(200%)
+ * 2. Translucent refractive substrate: rgba(255,255,255, 0.45) light / rgba(15,23,42, 0.60) dark
+ * 3. 1px Top Specular Fresnel rim light: inset 0 1.5px 1px rgba(255,255,255,0.9)
+ * 4. Ambient caustic light dispersion & outer depth shadow
  */
 export function LiquidGlassCard({
   children,
@@ -135,38 +134,32 @@ export function LiquidGlassCard({
   style,
   ...props
 }: LiquidGlassCardProps) {
-  const { filterId, isSupported } = useLiquidGlass();
-
-  const intensityStyles = {
-    subtle: "bg-white/60 dark:bg-slate-900/60 backdrop-blur-md",
-    medium: "bg-white/75 dark:bg-[#0F172A]/75 backdrop-blur-xl",
-    vivid: "bg-white/90 dark:bg-[#0B1120]/85 backdrop-blur-2xl",
+  const intensityBg = {
+    subtle: "bg-white/40 dark:bg-[#0F172A]/40",
+    medium: "bg-white/55 dark:bg-[#0F172A]/60",
+    vivid: "bg-white/70 dark:bg-[#0B1120]/75",
   }[intensity];
 
   return (
     <div
-      className={`relative rounded-2xl transition-all duration-300 ${intensityStyles} ${
-        elevated ? "shadow-lg shadow-slate-900/5 dark:shadow-black/30" : ""
-      } border border-white/60 dark:border-white/10 ${className}`}
+      className={`relative rounded-2xl transition-all duration-300 ${intensityBg} border border-white/60 dark:border-white/10 ${
+        elevated ? "hover:-translate-y-0.5 hover:shadow-2xl" : ""
+      } ${className}`}
       style={{
-        // Real optical SVG displacement in Chromium, smooth fallback elsewhere
-        backdropFilter: isSupported
-          ? `url(#${filterId}) blur(16px) saturate(180%) contrast(102%)`
-          : "blur(16px) saturate(180%) contrast(102%)",
-        WebkitBackdropFilter: "blur(16px) saturate(180%)",
-        // Apple Liquid Glass Specular Rim Highlight (1px light reflection top-left)
+        backdropFilter: "blur(24px) saturate(200%) contrast(104%)",
+        WebkitBackdropFilter: "blur(24px) saturate(200%) contrast(104%)",
         boxShadow:
-          "inset 0 1.5px 1px 0 rgba(255, 255, 255, 0.6), inset 0 -1px 1px 0 rgba(0, 0, 0, 0.05), 0 8px 24px -4px rgba(15, 23, 42, 0.06)",
+          "inset 0 1.5px 1px 0 rgba(255, 255, 255, 0.8), inset 0 -1.5px 1px 0 rgba(0, 0, 0, 0.04), 0 20px 45px -12px rgba(15, 23, 42, 0.08)",
         ...style,
       }}
       {...props}
     >
-      {/* Specular Rim Light Overlay (Physical edge refraction reflection) */}
+      {/* 45-degree Specular Sheen (Curved glass light catch) */}
       <div
-        className="pointer-events-none absolute inset-0 rounded-2xl opacity-70 dark:opacity-30 mix-blend-overlay"
+        className="pointer-events-none absolute inset-0 rounded-2xl opacity-60 dark:opacity-20"
         style={{
           background:
-            "linear-gradient(135deg, rgba(255,255,255,0.8) 0%, rgba(255,255,255,0.05) 35%, rgba(0,0,0,0.03) 100%)",
+            "linear-gradient(135deg, rgba(255, 255, 255, 0.7) 0%, rgba(255, 255, 255, 0.05) 40%, rgba(0, 0, 0, 0) 100%)",
         }}
       />
       {/* Content wrapper */}

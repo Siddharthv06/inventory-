@@ -24,6 +24,7 @@ import {
   ExternalLink,
 } from "lucide-react";
 import { archiveProduct, restoreProduct, deleteProduct, bulkArchiveProducts } from "@/lib/actions/products";
+import { LiquidGlassCard } from "@/components/ui/liquid-glass";
 
 interface ProductTableProps {
   initialProducts: Product[];
@@ -135,7 +136,7 @@ export function ProductTable({
   return (
     <div className="space-y-4">
       {/* Action Bar: Search, Filters & Export */}
-      <div className="p-4 rounded-xl bg-white dark:bg-[#0F172A] border border-slate-200 dark:border-slate-800 shadow-sm flex flex-col lg:flex-row lg:items-center justify-between gap-3">
+      <LiquidGlassCard className="p-4 flex flex-col lg:flex-row lg:items-center justify-between gap-3">
         {/* Search */}
         <form onSubmit={handleSearchSubmit} className="relative flex-1 max-w-md">
           <Search className="w-4 h-4 text-slate-400 absolute left-3 top-1/2 -translate-y-1/2" />
@@ -218,7 +219,7 @@ export function ProductTable({
             <span>New Product</span>
           </Link>
         </div>
-      </div>
+      </LiquidGlassCard>
 
       {/* Bulk Action Bar (when rows are selected) */}
       {selectedIds.length > 0 && (
@@ -245,7 +246,7 @@ export function ProductTable({
       )}
 
       {/* Products Table */}
-      <div className="rounded-xl bg-white dark:bg-[#0F172A] border border-slate-200 dark:border-slate-800 shadow-sm overflow-hidden">
+      <LiquidGlassCard className="overflow-hidden">
         <div className="overflow-x-auto">
           <table className="w-full text-left text-xs">
             <thead className="bg-slate-50 dark:bg-slate-800/60 text-slate-500 dark:text-slate-400 font-semibold border-b border-slate-200 dark:border-slate-800">
@@ -529,7 +530,7 @@ export function ProductTable({
             </button>
           </div>
         </div>
-      </div>
+      </LiquidGlassCard>
 
       {/* Confirmation Modal */}
       {actionModal.type && (

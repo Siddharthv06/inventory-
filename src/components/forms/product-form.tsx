@@ -13,6 +13,7 @@ import {
   ExternalLink,
 } from "lucide-react";
 import Link from "next/link";
+import { LiquidGlassCard } from "@/components/ui/liquid-glass";
 
 interface ProductFormProps {
   categories: Category[];
@@ -174,7 +175,7 @@ export function ProductForm({ categories, initialData }: ProductFormProps) {
       )}
 
       {/* Section 1: Basic Information */}
-      <div className="p-6 rounded-xl bg-white dark:bg-[#0F172A] border border-slate-200 dark:border-slate-800 shadow-sm space-y-4">
+      <div className="p-6 liquid-glass liquid-glass-card rounded-2xl space-y-4">
         <h2 className="text-sm font-bold uppercase tracking-wider text-slate-700 dark:text-slate-300 border-b border-slate-100 dark:border-slate-800 pb-2">
           1. Basic Information
         </h2>
@@ -246,7 +247,7 @@ export function ProductForm({ categories, initialData }: ProductFormProps) {
       </div>
 
       {/* Section 2: Pricing */}
-      <div className="p-6 rounded-xl bg-white dark:bg-[#0F172A] border border-slate-200 dark:border-slate-800 shadow-sm space-y-4">
+      <div className="p-6 liquid-glass liquid-glass-card rounded-2xl space-y-4">
         <h2 className="text-sm font-bold uppercase tracking-wider text-slate-700 dark:text-slate-300 border-b border-slate-100 dark:border-slate-800 pb-2">
           2. Pricing & Currency
         </h2>
@@ -310,7 +311,7 @@ export function ProductForm({ categories, initialData }: ProductFormProps) {
       </div>
 
       {/* Section 3: Physical Details & Dimensions */}
-      <div className="p-6 rounded-xl bg-white dark:bg-[#0F172A] border border-slate-200 dark:border-slate-800 shadow-sm space-y-4">
+      <div className="p-6 liquid-glass liquid-glass-card rounded-2xl space-y-4">
         <h2 className="text-sm font-bold uppercase tracking-wider text-slate-700 dark:text-slate-300 border-b border-slate-100 dark:border-slate-800 pb-2">
           3. Physical Specifications & Dimensions
         </h2>
@@ -406,7 +407,7 @@ export function ProductForm({ categories, initialData }: ProductFormProps) {
       </div>
 
       {/* Section 4: Product Attributes */}
-      <div className="p-6 rounded-xl bg-white dark:bg-[#0F172A] border border-slate-200 dark:border-slate-800 shadow-sm space-y-4">
+      <div className="p-6 liquid-glass liquid-glass-card rounded-2xl space-y-4">
         <h2 className="text-sm font-bold uppercase tracking-wider text-slate-700 dark:text-slate-300 border-b border-slate-100 dark:border-slate-800 pb-2">
           4. Product Attributes (Optional)
         </h2>
@@ -457,7 +458,7 @@ export function ProductForm({ categories, initialData }: ProductFormProps) {
       </div>
 
       {/* Section 5: Inventory & Thresholds */}
-      <div className="p-6 rounded-xl bg-white dark:bg-[#0F172A] border border-slate-200 dark:border-slate-800 shadow-sm space-y-4">
+      <div className="p-6 liquid-glass liquid-glass-card rounded-2xl space-y-4">
         <h2 className="text-sm font-bold uppercase tracking-wider text-slate-700 dark:text-slate-300 border-b border-slate-100 dark:border-slate-800 pb-2">
           5. Inventory & Stock Controls
         </h2>
@@ -501,7 +502,7 @@ export function ProductForm({ categories, initialData }: ProductFormProps) {
       </div>
 
       {/* Section 6: Media & Listing Links (With Image Preview) */}
-      <div className="p-6 rounded-xl bg-white dark:bg-[#0F172A] border border-slate-200 dark:border-slate-800 shadow-sm space-y-4">
+      <div className="p-6 liquid-glass liquid-glass-card rounded-2xl space-y-4">
         <h2 className="text-sm font-bold uppercase tracking-wider text-slate-700 dark:text-slate-300 border-b border-slate-100 dark:border-slate-800 pb-2">
           6. Media & Listing Links
         </h2>
@@ -581,7 +582,7 @@ export function ProductForm({ categories, initialData }: ProductFormProps) {
       </div>
 
       {/* Section 7: Tax Information */}
-      <div className="p-6 rounded-xl bg-white dark:bg-[#0F172A] border border-slate-200 dark:border-slate-800 shadow-sm space-y-4">
+      <div className="p-6 liquid-glass liquid-glass-card rounded-2xl space-y-4">
         <h2 className="text-sm font-bold uppercase tracking-wider text-slate-700 dark:text-slate-300 border-b border-slate-100 dark:border-slate-800 pb-2">
           7. Tax & Compliance
         </h2>
@@ -621,7 +622,7 @@ export function ProductForm({ categories, initialData }: ProductFormProps) {
       </div>
 
       {/* Section 8: Status & Internal Notes */}
-      <div className="p-6 rounded-xl bg-white dark:bg-[#0F172A] border border-slate-200 dark:border-slate-800 shadow-sm space-y-4">
+      <div className="p-6 liquid-glass liquid-glass-card rounded-2xl space-y-4">
         <h2 className="text-sm font-bold uppercase tracking-wider text-slate-700 dark:text-slate-300 border-b border-slate-100 dark:border-slate-800 pb-2">
           8. Status & Remarks
         </h2>

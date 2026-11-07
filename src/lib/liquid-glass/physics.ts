@@ -207,3 +207,4 @@ export function generateDisplacementMapDataUrl(
     maxDisplacement: Math.max(4, Math.min(32, maxDisp * 2)),
   };
 }
+

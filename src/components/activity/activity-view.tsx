@@ -14,6 +14,7 @@ import {
   FileSpreadsheet,
   Filter,
 } from "lucide-react";
+import { LiquidGlassCard } from "@/components/ui/liquid-glass";
 
 interface ActivityViewProps {
   initialActivities: ActivityLog[];
@@ -113,13 +114,13 @@ export function ActivityView({ initialActivities }: ActivityViewProps) {
       </div>
 
       {/* Activity Timeline List */}
-      <div className="rounded-xl bg-white dark:bg-[#0F172A] border border-slate-200 dark:border-slate-800 shadow-sm overflow-hidden">
-        <div className="p-4 border-b border-slate-100 dark:border-slate-800 text-xs font-semibold text-slate-500 flex items-center justify-between">
+      <LiquidGlassCard className="overflow-hidden">
+        <div className="p-4 border-b border-white/40 dark:border-white/10 text-xs font-semibold text-slate-500 flex items-center justify-between">
           <span>Logged Event</span>
           <span>Timestamp</span>
         </div>
 
-        <div className="divide-y divide-slate-100 dark:divide-slate-800">
+        <div className="divide-y divide-white/20 dark:divide-white/5">
           {filtered.length === 0 ? (
             <div className="py-16 text-center text-slate-400">
               <History className="w-10 h-10 mx-auto mb-2 opacity-30" />
@@ -129,7 +130,7 @@ export function ActivityView({ initialActivities }: ActivityViewProps) {
             filtered.map((item) => (
               <div
                 key={item.id}
-                className="p-4 flex flex-col sm:flex-row sm:items-center justify-between gap-3 hover:bg-slate-50/70 dark:hover:bg-slate-800/40 transition-colors"
+                className="p-4 flex flex-col sm:flex-row sm:items-center justify-between gap-3 hover:bg-white/40 dark:hover:bg-white/5 transition-colors"
               >
                 <div className="flex items-start sm:items-center gap-3">
                   <div className="shrink-0">{getActionBadge(item.action)}</div>
@@ -152,7 +153,7 @@ export function ActivityView({ initialActivities }: ActivityViewProps) {
             ))
           )}
         </div>
-      </div>
+      </LiquidGlassCard>
     </div>
   );
 }

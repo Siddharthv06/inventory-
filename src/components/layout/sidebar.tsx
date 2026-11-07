@@ -42,9 +42,9 @@ export function Sidebar({ user }: SidebarProps) {
   const pathname = usePathname();
 
   return (
-    <aside className="w-64 border-r border-slate-200 dark:border-slate-800 bg-white dark:bg-[#0B1120] flex flex-col h-screen sticky top-0 transition-all select-none">
+    <aside className="w-64 border-r border-slate-200/80 dark:border-white/10 liquid-glass flex flex-col h-screen sticky top-0 transition-all select-none z-20">
       {/* Brand Header */}
-      <div className="h-16 flex items-center px-6 border-b border-slate-200 dark:border-slate-800">
+      <div className="h-16 flex items-center px-6 border-b border-slate-200/60 dark:border-white/10">
         <Link href="/dashboard" className="flex items-center gap-2.5 group">
           <div className="w-8 h-8 rounded-lg bg-blue-600 dark:bg-blue-500 text-white flex items-center justify-center font-bold text-lg shadow-sm shadow-blue-500/20 group-hover:scale-105 transition-transform">
             IX
