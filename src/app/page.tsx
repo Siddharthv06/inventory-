@@ -36,17 +36,17 @@ export default function LandingPage() {
             <ThemeToggle />
             <Link
               href="/login"
-              className="px-3.5 py-1.5 text-xs sm:text-sm font-medium rounded-lg text-slate-700 dark:text-slate-300 hover:bg-slate-100 dark:hover:bg-slate-800 transition-colors"
+              className="px-3.5 py-1.5 text-xs sm:text-sm font-semibold rounded-full text-slate-700 dark:text-slate-300 hover:bg-slate-100 dark:hover:bg-slate-800 transition-colors"
             >
               Sign In
             </Link>
-            <Link
-              href="/dashboard"
-              className="inline-flex items-center gap-1.5 px-4 py-1.5 text-xs sm:text-sm font-medium rounded-lg text-white bg-blue-600 hover:bg-blue-700 shadow-sm transition-all hover:scale-[1.02]"
+            <a
+              href="/api/demo-login"
+              className="inline-flex items-center gap-1.5 px-4 py-1.5 text-xs sm:text-sm font-bold rounded-full text-white bg-blue-600 hover:bg-blue-700 shadow-sm transition-all hover:scale-[1.02]"
             >
-              <span>Launch App</span>
+              <span>Enter Dashboard</span>
               <ArrowRight className="w-3.5 h-3.5" />
-            </Link>
+            </a>
           </div>
         </div>
       </header>
@@ -68,17 +68,17 @@ export default function LandingPage() {
 
         {/* Action Buttons */}
         <div className="mt-8 flex flex-wrap items-center justify-center gap-3">
-          <Link
-            href="/dashboard"
-            className="inline-flex items-center gap-2 px-6 py-3 text-sm font-semibold rounded-xl text-white bg-blue-600 hover:bg-blue-700 shadow-lg shadow-blue-500/25 transition-all hover:scale-105 active:scale-95"
+          <a
+            href="/api/demo-login"
+            className="inline-flex items-center gap-2 px-6 py-3 text-sm font-bold rounded-full text-white bg-blue-600 hover:bg-blue-700 shadow-lg shadow-blue-500/25 transition-all hover:scale-105 active:scale-95"
           >
-            <span>Open Workspace Dashboard</span>
+            <span>⚡ Enter Workspace Dashboard</span>
             <ArrowRight className="w-4 h-4" />
-          </Link>
+          </a>
 
           <Link
             href="/login"
-            className="inline-flex items-center gap-2 px-6 py-3 text-sm font-semibold rounded-xl text-slate-800 dark:text-slate-200 bg-white dark:bg-slate-800 border border-slate-200 dark:border-slate-700 hover:bg-slate-50 dark:hover:bg-slate-700/60 shadow-sm transition-all"
+            className="inline-flex items-center gap-2 px-6 py-3 text-sm font-bold rounded-full text-slate-800 dark:text-slate-200 bg-white dark:bg-slate-800 border border-slate-200 dark:border-slate-700 hover:bg-slate-50 dark:hover:bg-slate-700/60 shadow-sm transition-all"
           >
             <span>Sign In to Account</span>
           </Link>

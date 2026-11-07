@@ -180,6 +180,13 @@ export default function SignupPage() {
           <span>{isSubmitting ? "Creating Workspace..." : "Create Account"}</span>
           <ArrowRight className="w-4 h-4" />
         </button>
+
+        <a
+          href="/api/demo-login"
+          className="w-full flex items-center justify-center gap-2 py-2 px-4 text-xs font-bold rounded-lg text-slate-700 dark:text-slate-200 bg-slate-100 hover:bg-slate-200 dark:bg-slate-800 dark:hover:bg-slate-700 transition-colors border border-slate-200 dark:border-slate-700"
+        >
+          <span>⚡ Skip & Enter Dashboard Directly</span>
+        </a>
       </form>
 
       <div className="text-center text-xs text-slate-500 dark:text-slate-400 pt-2 border-t border-slate-100 dark:border-slate-800">
