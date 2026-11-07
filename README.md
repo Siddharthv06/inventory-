@@ -303,3 +303,5 @@ The platform comes pre-packaged with **20 realistic products** across 5 categori
 
 - **Author**: Candidate for Full Stack Developer Intern
 - **Organization**: Innovexa Technologies Technical Practical Assessment
+#   i n v e n t o r y -  
+ 
