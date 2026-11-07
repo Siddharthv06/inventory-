@@ -15,12 +15,6 @@ export default function AuthLayout({ children }: { children: React.ReactNode }) 
           </span>
         </Link>
         <div className="flex items-center gap-2 sm:gap-3">
-          <a
-            href="/api/demo-login"
-            className="inline-flex items-center gap-1.5 px-3.5 py-1.5 text-xs font-bold rounded-full bg-slate-900 text-white hover:bg-slate-800 dark:bg-white dark:text-slate-900 transition-all shadow-sm"
-          >
-            <span>⚡ Enter Dashboard Directly</span>
-          </a>
           <ThemeToggle />
         </div>
       </div>
