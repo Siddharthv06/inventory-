@@ -9,8 +9,9 @@ import {
   ArrowLeft,
   Image as ImageIcon,
   AlertCircle,
-  CheckCircle,
-  ExternalLink,
+  Sparkles,
+  ChevronDown,
+  ChevronUp,
 } from "lucide-react";
 import Link from "next/link";
 
@@ -26,7 +27,7 @@ export function ProductForm({ categories, initialData }: ProductFormProps) {
   const [formData, setFormData] = useState({
     product_name: initialData?.product_name || "",
     sku: initialData?.sku || "",
-    category_id: initialData?.category_id || (categories[0]?.id || ""),
+    category_id: initialData?.category_id || categories[0]?.id || "",
     description: initialData?.description || "",
     purchase_cost: initialData?.purchase_cost ?? 0,
     selling_price: initialData?.selling_price ?? 0,
@@ -45,12 +46,13 @@ export function ProductForm({ categories, initialData }: ProductFormProps) {
     drive_url: initialData?.drive_url || "",
     hsn_code: initialData?.hsn_code || "",
     gst_percentage: initialData?.gst_percentage ?? 18,
-    stock_quantity: initialData?.stock_quantity ?? 0,
-    low_stock_threshold: initialData?.low_stock_threshold ?? 10,
-    status: initialData?.status || "Draft",
+    stock_quantity: initialData?.stock_quantity ?? 10,
+    low_stock_threshold: initialData?.low_stock_threshold ?? 5,
+    status: initialData?.status || "Listed",
     internal_notes: initialData?.internal_notes || "",
   });
 
+  const [showAdvanced, setShowAdvanced] = useState(false);
   const [isSubmitting, setIsSubmitting] = useState(false);
   const [errorMessage, setErrorMessage] = useState<string | null>(null);
   const [previewImageFailed, setPreviewImageFailed] = useState(false);
@@ -65,45 +67,46 @@ export function ProductForm({ categories, initialData }: ProductFormProps) {
     }));
   };
 
+  // 1-Click Auto-generate SKU
+  const handleGenerateSku = () => {
+    const prefix = formData.product_name
+      ? formData.product_name.replace(/[^a-zA-Z]/g, "").slice(0, 4).toUpperCase()
+      : "PRD";
+    const random = Math.floor(1000 + Math.random() * 9000);
+    setFormData((prev) => ({ ...prev, sku: `${prefix}-${random}` }));
+  };
+
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
     setIsSubmitting(true);
     setErrorMessage(null);
 
-    // Client-side quick checks
     if (!formData.product_name.trim()) {
-      setErrorMessage("Product name is required.");
+      setErrorMessage("Please enter a product name.");
       setIsSubmitting(false);
       return;
     }
 
-    if (!formData.sku.trim()) {
-      setErrorMessage("SKU is required.");
-      setIsSubmitting(false);
-      return;
+    // Auto-generate SKU if blank
+    let finalSku = formData.sku.trim();
+    if (!finalSku) {
+      const prefix = formData.product_name.replace(/[^a-zA-Z]/g, "").slice(0, 4).toUpperCase() || "PRD";
+      finalSku = `${prefix}-${Math.floor(1000 + Math.random() * 9000)}`;
     }
 
-    if (!formData.category_id) {
-      setErrorMessage("Please select a category.");
-      setIsSubmitting(false);
-      return;
-    }
-
-    if (formData.purchase_cost < 0 || formData.selling_price < 0) {
-      setErrorMessage("Prices cannot be negative.");
-      setIsSubmitting(false);
-      return;
-    }
-
-    if (formData.stock_quantity < 0) {
-      setErrorMessage("Stock quantity cannot be negative.");
-      setIsSubmitting(false);
-      return;
-    }
+    const payload = {
+      ...formData,
+      sku: finalSku,
+      purchase_cost:
+        formData.purchase_cost > 0
+          ? formData.purchase_cost
+          : Math.round(Number(formData.selling_price) * 0.7),
+      category_id: formData.category_id || categories[0]?.id || "",
+    };
 
     try {
       if (isEditing && initialData) {
-        const res = await updateProduct(initialData.id, formData as any);
+        const res = await updateProduct(initialData.id, payload as any);
         if (!res.success) {
           setErrorMessage(res.error || "Failed to update product");
           setIsSubmitting(false);
@@ -111,13 +114,13 @@ export function ProductForm({ categories, initialData }: ProductFormProps) {
         }
         router.push(`/dashboard/products/${initialData.id}`);
       } else {
-        const res = await createProduct(formData as any);
+        const res = await createProduct(payload as any);
         if (!res.success) {
           setErrorMessage(res.error || "Failed to create product");
           setIsSubmitting(false);
           return;
         }
-        router.push(`/dashboard/products/${res.data.id}`);
+        router.push(`/dashboard/products`);
       }
       router.refresh();
     } catch (err: any) {
@@ -127,9 +130,9 @@ export function ProductForm({ categories, initialData }: ProductFormProps) {
   };
 
   return (
-    <form onSubmit={handleSubmit} className="space-y-6 max-w-5xl mx-auto pb-12">
-      {/* Top Bar with Navigation & Actions */}
-      <div className="flex items-center justify-between pb-4 border-b border-slate-200 dark:border-slate-800">
+    <form onSubmit={handleSubmit} className="space-y-6 max-w-3xl mx-auto pb-16">
+      {/* Top Header */}
+      <div className="flex items-center justify-between pb-3 border-b border-slate-200 dark:border-slate-800">
         <div className="flex items-center gap-3">
           <Link
             href="/dashboard/products"
@@ -138,11 +141,11 @@ export function ProductForm({ categories, initialData }: ProductFormProps) {
             <ArrowLeft className="w-5 h-5" />
           </Link>
           <div>
-            <h1 className="text-xl font-bold text-slate-900 dark:text-slate-100">
-              {isEditing ? `Edit: ${initialData?.product_name}` : "Create New Product Listing"}
+            <h1 className="text-xl sm:text-2xl font-bold text-slate-900 dark:text-slate-100">
+              {isEditing ? `Edit: ${initialData?.product_name}` : "Add New Product"}
             </h1>
             <p className="text-xs text-slate-500 dark:text-slate-400">
-              Fill in all product specifications and tax details.
+              Simple & fast product listing entry
             </p>
           </div>
         </div>
@@ -150,14 +153,14 @@ export function ProductForm({ categories, initialData }: ProductFormProps) {
         <div className="flex items-center gap-2">
           <Link
             href="/dashboard/products"
-            className="px-4 py-2 text-xs sm:text-sm font-medium rounded-lg text-slate-700 dark:text-slate-300 hover:bg-slate-100 dark:hover:bg-slate-800 border border-slate-200 dark:border-slate-700 transition-colors"
+            className="px-4 py-2 text-xs sm:text-sm font-semibold rounded-full text-slate-700 dark:text-slate-300 hover:bg-slate-100 dark:hover:bg-slate-800 border border-slate-200 dark:border-slate-700 transition-colors"
           >
             Cancel
           </Link>
           <button
             type="submit"
             disabled={isSubmitting}
-            className="inline-flex items-center gap-1.5 px-4 py-2 text-xs sm:text-sm font-medium rounded-lg text-white bg-blue-600 hover:bg-blue-700 shadow-sm transition-all disabled:opacity-50"
+            className="inline-flex items-center gap-1.5 px-5 py-2 text-xs sm:text-sm font-bold rounded-full text-white bg-blue-600 hover:bg-blue-700 shadow-sm transition-all disabled:opacity-50"
           >
             <Save className="w-4 h-4" />
             <span>{isSubmitting ? "Saving..." : isEditing ? "Save Changes" : "Create Product"}</span>
@@ -165,53 +168,40 @@ export function ProductForm({ categories, initialData }: ProductFormProps) {
         </div>
       </div>
 
-      {/* Global Error Banner */}
+      {/* Error Message */}
       {errorMessage && (
-        <div className="p-4 rounded-xl bg-rose-50 dark:bg-rose-950/40 border border-rose-200 dark:border-rose-900/60 flex items-center gap-3 text-rose-700 dark:text-rose-300 text-xs sm:text-sm animate-fade-in">
+        <div className="p-4 rounded-2xl bg-rose-50 dark:bg-rose-950/40 border border-rose-200 dark:border-rose-900/60 flex items-center gap-3 text-rose-700 dark:text-rose-300 text-xs sm:text-sm animate-fade-in">
           <AlertCircle className="w-5 h-5 shrink-0 text-rose-600 dark:text-rose-400" />
           <span>{errorMessage}</span>
         </div>
       )}
 
-      {/* Section 1: Basic Information */}
-      <div className="p-6 rounded-xl bg-white dark:bg-[#0F172A] border border-slate-200 dark:border-slate-800 shadow-sm space-y-4">
-        <h2 className="text-sm font-bold uppercase tracking-wider text-slate-700 dark:text-slate-300 border-b border-slate-100 dark:border-slate-800 pb-2">
-          1. Basic Information
+      {/* MAIN SIMPLE CARD: Essential Fields */}
+      <div className="p-6 sm:p-8 rounded-3xl bg-white dark:bg-[#181a20] border border-slate-200/70 dark:border-slate-800 shadow-sm space-y-5">
+        <h2 className="text-base font-bold text-slate-900 dark:text-slate-100">
+          Core Details
         </h2>
 
-        <div className="grid grid-cols-1 md:grid-cols-3 gap-4">
-          <div className="md:col-span-2 space-y-1">
-            <label className="text-xs font-semibold text-slate-700 dark:text-slate-300">
-              Product Name <span className="text-rose-500">*</span>
-            </label>
-            <input
-              type="text"
-              name="product_name"
-              required
-              value={formData.product_name}
-              onChange={handleChange}
-              placeholder="e.g. Aura ANC Wireless Studio Headphones"
-              className="w-full px-3 py-2 text-xs sm:text-sm rounded-lg bg-slate-50 dark:bg-slate-800/60 border border-slate-200 dark:border-slate-700 focus:outline-none focus:ring-2 focus:ring-blue-500"
-            />
-          </div>
+        {/* Product Name */}
+        <div className="space-y-1.5">
+          <label className="text-xs font-bold text-slate-700 dark:text-slate-300">
+            Product Name <span className="text-rose-500">*</span>
+          </label>
+          <input
+            type="text"
+            name="product_name"
+            required
+            value={formData.product_name}
+            onChange={handleChange}
+            placeholder="e.g. Wireless Ergonomic Keyboard"
+            className="w-full px-4 py-2.5 text-sm rounded-xl bg-slate-50 dark:bg-slate-800/60 border border-slate-200 dark:border-slate-700 focus:outline-none focus:ring-2 focus:ring-blue-500 font-medium"
+          />
+        </div>
 
-          <div className="space-y-1">
-            <label className="text-xs font-semibold text-slate-700 dark:text-slate-300">
-              SKU / Internal Code <span className="text-rose-500">*</span>
-            </label>
-            <input
-              type="text"
-              name="sku"
-              required
-              value={formData.sku}
-              onChange={handleChange}
-              placeholder="e.g. ELEC-HDPH-001"
-              className="w-full px-3 py-2 text-xs sm:text-sm font-mono rounded-lg bg-slate-50 dark:bg-slate-800/60 border border-slate-200 dark:border-slate-700 focus:outline-none focus:ring-2 focus:ring-blue-500 uppercase"
-            />
-          </div>
-
-          <div className="space-y-1">
-            <label className="text-xs font-semibold text-slate-700 dark:text-slate-300">
+        {/* Category & Status */}
+        <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
+          <div className="space-y-1.5">
+            <label className="text-xs font-bold text-slate-700 dark:text-slate-300">
               Category <span className="text-rose-500">*</span>
             </label>
             <select
@@ -219,7 +209,7 @@ export function ProductForm({ categories, initialData }: ProductFormProps) {
               required
               value={formData.category_id}
               onChange={handleChange}
-              className="w-full px-3 py-2 text-xs sm:text-sm rounded-lg bg-slate-50 dark:bg-slate-800/60 border border-slate-200 dark:border-slate-700 focus:outline-none focus:ring-2 focus:ring-blue-500"
+              className="w-full px-4 py-2.5 text-sm rounded-xl bg-slate-50 dark:bg-slate-800/60 border border-slate-200 dark:border-slate-700 focus:outline-none focus:ring-2 focus:ring-blue-500 font-medium"
             >
               {categories.map((c) => (
                 <option key={c.id} value={c.id}>
@@ -229,56 +219,57 @@ export function ProductForm({ categories, initialData }: ProductFormProps) {
             </select>
           </div>
 
-          <div className="md:col-span-2 space-y-1">
-            <label className="text-xs font-semibold text-slate-700 dark:text-slate-300">
-              Listing Description
+          <div className="space-y-1.5">
+            <label className="text-xs font-bold text-slate-700 dark:text-slate-300">
+              Listing Status
             </label>
-            <textarea
-              name="description"
-              rows={3}
-              value={formData.description}
+            <select
+              name="status"
+              value={formData.status}
               onChange={handleChange}
-              placeholder="Detailed commercial description, marketplace bullet points, specifications..."
-              className="w-full px-3 py-2 text-xs sm:text-sm rounded-lg bg-slate-50 dark:bg-slate-800/60 border border-slate-200 dark:border-slate-700 focus:outline-none focus:ring-2 focus:ring-blue-500"
-            />
+              className="w-full px-4 py-2.5 text-sm rounded-xl bg-slate-50 dark:bg-slate-800/60 border border-slate-200 dark:border-slate-700 focus:outline-none focus:ring-2 focus:ring-blue-500 font-medium"
+            >
+              <option value="Listed">Listed (Active)</option>
+              <option value="Ready for Listing">Ready for Listing</option>
+              <option value="Draft">Draft</option>
+              <option value="Archived">Archived</option>
+            </select>
           </div>
         </div>
-      </div>
 
-      {/* Section 2: Pricing */}
-      <div className="p-6 rounded-xl bg-white dark:bg-[#0F172A] border border-slate-200 dark:border-slate-800 shadow-sm space-y-4">
-        <h2 className="text-sm font-bold uppercase tracking-wider text-slate-700 dark:text-slate-300 border-b border-slate-100 dark:border-slate-800 pb-2">
-          2. Pricing & Currency
-        </h2>
-
-        <div className="grid grid-cols-1 sm:grid-cols-3 gap-4">
-          <div className="space-y-1">
-            <label className="text-xs font-semibold text-slate-700 dark:text-slate-300">
-              Purchase Cost (INR) <span className="text-rose-500">*</span>
+        {/* SKU with Auto-Generate Helper */}
+        <div className="space-y-1.5">
+          <div className="flex items-center justify-between">
+            <label className="text-xs font-bold text-slate-700 dark:text-slate-300">
+              SKU Code
             </label>
-            <div className="relative">
-              <span className="absolute left-3 top-1/2 -translate-y-1/2 text-slate-400 text-xs font-semibold">
-                ₹
-              </span>
-              <input
-                type="number"
-                name="purchase_cost"
-                step="0.01"
-                min="0"
-                required
-                value={formData.purchase_cost}
-                onChange={handleChange}
-                className="w-full pl-7 pr-3 py-2 text-xs sm:text-sm rounded-lg bg-slate-50 dark:bg-slate-800/60 border border-slate-200 dark:border-slate-700 focus:outline-none focus:ring-2 focus:ring-blue-500"
-              />
-            </div>
+            <button
+              type="button"
+              onClick={handleGenerateSku}
+              className="text-xs font-semibold text-blue-600 dark:text-blue-400 hover:underline flex items-center gap-1"
+            >
+              <Sparkles className="w-3.5 h-3.5" />
+              Auto-generate
+            </button>
           </div>
+          <input
+            type="text"
+            name="sku"
+            value={formData.sku}
+            onChange={handleChange}
+            placeholder="e.g. KEYB-1002 (or leave empty to auto-fill)"
+            className="w-full px-4 py-2.5 text-sm font-mono rounded-xl bg-slate-50 dark:bg-slate-800/60 border border-slate-200 dark:border-slate-700 focus:outline-none focus:ring-2 focus:ring-blue-500 uppercase"
+          />
+        </div>
 
-          <div className="space-y-1">
-            <label className="text-xs font-semibold text-slate-700 dark:text-slate-300">
-              Selling Price (INR) <span className="text-rose-500">*</span>
+        {/* Pricing & Stock Quantity */}
+        <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
+          <div className="space-y-1.5">
+            <label className="text-xs font-bold text-slate-700 dark:text-slate-300">
+              Selling Price (INR ₹) <span className="text-rose-500">*</span>
             </label>
             <div className="relative">
-              <span className="absolute left-3 top-1/2 -translate-y-1/2 text-slate-400 text-xs font-semibold">
+              <span className="absolute left-3.5 top-1/2 -translate-y-1/2 text-slate-400 text-sm font-bold">
                 ₹
               </span>
               <input
@@ -287,391 +278,213 @@ export function ProductForm({ categories, initialData }: ProductFormProps) {
                 step="0.01"
                 min="0"
                 required
-                value={formData.selling_price}
+                value={formData.selling_price || ""}
                 onChange={handleChange}
-                className="w-full pl-7 pr-3 py-2 text-xs sm:text-sm rounded-lg bg-slate-50 dark:bg-slate-800/60 border border-slate-200 dark:border-slate-700 focus:outline-none focus:ring-2 focus:ring-blue-500 font-semibold text-slate-900 dark:text-slate-100"
+                placeholder="2499"
+                className="w-full pl-8 pr-4 py-2.5 text-sm font-bold rounded-xl bg-slate-50 dark:bg-slate-800/60 border border-slate-200 dark:border-slate-700 focus:outline-none focus:ring-2 focus:ring-blue-500"
               />
             </div>
           </div>
 
-          <div className="space-y-1">
-            <label className="text-xs font-semibold text-slate-700 dark:text-slate-300">
-              Currency
-            </label>
-            <input
-              type="text"
-              name="currency"
-              disabled
-              value="INR (Indian Rupee)"
-              className="w-full px-3 py-2 text-xs sm:text-sm rounded-lg bg-slate-100 dark:bg-slate-800 text-slate-500 border border-slate-200 dark:border-slate-700 cursor-not-allowed"
-            />
-          </div>
-        </div>
-      </div>
-
-      {/* Section 3: Physical Details & Dimensions */}
-      <div className="p-6 rounded-xl bg-white dark:bg-[#0F172A] border border-slate-200 dark:border-slate-800 shadow-sm space-y-4">
-        <h2 className="text-sm font-bold uppercase tracking-wider text-slate-700 dark:text-slate-300 border-b border-slate-100 dark:border-slate-800 pb-2">
-          3. Physical Specifications & Dimensions
-        </h2>
-
-        <div className="grid grid-cols-2 sm:grid-cols-6 gap-3">
-          <div className="space-y-1 col-span-2 sm:col-span-2">
-            <label className="text-xs font-semibold text-slate-700 dark:text-slate-300">
-              Weight
-            </label>
-            <div className="flex gap-2">
-              <input
-                type="number"
-                name="weight_value"
-                step="0.01"
-                min="0"
-                value={formData.weight_value}
-                onChange={handleChange}
-                className="w-full px-3 py-2 text-xs sm:text-sm rounded-lg bg-slate-50 dark:bg-slate-800/60 border border-slate-200 dark:border-slate-700 focus:outline-none focus:ring-2 focus:ring-blue-500"
-              />
-              <select
-                name="weight_unit"
-                value={formData.weight_unit}
-                onChange={handleChange}
-                className="w-20 px-2 py-2 text-xs rounded-lg bg-slate-50 dark:bg-slate-800/60 border border-slate-200 dark:border-slate-700 focus:outline-none"
-              >
-                <option value="g">g</option>
-                <option value="kg">kg</option>
-              </select>
-            </div>
-          </div>
-
-          <div className="space-y-1">
-            <label className="text-xs font-semibold text-slate-700 dark:text-slate-300">
-              Length
-            </label>
-            <input
-              type="number"
-              name="length"
-              step="0.1"
-              min="0"
-              value={formData.length}
-              onChange={handleChange}
-              className="w-full px-3 py-2 text-xs sm:text-sm rounded-lg bg-slate-50 dark:bg-slate-800/60 border border-slate-200 dark:border-slate-700 focus:outline-none focus:ring-2 focus:ring-blue-500"
-            />
-          </div>
-
-          <div className="space-y-1">
-            <label className="text-xs font-semibold text-slate-700 dark:text-slate-300">
-              Width
-            </label>
-            <input
-              type="number"
-              name="width"
-              step="0.1"
-              min="0"
-              value={formData.width}
-              onChange={handleChange}
-              className="w-full px-3 py-2 text-xs sm:text-sm rounded-lg bg-slate-50 dark:bg-slate-800/60 border border-slate-200 dark:border-slate-700 focus:outline-none focus:ring-2 focus:ring-blue-500"
-            />
-          </div>
-
-          <div className="space-y-1">
-            <label className="text-xs font-semibold text-slate-700 dark:text-slate-300">
-              Height
-            </label>
-            <input
-              type="number"
-              name="height"
-              step="0.1"
-              min="0"
-              value={formData.height}
-              onChange={handleChange}
-              className="w-full px-3 py-2 text-xs sm:text-sm rounded-lg bg-slate-50 dark:bg-slate-800/60 border border-slate-200 dark:border-slate-700 focus:outline-none focus:ring-2 focus:ring-blue-500"
-            />
-          </div>
-
-          <div className="space-y-1">
-            <label className="text-xs font-semibold text-slate-700 dark:text-slate-300">
-              Unit
-            </label>
-            <select
-              name="dimension_unit"
-              value={formData.dimension_unit}
-              onChange={handleChange}
-              className="w-full px-3 py-2 text-xs rounded-lg bg-slate-50 dark:bg-slate-800/60 border border-slate-200 dark:border-slate-700 focus:outline-none"
-            >
-              <option value="cm">cm</option>
-              <option value="mm">mm</option>
-              <option value="in">in</option>
-            </select>
-          </div>
-        </div>
-      </div>
-
-      {/* Section 4: Product Attributes */}
-      <div className="p-6 rounded-xl bg-white dark:bg-[#0F172A] border border-slate-200 dark:border-slate-800 shadow-sm space-y-4">
-        <h2 className="text-sm font-bold uppercase tracking-wider text-slate-700 dark:text-slate-300 border-b border-slate-100 dark:border-slate-800 pb-2">
-          4. Product Attributes (Optional)
-        </h2>
-
-        <div className="grid grid-cols-1 sm:grid-cols-3 gap-4">
-          <div className="space-y-1">
-            <label className="text-xs font-semibold text-slate-700 dark:text-slate-300">
-              Material
-            </label>
-            <input
-              type="text"
-              name="material"
-              value={formData.material}
-              onChange={handleChange}
-              placeholder="e.g. Aluminum, Full Grain Leather"
-              className="w-full px-3 py-2 text-xs sm:text-sm rounded-lg bg-slate-50 dark:bg-slate-800/60 border border-slate-200 dark:border-slate-700 focus:outline-none focus:ring-2 focus:ring-blue-500"
-            />
-          </div>
-
-          <div className="space-y-1">
-            <label className="text-xs font-semibold text-slate-700 dark:text-slate-300">
-              Colour
-            </label>
-            <input
-              type="text"
-              name="colour"
-              value={formData.colour}
-              onChange={handleChange}
-              placeholder="e.g. Midnight Black, Cognac Tan"
-              className="w-full px-3 py-2 text-xs sm:text-sm rounded-lg bg-slate-50 dark:bg-slate-800/60 border border-slate-200 dark:border-slate-700 focus:outline-none focus:ring-2 focus:ring-blue-500"
-            />
-          </div>
-
-          <div className="space-y-1">
-            <label className="text-xs font-semibold text-slate-700 dark:text-slate-300">
-              Size / Variant
-            </label>
-            <input
-              type="text"
-              name="size"
-              value={formData.size}
-              onChange={handleChange}
-              placeholder="e.g. Fits 16-inch, 140x70cm"
-              className="w-full px-3 py-2 text-xs sm:text-sm rounded-lg bg-slate-50 dark:bg-slate-800/60 border border-slate-200 dark:border-slate-700 focus:outline-none focus:ring-2 focus:ring-blue-500"
-            />
-          </div>
-        </div>
-      </div>
-
-      {/* Section 5: Inventory & Thresholds */}
-      <div className="p-6 rounded-xl bg-white dark:bg-[#0F172A] border border-slate-200 dark:border-slate-800 shadow-sm space-y-4">
-        <h2 className="text-sm font-bold uppercase tracking-wider text-slate-700 dark:text-slate-300 border-b border-slate-100 dark:border-slate-800 pb-2">
-          5. Inventory & Stock Controls
-        </h2>
-
-        <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
-          <div className="space-y-1">
-            <label className="text-xs font-semibold text-slate-700 dark:text-slate-300">
-              Available Stock Quantity <span className="text-rose-500">*</span>
+          <div className="space-y-1.5">
+            <label className="text-xs font-bold text-slate-700 dark:text-slate-300">
+              Initial Stock Units <span className="text-rose-500">*</span>
             </label>
             <input
               type="number"
               name="stock_quantity"
               min="0"
-              step="1"
               required
               value={formData.stock_quantity}
               onChange={handleChange}
-              className="w-full px-3 py-2 text-xs sm:text-sm rounded-lg bg-slate-50 dark:bg-slate-800/60 border border-slate-200 dark:border-slate-700 focus:outline-none focus:ring-2 focus:ring-blue-500"
+              placeholder="50"
+              className="w-full px-4 py-2.5 text-sm font-bold rounded-xl bg-slate-50 dark:bg-slate-800/60 border border-slate-200 dark:border-slate-700 focus:outline-none focus:ring-2 focus:ring-blue-500"
             />
-          </div>
-
-          <div className="space-y-1">
-            <label className="text-xs font-semibold text-slate-700 dark:text-slate-300">
-              Low-Stock Warning Threshold <span className="text-rose-500">*</span>
-            </label>
-            <input
-              type="number"
-              name="low_stock_threshold"
-              min="0"
-              step="1"
-              required
-              value={formData.low_stock_threshold}
-              onChange={handleChange}
-              className="w-full px-3 py-2 text-xs sm:text-sm rounded-lg bg-slate-50 dark:bg-slate-800/60 border border-slate-200 dark:border-slate-700 focus:outline-none focus:ring-2 focus:ring-blue-500"
-            />
-            <p className="text-[11px] text-slate-500">
-              An alert is triggered when available stock drops to or below this count.
-            </p>
           </div>
         </div>
-      </div>
 
-      {/* Section 6: Media & Listing Links (With Image Preview) */}
-      <div className="p-6 rounded-xl bg-white dark:bg-[#0F172A] border border-slate-200 dark:border-slate-800 shadow-sm space-y-4">
-        <h2 className="text-sm font-bold uppercase tracking-wider text-slate-700 dark:text-slate-300 border-b border-slate-100 dark:border-slate-800 pb-2">
-          6. Media & Listing Links
-        </h2>
-
-        <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
-          <div className="md:col-span-2 space-y-4">
-            <div className="space-y-1">
-              <label className="text-xs font-semibold text-slate-700 dark:text-slate-300">
-                Product Image URL
-              </label>
-              <input
-                type="url"
-                name="image_url"
-                value={formData.image_url}
-                onChange={(e) => {
-                  handleChange(e);
-                  setPreviewImageFailed(false);
-                }}
-                placeholder="https://images.unsplash.com/... or CDN link"
-                className="w-full px-3 py-2 text-xs sm:text-sm rounded-lg bg-slate-50 dark:bg-slate-800/60 border border-slate-200 dark:border-slate-700 focus:outline-none focus:ring-2 focus:ring-blue-500"
-              />
-            </div>
-
-            <div className="space-y-1">
-              <label className="text-xs font-semibold text-slate-700 dark:text-slate-300">
-                Google Drive / Asset Folder Link
-              </label>
-              <input
-                type="url"
-                name="drive_url"
-                value={formData.drive_url}
-                onChange={handleChange}
-                placeholder="https://drive.google.com/drive/folders/..."
-                className="w-full px-3 py-2 text-xs sm:text-sm rounded-lg bg-slate-50 dark:bg-slate-800/60 border border-slate-200 dark:border-slate-700 focus:outline-none focus:ring-2 focus:ring-blue-500"
-              />
-            </div>
-
-            <div className="space-y-1">
-              <label className="text-xs font-semibold text-slate-700 dark:text-slate-300">
-                Searchable Keywords (Comma separated)
-              </label>
-              <input
-                type="text"
-                name="keywords"
-                value={formData.keywords}
-                onChange={handleChange}
-                placeholder="anc headphones, studio audio, wireless bluetooth"
-                className="w-full px-3 py-2 text-xs sm:text-sm rounded-lg bg-slate-50 dark:bg-slate-800/60 border border-slate-200 dark:border-slate-700 focus:outline-none focus:ring-2 focus:ring-blue-500"
-              />
-            </div>
-          </div>
-
-          {/* Live Image Preview Card */}
-          <div className="flex flex-col items-center justify-center p-4 border border-dashed border-slate-200 dark:border-slate-700 rounded-xl bg-slate-50 dark:bg-slate-800/30">
-            <span className="text-[11px] font-semibold text-slate-500 uppercase tracking-wider mb-2">
-              Image Preview
-            </span>
-            <div className="w-36 h-36 rounded-lg bg-white dark:bg-slate-800 border border-slate-200 dark:border-slate-700 overflow-hidden flex items-center justify-center shadow-sm">
-              {formData.image_url && !previewImageFailed ? (
+        {/* Product Image URL & Preview */}
+        <div className="space-y-1.5">
+          <label className="text-xs font-bold text-slate-700 dark:text-slate-300">
+            Image URL <span className="text-slate-400 font-normal">(Optional)</span>
+          </label>
+          <div className="flex gap-3">
+            <input
+              type="url"
+              name="image_url"
+              value={formData.image_url}
+              onChange={(e) => {
+                setPreviewImageFailed(false);
+                handleChange(e);
+              }}
+              placeholder="https://images.unsplash.com/photo-..."
+              className="flex-1 px-4 py-2.5 text-sm rounded-xl bg-slate-50 dark:bg-slate-800/60 border border-slate-200 dark:border-slate-700 focus:outline-none focus:ring-2 focus:ring-blue-500"
+            />
+            {formData.image_url && !previewImageFailed ? (
+              <div className="w-11 h-11 rounded-xl border border-slate-200 dark:border-slate-700 overflow-hidden shrink-0">
                 <img
                   src={formData.image_url}
                   alt="Preview"
                   onError={() => setPreviewImageFailed(true)}
                   className="w-full h-full object-cover"
                 />
-              ) : (
-                <div className="text-center p-3 text-slate-400">
-                  <ImageIcon className="w-8 h-8 mx-auto mb-1 opacity-50" />
-                  <span className="text-[10px]">
-                    {previewImageFailed ? "Failed to load image" : "No image preview"}
-                  </span>
-                </div>
-              )}
+              </div>
+            ) : (
+              <div className="w-11 h-11 rounded-xl bg-slate-100 dark:bg-slate-800 flex items-center justify-center shrink-0 text-slate-400">
+                <ImageIcon className="w-5 h-5" />
+              </div>
+            )}
+          </div>
+        </div>
+      </div>
+
+      {/* OPTIONAL / ADVANCED ACCORDION: Keeps form compact by default */}
+      <div className="rounded-3xl bg-white dark:bg-[#181a20] border border-slate-200/70 dark:border-slate-800 shadow-sm overflow-hidden">
+        <button
+          type="button"
+          onClick={() => setShowAdvanced(!showAdvanced)}
+          className="w-full p-5 flex items-center justify-between text-left hover:bg-slate-50 dark:hover:bg-slate-800/50 transition-colors"
+        >
+          <div>
+            <span className="text-sm font-bold text-slate-800 dark:text-slate-200 block">
+              Additional Details (Optional)
+            </span>
+            <span className="text-xs text-slate-500 dark:text-slate-400">
+              Description, cost price, dimensions, and notes
+            </span>
+          </div>
+          {showAdvanced ? (
+            <ChevronUp className="w-5 h-5 text-slate-400" />
+          ) : (
+            <ChevronDown className="w-5 h-5 text-slate-400" />
+          )}
+        </button>
+
+        {showAdvanced && (
+          <div className="p-6 pt-2 border-t border-slate-100 dark:border-slate-800 space-y-4 animate-fade-in">
+            {/* Description */}
+            <div className="space-y-1.5">
+              <label className="text-xs font-bold text-slate-700 dark:text-slate-300">
+                Listing Description
+              </label>
+              <textarea
+                name="description"
+                rows={2}
+                value={formData.description}
+                onChange={handleChange}
+                placeholder="Product highlights, specifications, or box contents..."
+                className="w-full px-4 py-2 text-sm rounded-xl bg-slate-50 dark:bg-slate-800/60 border border-slate-200 dark:border-slate-700 focus:outline-none focus:ring-2 focus:ring-blue-500"
+              />
+            </div>
+
+            {/* Purchase Cost & Threshold */}
+            <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
+              <div className="space-y-1.5">
+                <label className="text-xs font-bold text-slate-700 dark:text-slate-300">
+                  Purchase Cost (INR ₹)
+                </label>
+                <input
+                  type="number"
+                  name="purchase_cost"
+                  min="0"
+                  step="0.01"
+                  value={formData.purchase_cost || ""}
+                  onChange={handleChange}
+                  placeholder="Defaults to 70% of price"
+                  className="w-full px-4 py-2 text-sm rounded-xl bg-slate-50 dark:bg-slate-800/60 border border-slate-200 dark:border-slate-700 focus:outline-none focus:ring-2 focus:ring-blue-500"
+                />
+              </div>
+
+              <div className="space-y-1.5">
+                <label className="text-xs font-bold text-slate-700 dark:text-slate-300">
+                  Low Stock Alert Threshold
+                </label>
+                <input
+                  type="number"
+                  name="low_stock_threshold"
+                  min="0"
+                  value={formData.low_stock_threshold}
+                  onChange={handleChange}
+                  placeholder="5"
+                  className="w-full px-4 py-2 text-sm rounded-xl bg-slate-50 dark:bg-slate-800/60 border border-slate-200 dark:border-slate-700 focus:outline-none focus:ring-2 focus:ring-blue-500"
+                />
+              </div>
+            </div>
+
+            {/* Material & Dimensions */}
+            <div className="grid grid-cols-1 sm:grid-cols-3 gap-3">
+              <div className="space-y-1">
+                <label className="text-xs font-bold text-slate-700 dark:text-slate-300">
+                  Material
+                </label>
+                <input
+                  type="text"
+                  name="material"
+                  value={formData.material}
+                  onChange={handleChange}
+                  placeholder="e.g. Aluminium"
+                  className="w-full px-3 py-2 text-xs rounded-xl bg-slate-50 dark:bg-slate-800/60 border border-slate-200 dark:border-slate-700"
+                />
+              </div>
+              <div className="space-y-1">
+                <label className="text-xs font-bold text-slate-700 dark:text-slate-300">
+                  Colour
+                </label>
+                <input
+                  type="text"
+                  name="colour"
+                  value={formData.colour}
+                  onChange={handleChange}
+                  placeholder="e.g. Space Gray"
+                  className="w-full px-3 py-2 text-xs rounded-xl bg-slate-50 dark:bg-slate-800/60 border border-slate-200 dark:border-slate-700"
+                />
+              </div>
+              <div className="space-y-1">
+                <label className="text-xs font-bold text-slate-700 dark:text-slate-300">
+                  Weight (g)
+                </label>
+                <input
+                  type="number"
+                  name="weight_value"
+                  min="0"
+                  value={formData.weight_value || ""}
+                  onChange={handleChange}
+                  placeholder="e.g. 250"
+                  className="w-full px-3 py-2 text-xs rounded-xl bg-slate-50 dark:bg-slate-800/60 border border-slate-200 dark:border-slate-700"
+                />
+              </div>
+            </div>
+
+            {/* Internal Notes */}
+            <div className="space-y-1.5">
+              <label className="text-xs font-bold text-slate-700 dark:text-slate-300">
+                Internal Team Notes
+              </label>
+              <textarea
+                name="internal_notes"
+                rows={2}
+                value={formData.internal_notes}
+                onChange={handleChange}
+                placeholder="Private supplier notes or warehouse locations..."
+                className="w-full px-4 py-2 text-sm rounded-xl bg-slate-50 dark:bg-slate-800/60 border border-slate-200 dark:border-slate-700 focus:outline-none focus:ring-2 focus:ring-blue-500"
+              />
             </div>
           </div>
-        </div>
-      </div>
-
-      {/* Section 7: Tax Information */}
-      <div className="p-6 rounded-xl bg-white dark:bg-[#0F172A] border border-slate-200 dark:border-slate-800 shadow-sm space-y-4">
-        <h2 className="text-sm font-bold uppercase tracking-wider text-slate-700 dark:text-slate-300 border-b border-slate-100 dark:border-slate-800 pb-2">
-          7. Tax & Compliance
-        </h2>
-
-        <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
-          <div className="space-y-1">
-            <label className="text-xs font-semibold text-slate-700 dark:text-slate-300">
-              HSN Code
-            </label>
-            <input
-              type="text"
-              name="hsn_code"
-              value={formData.hsn_code}
-              onChange={handleChange}
-              placeholder="e.g. 85183000"
-              className="w-full px-3 py-2 text-xs sm:text-sm font-mono rounded-lg bg-slate-50 dark:bg-slate-800/60 border border-slate-200 dark:border-slate-700 focus:outline-none focus:ring-2 focus:ring-blue-500"
-            />
-          </div>
-
-          <div className="space-y-1">
-            <label className="text-xs font-semibold text-slate-700 dark:text-slate-300">
-              GST Percentage (%)
-            </label>
-            <input
-              type="number"
-              name="gst_percentage"
-              min="0"
-              max="100"
-              step="0.01"
-              value={formData.gst_percentage}
-              onChange={handleChange}
-              placeholder="18"
-              className="w-full px-3 py-2 text-xs sm:text-sm rounded-lg bg-slate-50 dark:bg-slate-800/60 border border-slate-200 dark:border-slate-700 focus:outline-none focus:ring-2 focus:ring-blue-500"
-            />
-          </div>
-        </div>
-      </div>
-
-      {/* Section 8: Status & Internal Notes */}
-      <div className="p-6 rounded-xl bg-white dark:bg-[#0F172A] border border-slate-200 dark:border-slate-800 shadow-sm space-y-4">
-        <h2 className="text-sm font-bold uppercase tracking-wider text-slate-700 dark:text-slate-300 border-b border-slate-100 dark:border-slate-800 pb-2">
-          8. Status & Remarks
-        </h2>
-
-        <div className="grid grid-cols-1 sm:grid-cols-3 gap-4">
-          <div className="space-y-1">
-            <label className="text-xs font-semibold text-slate-700 dark:text-slate-300">
-              Listing Status <span className="text-rose-500">*</span>
-            </label>
-            <select
-              name="status"
-              value={formData.status}
-              onChange={handleChange}
-              className="w-full px-3 py-2 text-xs sm:text-sm rounded-lg bg-slate-50 dark:bg-slate-800/60 border border-slate-200 dark:border-slate-700 focus:outline-none focus:ring-2 focus:ring-blue-500 font-medium"
-            >
-              <option value="Draft">Draft</option>
-              <option value="Ready for Listing">Ready for Listing</option>
-              <option value="Listed">Listed</option>
-              <option value="Archived">Archived</option>
-            </select>
-          </div>
-
-          <div className="sm:col-span-2 space-y-1">
-            <label className="text-xs font-semibold text-slate-700 dark:text-slate-300">
-              Internal Remarks & Notes
-            </label>
-            <textarea
-              name="internal_notes"
-              rows={2}
-              value={formData.internal_notes}
-              onChange={handleChange}
-              placeholder="Private team notes, supplier reorder info, warehouse batch numbers..."
-              className="w-full px-3 py-2 text-xs sm:text-sm rounded-lg bg-slate-50 dark:bg-slate-800/60 border border-slate-200 dark:border-slate-700 focus:outline-none focus:ring-2 focus:ring-blue-500"
-            />
-          </div>
-        </div>
+        )}
       </div>
 
       {/* Bottom Action Footer */}
       <div className="flex items-center justify-end gap-3 pt-4">
         <Link
           href="/dashboard/products"
-          className="px-4 py-2 text-sm font-medium rounded-lg text-slate-700 dark:text-slate-300 hover:bg-slate-100 dark:hover:bg-slate-800 border border-slate-200 dark:border-slate-700 transition-colors"
+          className="px-5 py-2.5 text-sm font-semibold rounded-full text-slate-700 dark:text-slate-300 hover:bg-slate-100 dark:hover:bg-slate-800 border border-slate-200 dark:border-slate-700 transition-colors"
         >
           Cancel
         </Link>
         <button
           type="submit"
           disabled={isSubmitting}
-          className="inline-flex items-center gap-1.5 px-5 py-2 text-sm font-medium rounded-lg text-white bg-blue-600 hover:bg-blue-700 shadow-md shadow-blue-500/20 transition-all disabled:opacity-50"
+          className="inline-flex items-center gap-2 px-6 py-2.5 text-sm font-bold rounded-full text-white bg-blue-600 hover:bg-blue-700 shadow-md transition-all disabled:opacity-50"
         >
           <Save className="w-4 h-4" />
           <span>{isSubmitting ? "Saving..." : isEditing ? "Save Changes" : "Create Product"}</span>
@@ -680,4 +493,3 @@ export function ProductForm({ categories, initialData }: ProductFormProps) {
     </form>
   );
 }
-
