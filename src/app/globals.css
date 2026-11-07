@@ -8,7 +8,10 @@
 }
 
 :root {
-  /* Reference Design: Soft neutral canvas & crisp pure white cards */
+  /* ========================================================
+   * INSPIRATION DESIGN SYSTEM PALETTE (media_1794032225005)
+   * Matte Clay Canvas, Pure White Floating Cards, Vibrant Neo Accents
+   * ======================================================== */
   --background: #ededf0;
   --foreground: #111111;
   --card: #ffffff;
@@ -17,200 +20,670 @@
   --popover-foreground: #111111;
   --primary: #111111;
   --primary-foreground: #ffffff;
-  --secondary: #f4f5f7;
+  --secondary: #f4f5f8;
   --secondary-foreground: #111111;
-  --muted: #f4f5f7;
+  --muted: #f4f5f8;
   --muted-foreground: #71717a;
   --accent: #d4f94a;
   --accent-foreground: #111111;
   --destructive: #ef4444;
   --destructive-foreground: #ffffff;
   --border: #e2e4e8;
-  --input: #e2e4e8;
+  --input: #f4f5f8;
   --ring: #72cbf6;
-  --radius: 1.75rem; /* 28px rounded corners from reference design */
+  --radius: 1.75rem; /* 28px smooth rounded corners */
+
+  /* Reference image exact signature colors */
+  --neo-blue: #72cbf6;       /* "New Project Discussion" / Header cyan */
+  --neo-lime: #d4f94a;       /* "Devs Meetings" / Active tabs / Toggles */
+  --neo-mint: #a6f4b8;       /* "Today's Bookings" / In Stock */
+  --neo-yellow: #fef08a;     /* "Coder" pill / Warning / Ready */
+  --neo-black: #111111;      /* Contrast chips "+3", primary pills */
+  --neo-clay: #ededf0;       /* Matte canvas background */
 }
 
 .dark {
-  --background: #121316;
+  --background: #111215;
   --foreground: #f8fafc;
-  --card: #1c1e22;
+  --card: #1a1c21;
   --card-foreground: #f8fafc;
-  --popover: #1c1e22;
+  --popover: #1a1c21;
   --popover-foreground: #f8fafc;
   --primary: #d4f94a;
   --primary-foreground: #111111;
-  --secondary: #252830;
+  --secondary: #24262d;
   --secondary-foreground: #f8fafc;
-  --muted: #252830;
+  --muted: #24262d;
   --muted-foreground: #a1a1aa;
   --accent: #72cbf6;
   --accent-foreground: #111111;
   --destructive: #dc2626;
   --destructive-foreground: #ffffff;
   --border: #282a30;
-  --input: #282a30;
+  --input: #24262d;
   --ring: #d4f94a;
 }
 
 body {
   background-color: var(--background);
   color: var(--foreground);
-  font-family: var(--font-geist-sans), system-ui, -apple-system, sans-serif;
+  font-family: var(--font-geist-sans), system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
 }
 
 /* ========================================================
- * Reference Design UI: 28px Smooth Cards, Soft Shadows & Color Accents
+ * 1. FLOATING BENTO TILES: 28px Radius & Diffuse Clay Shadow
  * ======================================================== */
 
-/* All cards: 28px corner radius and clean soft floating elevation */
-.rounded-2xl, 
-.rounded-3xl, 
-[class*="rounded-2xl"], 
+.rounded-xl,
+.rounded-2xl,
+.rounded-3xl,
+[class*="rounded-xl"],
+[class*="rounded-2xl"],
 [class*="rounded-3xl"] {
   border-radius: 28px !important;
 }
 
-.shadow-xs, 
-.shadow-sm, 
-.shadow-md, 
-.shadow-lg {
-  box-shadow: 0 4px 20px -4px rgba(0, 0, 0, 0.04), 0 2px 8px -2px rgba(0, 0, 0, 0.02) !important;
-}
-
-/* Card surfaces: pure crisp white with ultra-subtle border */
-.bg-white, 
-.dark .bg-slate-900, 
-.dark .bg-\[\#0f172a\], 
+/* All Card Surfaces */
+.bg-white,
+.dark .bg-slate-900,
+.dark .bg-\[\#0F172A\],
 .dark .bg-\[\#0D1527\] {
-  border-color: rgba(0, 0, 0, 0.04) !important;
+  border: 1px solid rgba(255, 255, 255, 0.95) !important;
+  box-shadow: 0 4px 20px -4px rgba(0, 0, 0, 0.04), 0 2px 6px -2px rgba(0, 0, 0, 0.02) !important;
 }
 
-.dark .bg-white, 
-.dark .bg-slate-900, 
-.dark .bg-\[\#0f172a\] {
-  border-color: rgba(255, 255, 255, 0.07) !important;
+.dark .bg-white,
+.dark .bg-slate-900,
+.dark .bg-\[\#0F172A\] {
+  border: 1px solid rgba(255, 255, 255, 0.06) !important;
+  box-shadow: 0 8px 30px -4px rgba(0, 0, 0, 0.45) !important;
 }
 
-/* Topbar Header: Floating rounded container */
-header {
-  border-radius: 24px !important;
-  margin: 12px 16px 0 16px !important;
-  border: 1px solid rgba(0, 0, 0, 0.04) !important;
-  background-color: #ffffff !important;
-  box-shadow: 0 4px 20px -4px rgba(0, 0, 0, 0.04) !important;
+/* Clean, high-contrast typography matching reference */
+h1, h2, h3, .text-2xl, .text-3xl {
+  color: #111111 !important;
+  font-weight: 800 !important;
+  letter-spacing: -0.03em !important;
 }
 
-.dark header {
-  background-color: #1c1e22 !important;
-  border-color: rgba(255, 255, 255, 0.07) !important;
+.dark h1, .dark h2, .dark h3, .dark .text-2xl, .dark .text-3xl {
+  color: #f8fafc !important;
 }
 
-/* Sidebar: Floating rounded white card */
+/* ========================================================
+ * 2. SIDEBAR & TOPBAR: Floating Rounded Slabs with Gradient Profile
+ * ======================================================== */
+
+/* Floating Sidebar Slab */
 aside {
-  margin: 12px 0 12px 16px !important;
-  height: calc(100vh - 24px) !important;
-  border-radius: 28px !important;
+  margin: 16px 0 16px 20px !important;
+  height: calc(100vh - 32px) !important;
+  border-radius: 32px !important;
   background-color: #ffffff !important;
-  border: 1px solid rgba(0, 0, 0, 0.04) !important;
-  box-shadow: 0 4px 20px -4px rgba(0, 0, 0, 0.04) !important;
+  border: 1px solid rgba(255, 255, 255, 0.95) !important;
+  box-shadow: 0 8px 30px -6px rgba(0, 0, 0, 0.05) !important;
+  overflow: hidden !important;
 }
 
 .dark aside {
-  background-color: #1c1e22 !important;
-  border-color: rgba(255, 255, 255, 0.07) !important;
+  background-color: #1a1c21 !important;
+  border: 1px solid rgba(255, 255, 255, 0.06) !important;
 }
 
-/* Active navigation pill: Vibrant Lime Green pill with bold black text */
+/* Sidebar Logo Badge: Solid Jet Black tile */
+aside .bg-blue-600 {
+  background-color: #111111 !important;
+  color: #ffffff !important;
+  border-radius: 14px !important;
+  font-weight: 800 !important;
+}
+
+/* Active Nav Link: Electric Lime Pill (#d4f94a) with Bold Black text */
 aside nav a[class*="bg-blue"] {
   background-color: #d4f94a !important;
   color: #111111 !important;
   border-radius: 9999px !important;
-  font-weight: 700 !important;
+  font-weight: 800 !important;
+  padding: 11px 18px !important;
+  box-shadow: 0 4px 16px rgba(212, 249, 74, 0.38) !important;
+  border: none !important;
 }
 
 aside nav a[class*="bg-blue"] svg {
   color: #111111 !important;
+  stroke-width: 2.4 !important;
 }
 
-/* Primary Action Buttons: Solid Black pill hovering to Lime Green */
-.bg-blue-600 {
-  background-color: #111111 !important;
-  color: #ffffff !important;
+/* Inactive Nav Links: Soft rounded pills */
+aside nav a {
   border-radius: 9999px !important;
   font-weight: 600 !important;
+  padding: 9px 18px !important;
+  transition: all 0.2s cubic-bezier(0.16, 1, 0.3, 1) !important;
+}
+
+aside nav a:hover {
+  background-color: #f4f5f8 !important;
+  color: #111111 !important;
+  transform: translateX(3px);
+}
+
+.dark aside nav a:hover {
+  background-color: #24262d !important;
+  color: #ffffff !important;
+}
+
+/* Sidebar User Profile: The Reference Gradient Card (Sky Blue -> Lime Green) */
+aside .p-3:last-child > div {
+  background: linear-gradient(135deg, #72cbf6 0%, #d4f94a 100%) !important;
+  border-radius: 22px !important;
+  border: none !important;
+  padding: 12px 14px !important;
+  box-shadow: 0 4px 16px rgba(114, 203, 246, 0.25) !important;
+}
+
+aside .p-3:last-child > div p:first-child {
+  font-weight: 800 !important;
+  color: #111111 !important;
+  font-size: 13px !important;
+}
+
+aside .p-3:last-child > div p:last-child {
+  font-weight: 700 !important;
+  color: rgba(17, 17, 17, 0.7) !important;
+  font-size: 11px !important;
+  text-transform: uppercase !important;
+  letter-spacing: 0.04em !important;
+}
+
+/* User Avatar Disc: Black circle like the reference image */
+aside .p-3:last-child > div .rounded-full {
+  background-color: #111111 !important;
+  color: #ffffff !important;
+  font-weight: 800 !important;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.2) !important;
+}
+
+/* Sign out button in user card */
+aside .p-3:last-child button {
+  background-color: rgba(255, 255, 255, 0.6) !important;
+  border-radius: 9999px !important;
+  color: #111111 !important;
+}
+
+aside .p-3:last-child button:hover {
+  background-color: #111111 !important;
+  color: #ffffff !important;
+}
+
+/* Floating Topbar Header */
+header {
+  margin: 16px 20px 0 20px !important;
+  height: 72px !important;
+  border-radius: 28px !important;
+  background-color: #ffffff !important;
+  border: 1px solid rgba(255, 255, 255, 0.95) !important;
+  box-shadow: 0 4px 20px -4px rgba(0, 0, 0, 0.04) !important;
+  padding: 0 24px !important;
+}
+
+.dark header {
+  background-color: #1a1c21 !important;
+  border: 1px solid rgba(255, 255, 255, 0.06) !important;
+}
+
+/* ========================================================
+ * 3. DASHBOARD ANALYTICS GRID: Exact Reference Colors
+ * ======================================================== */
+
+/* Top 6 Analytics Cards Grid */
+.grid.grid-cols-1.sm\:grid-cols-2.lg\:grid-cols-3 {
+  gap: 16px !important;
+}
+
+/* Card 1: Sky Blue (#72cbf6) like "New Project Discussion" */
+.grid.grid-cols-1.sm\:grid-cols-2.lg\:grid-cols-3 > div:nth-child(1) {
+  background-color: #72cbf6 !important;
+  border: none !important;
+  color: #111111 !important;
+  box-shadow: 0 8px 24px -4px rgba(114, 203, 246, 0.35) !important;
+  transition: transform 0.2s ease, box-shadow 0.2s ease !important;
+}
+
+.grid.grid-cols-1.sm\:grid-cols-2.lg\:grid-cols-3 > div:nth-child(1):hover {
+  transform: translateY(-2px);
+  box-shadow: 0 12px 28px -4px rgba(114, 203, 246, 0.45) !important;
+}
+
+.grid.grid-cols-1.sm\:grid-cols-2.lg\:grid-cols-3 > div:nth-child(1) * {
+  color: #111111 !important;
+}
+
+.grid.grid-cols-1.sm\:grid-cols-2.lg\:grid-cols-3 > div:nth-child(1) span {
+  font-weight: 700 !important;
+}
+
+.grid.grid-cols-1.sm\:grid-cols-2.lg\:grid-cols-3 > div:nth-child(1) [class*="bg-"] {
+  background-color: rgba(255, 255, 255, 0.6) !important;
+  border-radius: 9999px !important;
+  padding: 10px !important;
+}
+
+/* Card 2: Electric Lime Green (#d4f94a) like "Devs Meetings" */
+.grid.grid-cols-1.sm\:grid-cols-2.lg\:grid-cols-3 > div:nth-child(2) {
+  background-color: #d4f94a !important;
+  border: none !important;
+  color: #111111 !important;
+  box-shadow: 0 8px 24px -4px rgba(212, 249, 74, 0.35) !important;
+  transition: transform 0.2s ease, box-shadow 0.2s ease !important;
+}
+
+.grid.grid-cols-1.sm\:grid-cols-2.lg\:grid-cols-3 > div:nth-child(2):hover {
+  transform: translateY(-2px);
+  box-shadow: 0 12px 28px -4px rgba(212, 249, 74, 0.45) !important;
+}
+
+.grid.grid-cols-1.sm\:grid-cols-2.lg\:grid-cols-3 > div:nth-child(2) * {
+  color: #111111 !important;
+}
+
+.grid.grid-cols-1.sm\:grid-cols-2.lg\:grid-cols-3 > div:nth-child(2) span {
+  font-weight: 700 !important;
+}
+
+.grid.grid-cols-1.sm\:grid-cols-2.lg\:grid-cols-3 > div:nth-child(2) [class*="bg-"] {
+  background-color: rgba(0, 0, 0, 0.08) !important;
+  border-radius: 9999px !important;
+  padding: 10px !important;
+}
+
+/* Card 3: Soft Mint Green (#a6f4b8) like "Today's Bookings" */
+.grid.grid-cols-1.sm\:grid-cols-2.lg\:grid-cols-3 > div:nth-child(3) {
+  background-color: #a6f4b8 !important;
+  border: none !important;
+  color: #111111 !important;
+  box-shadow: 0 8px 24px -4px rgba(166, 244, 184, 0.35) !important;
+  transition: transform 0.2s ease, box-shadow 0.2s ease !important;
+}
+
+.grid.grid-cols-1.sm\:grid-cols-2.lg\:grid-cols-3 > div:nth-child(3):hover {
+  transform: translateY(-2px);
+  box-shadow: 0 12px 28px -4px rgba(166, 244, 184, 0.45) !important;
+}
+
+.grid.grid-cols-1.sm\:grid-cols-2.lg\:grid-cols-3 > div:nth-child(3) * {
+  color: #111111 !important;
+}
+
+.grid.grid-cols-1.sm\:grid-cols-2.lg\:grid-cols-3 > div:nth-child(3) span {
+  font-weight: 700 !important;
+}
+
+.grid.grid-cols-1.sm\:grid-cols-2.lg\:grid-cols-3 > div:nth-child(3) [class*="bg-"] {
+  background-color: rgba(255, 255, 255, 0.6) !important;
+  border-radius: 9999px !important;
+  padding: 10px !important;
+}
+
+/* Cards 4, 5, 6: Crisp Pure White Tiles with Tactile Accents */
+.grid.grid-cols-1.sm\:grid-cols-2.lg\:grid-cols-3 > div:nth-child(n+4) {
+  background-color: #ffffff !important;
+  border: 1px solid rgba(255, 255, 255, 0.95) !important;
+  box-shadow: 0 4px 20px -4px rgba(0, 0, 0, 0.04) !important;
+  transition: transform 0.2s ease, box-shadow 0.2s ease !important;
+}
+
+.grid.grid-cols-1.sm\:grid-cols-2.lg\:grid-cols-3 > div:nth-child(n+4):hover {
+  transform: translateY(-2px);
+  box-shadow: 0 10px 24px -4px rgba(0, 0, 0, 0.07) !important;
+}
+
+.dark .grid.grid-cols-1.sm\:grid-cols-2.lg\:grid-cols-3 > div:nth-child(n+4) {
+  background-color: #1a1c21 !important;
+}
+
+/* Circular icon badges on white cards */
+.grid.grid-cols-1.sm\:grid-cols-2.lg\:grid-cols-3 > div:nth-child(4) [class*="bg-"] {
+  background-color: #fef08a !important; /* Pastel Yellow */
+  color: #111111 !important;
+  border-radius: 9999px !important;
+  padding: 10px !important;
+}
+.grid.grid-cols-1.sm\:grid-cols-2.lg\:grid-cols-3 > div:nth-child(4) svg {
+  color: #111111 !important;
+}
+
+.grid.grid-cols-1.sm\:grid-cols-2.lg\:grid-cols-3 > div:nth-child(5) [class*="bg-"] {
+  background-color: #111111 !important; /* Jet Black */
+  color: #ffffff !important;
+  border-radius: 9999px !important;
+  padding: 10px !important;
+}
+.grid.grid-cols-1.sm\:grid-cols-2.lg\:grid-cols-3 > div:nth-child(5) svg {
+  color: #ffffff !important;
+}
+
+.grid.grid-cols-1.sm\:grid-cols-2.lg\:grid-cols-3 > div:nth-child(6) [class*="bg-"] {
+  background-color: #72cbf6 !important; /* Sky Blue */
+  color: #111111 !important;
+  border-radius: 9999px !important;
+  padding: 10px !important;
+}
+.grid.grid-cols-1.sm\:grid-cols-2.lg\:grid-cols-3 > div:nth-child(6) svg {
+  color: #111111 !important;
+}
+
+/* ========================================================
+ * 4. SEGMENTED BAR: "Sales Data" Pastel Blocks from Reference
+ * ======================================================== */
+
+/* Inventory Overview Card Segmented Progress Bar */
+.h-3.w-full.rounded-full.overflow-hidden.flex {
+  height: 22px !important;
+  border-radius: 12px !important;
+  background-color: #f1f3f6 !important;
+  padding: 3px !important;
+  gap: 3px !important;
+}
+
+.h-3.w-full.rounded-full.overflow-hidden.flex > div {
+  border-radius: 8px !important;
+  transition: all 0.3s ease !important;
+}
+
+/* Block 1: Soft Mint */
+.h-3.w-full.rounded-full.overflow-hidden.flex > div:nth-child(1) {
+  background-color: #a6f4b8 !important;
+}
+
+/* Block 2: Vibrant Lime */
+.h-3.w-full.rounded-full.overflow-hidden.flex > div:nth-child(2) {
+  background-color: #d4f94a !important;
+}
+
+/* Block 3: Sky Blue */
+.h-3.w-full.rounded-full.overflow-hidden.flex > div:nth-child(3) {
+  background-color: #72cbf6 !important;
+}
+
+/* Block 4: Jet Black */
+.h-3.w-full.rounded-full.overflow-hidden.flex > div:nth-child(4) {
+  background-color: #111111 !important;
+}
+
+/* Status breakdown mini tiles */
+.grid.grid-cols-2.gap-3 > div,
+.grid.grid-cols-2.gap-4 > div {
+  border-radius: 18px !important;
+  background-color: #f7f8fa !important;
+  border: 1px solid #edf0f3 !important;
+  padding: 12px 16px !important;
+  transition: background-color 0.2s ease !important;
+}
+
+.grid.grid-cols-2.gap-3 > div:hover,
+.grid.grid-cols-2.gap-4 > div:hover {
+  background-color: #ffffff !important;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.03) !important;
+}
+
+/* ========================================================
+ * 5. SCHEDULE & ACTIVITY TIMELINE: Floating Event Pills
+ * ======================================================== */
+
+/* Activity Feed timeline entries matching bottom-right schedule in reference */
+.space-y-4 > div[class*="flex items-start"] {
+  border-radius: 18px !important;
+  background-color: #f8f9fb !important;
+  border: 1px solid #edf0f4 !important;
+  padding: 12px 16px !important;
+  margin-bottom: 8px !important;
   transition: all 0.2s ease !important;
 }
 
-.bg-blue-600:hover {
-  background-color: #d4f94a !important;
-  color: #111111 !important;
+.space-y-4 > div[class*="flex items-start"]:hover {
+  background-color: #ffffff !important;
   transform: translateY(-1px);
+  box-shadow: 0 4px 14px rgba(0, 0, 0, 0.04) !important;
 }
 
-.dark .bg-blue-600 {
+/* Timeline icon discs: Black circle with white icon */
+.space-y-4 > div[class*="flex items-start"] > div:first-child {
+  background-color: #111111 !important;
+  border-radius: 9999px !important;
+  padding: 7px !important;
+}
+
+.space-y-4 > div[class*="flex items-start"] > div:first-child svg {
+  color: #ffffff !important;
+}
+
+/* Low Stock Alert list items */
+.space-y-3 > div[class*="flex items-center"] {
+  border-radius: 18px !important;
+  background-color: #f8f9fb !important;
+  border: 1px solid #edf0f4 !important;
+  padding: 12px 16px !important;
+  transition: all 0.2s ease !important;
+}
+
+.space-y-3 > div[class*="flex items-center"]:hover {
+  background-color: #ffffff !important;
+  transform: translateY(-1px);
+  box-shadow: 0 4px 14px rgba(0, 0, 0, 0.04) !important;
+}
+
+/* ========================================================
+ * 6. BUTTONS & PILLS: Solid Black & Tactile Accents
+ * ======================================================== */
+
+/* Primary Action Buttons: Solid Jet Black pill (#111111) hovering to Lime Green (#d4f94a) */
+.bg-blue-600,
+button[class*="bg-blue-600"],
+a[class*="bg-blue-600"] {
+  background-color: #111111 !important;
+  color: #ffffff !important;
+  border-radius: 9999px !important;
+  font-weight: 800 !important;
+  padding: 10px 22px !important;
+  box-shadow: 0 4px 14px rgba(0, 0, 0, 0.15) !important;
+  transition: all 0.2s cubic-bezier(0.16, 1, 0.3, 1) !important;
+  border: none !important;
+  letter-spacing: -0.01em !important;
+}
+
+.bg-blue-600:hover,
+button[class*="bg-blue-600"]:hover,
+a[class*="bg-blue-600"]:hover {
+  background-color: #d4f94a !important;
+  color: #111111 !important;
+  transform: translateY(-1px) scale(1.02);
+  box-shadow: 0 6px 20px rgba(212, 249, 74, 0.45) !important;
+}
+
+.dark .bg-blue-600,
+.dark button[class*="bg-blue-600"],
+.dark a[class*="bg-blue-600"] {
   background-color: #d4f94a !important;
   color: #111111 !important;
 }
 
-.dark .bg-blue-600:hover {
+.dark .bg-blue-600:hover,
+.dark button[class*="bg-blue-600"]:hover,
+.dark a[class*="bg-blue-600"]:hover {
   background-color: #72cbf6 !important;
   color: #111111 !important;
 }
 
-/* Reference Design Status Badges: Fresh Mint, Lime, Pale Yellow, and Sky Blue */
-.bg-emerald-50, 
-[class*="bg-emerald-50"] {
+/* Secondary Button Pills */
+button[class*="border-slate-200"],
+a[class*="border-slate-200"],
+button[class*="bg-slate-100"] {
+  border-radius: 9999px !important;
+  border: 1px solid #e2e4e8 !important;
+  background-color: #ffffff !important;
+  font-weight: 700 !important;
+  color: #111111 !important;
+  padding: 9px 20px !important;
+  transition: all 0.2s ease !important;
+}
+
+button[class*="border-slate-200"]:hover,
+a[class*="border-slate-200"]:hover,
+button[class*="bg-slate-100"]:hover {
+  background-color: #f4f5f8 !important;
+  border-color: #111111 !important;
+  color: #111111 !important;
+}
+
+/* ========================================================
+ * 7. STATUS BADGES & TAGS: Mint, Pale Yellow, Sky Blue & Black
+ * ======================================================== */
+
+/* In Stock / Listed / Healthy: Mint Green (#a6f4b8) with Black Text */
+.bg-emerald-50,
+[class*="bg-emerald-50"],
+.text-emerald-700 {
   background-color: #a6f4b8 !important;
   color: #111111 !important;
   border-radius: 9999px !important;
-  font-weight: 600 !important;
+  font-weight: 800 !important;
+  padding: 4px 14px !important;
   border: none !important;
 }
 
-.bg-amber-50, 
-[class*="bg-amber-50"] {
+/* Ready for Listing / Warning / Low: Pale Yellow (#fef08a) with Black Text */
+.bg-amber-50,
+[class*="bg-amber-50"],
+.text-amber-700 {
   background-color: #fef08a !important;
   color: #111111 !important;
   border-radius: 9999px !important;
-  font-weight: 600 !important;
+  font-weight: 800 !important;
+  padding: 4px 14px !important;
   border: none !important;
 }
 
-.bg-blue-50, 
-[class*="bg-blue-50"] {
+/* Draft / Sky Blue Badges (#72cbf6) */
+.bg-blue-50,
+[class*="bg-blue-50"],
+.text-blue-700 {
   background-color: #72cbf6 !important;
   color: #111111 !important;
   border-radius: 9999px !important;
-  font-weight: 600 !important;
+  font-weight: 800 !important;
+  padding: 4px 14px !important;
   border: none !important;
 }
 
-.bg-slate-100, 
-[class*="bg-slate-100"] {
-  background-color: #f4f5f7 !important;
+/* Out of Stock / Critical / Archived / "+3" badges: Solid Black (#111111) with White Text */
+.bg-rose-50,
+[class*="bg-rose-50"],
+.text-rose-700,
+.bg-zinc-100 {
+  background-color: #111111 !important;
+  color: #ffffff !important;
   border-radius: 9999px !important;
+  font-weight: 800 !important;
+  padding: 4px 14px !important;
+  border: none !important;
 }
 
-/* Inputs & Search Pills */
-input[type="text"], 
-input[type="search"], 
+/* ========================================================
+ * 8. SEARCH BARS & INPUTS: Smooth Rounded Pills
+ * ======================================================== */
+
+input[type="text"],
+input[type="search"],
+input[type="email"],
+input[type="password"],
+input[type="number"],
 select {
-  border-radius: 16px !important;
+  border-radius: 9999px !important;
   background-color: #f5f6f8 !important;
-  border-color: transparent !important;
+  border: 1px solid #e5e7eb !important;
+  padding: 10px 20px !important;
+  font-size: 13px !important;
+  font-weight: 600 !important;
+  color: #111111 !important;
+  transition: all 0.2s ease !important;
 }
 
-.dark input[type="text"], 
-.dark input[type="search"], 
+input:focus,
+select:focus {
+  border-color: #72cbf6 !important;
+  background-color: #ffffff !important;
+  box-shadow: 0 0 0 4px rgba(114, 203, 246, 0.3) !important;
+  outline: none !important;
+}
+
+.dark input[type="text"],
+.dark input[type="search"],
+.dark input[type="email"],
+.dark input[type="password"],
 .dark select {
-  background-color: #252830 !important;
-  border-color: transparent !important;
+  background-color: #24262d !important;
+  color: #ffffff !important;
+  border-color: #2e313a !important;
 }
 
-/* Subtle, polished animations */
+.dark input:focus,
+.dark select:focus {
+  border-color: #d4f94a !important;
+  box-shadow: 0 0 0 4px rgba(212, 249, 74, 0.3) !important;
+}
+
+/* ========================================================
+ * 9. TABLES: Clean Rounded Container & Soft Row Dividers
+ * ======================================================== */
+
+table {
+  border-collapse: separate !important;
+  border-spacing: 0 !important;
+  width: 100% !important;
+}
+
+thead tr {
+  background-color: #f7f8fa !important;
+}
+
+.dark thead tr {
+  background-color: #202227 !important;
+}
+
+thead th {
+  color: #71717a !important;
+  font-size: 11px !important;
+  font-weight: 800 !important;
+  text-transform: uppercase !important;
+  letter-spacing: 0.06em !important;
+  border-bottom: 1px solid #edf0f3 !important;
+  padding: 14px 18px !important;
+}
+
+tbody tr {
+  transition: background-color 0.15s ease !important;
+  border-bottom: 1px solid #f1f3f6 !important;
+}
+
+tbody td {
+  padding: 14px 18px !important;
+}
+
+tbody tr:hover {
+  background-color: #f9fafb !important;
+}
+
+.dark tbody tr:hover {
+  background-color: #24262d !important;
+}
+
+/* ========================================================
+ * 10. ANIMATIONS & SCROLLBAR
+ * ======================================================== */
+
 @keyframes fadeIn {
   from {
     opacity: 0;
@@ -226,7 +699,6 @@ select {
   animation: fadeIn 0.25s cubic-bezier(0.16, 1, 0.3, 1) forwards;
 }
 
-/* Custom scrollbars */
 ::-webkit-scrollbar {
   width: 6px;
   height: 6px;
@@ -237,10 +709,10 @@ select {
 }
 
 ::-webkit-scrollbar-thumb {
-  background: rgba(148, 163, 184, 0.4);
+  background: rgba(148, 163, 184, 0.3);
   border-radius: 9999px;
 }
 
 ::-webkit-scrollbar-thumb:hover {
-  background: rgba(148, 163, 184, 0.7);
+  background: rgba(148, 163, 184, 0.6);
 }
