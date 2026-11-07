@@ -13,6 +13,7 @@ import {
   ExternalLink,
 } from "lucide-react";
 import Link from "next/link";
+import { LiquidGlassCard } from "@/components/ui/liquid-glass";
 
 interface ProductFormProps {
   categories: Category[];
@@ -174,8 +175,8 @@ export function ProductForm({ categories, initialData }: ProductFormProps) {
       )}
 
       {/* Section 1: Basic Information */}
-      <div className="p-6 rounded-xl bg-white dark:bg-[#0F172A] border border-slate-200 dark:border-slate-800 shadow-sm space-y-4">
-        <h2 className="text-sm font-bold uppercase tracking-wider text-slate-700 dark:text-slate-300 border-b border-slate-100 dark:border-slate-800 pb-2">
+      <LiquidGlassCard className="p-6 space-y-4">
+        <h2 className="text-sm font-bold uppercase tracking-wider text-slate-700 dark:text-slate-300 border-b border-white/50 dark:border-white/10 pb-2">
           1. Basic Information
         </h2>
 
@@ -191,7 +192,7 @@ export function ProductForm({ categories, initialData }: ProductFormProps) {
               value={formData.product_name}
               onChange={handleChange}
               placeholder="e.g. Aura ANC Wireless Studio Headphones"
-              className="w-full px-3 py-2 text-xs sm:text-sm rounded-lg bg-slate-50 dark:bg-slate-800/60 border border-slate-200 dark:border-slate-700 focus:outline-none focus:ring-2 focus:ring-blue-500"
+              className="w-full px-3 py-2 text-xs sm:text-sm rounded-xl bg-white/40 dark:bg-slate-900/40 border border-white/60 dark:border-white/10 text-slate-900 dark:text-slate-100 placeholder:text-slate-400 focus:outline-none focus:ring-2 focus:ring-blue-500 shadow-xs"
             />
           </div>
 
@@ -206,7 +207,7 @@ export function ProductForm({ categories, initialData }: ProductFormProps) {
               value={formData.sku}
               onChange={handleChange}
               placeholder="e.g. ELEC-HDPH-001"
-              className="w-full px-3 py-2 text-xs sm:text-sm font-mono rounded-lg bg-slate-50 dark:bg-slate-800/60 border border-slate-200 dark:border-slate-700 focus:outline-none focus:ring-2 focus:ring-blue-500 uppercase"
+              className="w-full px-3 py-2 text-xs sm:text-sm font-mono rounded-xl bg-white/40 dark:bg-slate-900/40 border border-white/60 dark:border-white/10 text-slate-900 dark:text-slate-100 placeholder:text-slate-400 focus:outline-none focus:ring-2 focus:ring-blue-500 uppercase shadow-xs"
             />
           </div>
 
@@ -219,7 +220,7 @@ export function ProductForm({ categories, initialData }: ProductFormProps) {
               required
               value={formData.category_id}
               onChange={handleChange}
-              className="w-full px-3 py-2 text-xs sm:text-sm rounded-lg bg-slate-50 dark:bg-slate-800/60 border border-slate-200 dark:border-slate-700 focus:outline-none focus:ring-2 focus:ring-blue-500"
+              className="w-full px-3 py-2 text-xs sm:text-sm rounded-xl bg-white/40 dark:bg-slate-900/40 border border-white/60 dark:border-white/10 text-slate-900 dark:text-slate-100 focus:outline-none focus:ring-2 focus:ring-blue-500 shadow-xs"
             >
               {categories.map((c) => (
                 <option key={c.id} value={c.id}>
@@ -239,15 +240,15 @@ export function ProductForm({ categories, initialData }: ProductFormProps) {
               value={formData.description}
               onChange={handleChange}
               placeholder="Detailed commercial description, marketplace bullet points, specifications..."
-              className="w-full px-3 py-2 text-xs sm:text-sm rounded-lg bg-slate-50 dark:bg-slate-800/60 border border-slate-200 dark:border-slate-700 focus:outline-none focus:ring-2 focus:ring-blue-500"
+              className="w-full px-3 py-2 text-xs sm:text-sm rounded-xl bg-white/40 dark:bg-slate-900/40 border border-white/60 dark:border-white/10 text-slate-900 dark:text-slate-100 placeholder:text-slate-400 focus:outline-none focus:ring-2 focus:ring-blue-500 shadow-xs"
             />
           </div>
         </div>
-      </div>
+      </LiquidGlassCard>
 
       {/* Section 2: Pricing */}
-      <div className="p-6 rounded-xl bg-white dark:bg-[#0F172A] border border-slate-200 dark:border-slate-800 shadow-sm space-y-4">
-        <h2 className="text-sm font-bold uppercase tracking-wider text-slate-700 dark:text-slate-300 border-b border-slate-100 dark:border-slate-800 pb-2">
+      <LiquidGlassCard className="p-6 space-y-4">
+        <h2 className="text-sm font-bold uppercase tracking-wider text-slate-700 dark:text-slate-300 border-b border-white/50 dark:border-white/10 pb-2">
           2. Pricing & Currency
         </h2>
 
@@ -268,7 +269,7 @@ export function ProductForm({ categories, initialData }: ProductFormProps) {
                 required
                 value={formData.purchase_cost}
                 onChange={handleChange}
-                className="w-full pl-7 pr-3 py-2 text-xs sm:text-sm rounded-lg bg-slate-50 dark:bg-slate-800/60 border border-slate-200 dark:border-slate-700 focus:outline-none focus:ring-2 focus:ring-blue-500"
+                className="w-full pl-7 pr-3 py-2 text-xs sm:text-sm rounded-xl bg-white/40 dark:bg-slate-900/40 border border-white/60 dark:border-white/10 focus:outline-none focus:ring-2 focus:ring-blue-500 shadow-xs"
               />
             </div>
           </div>
@@ -289,7 +290,7 @@ export function ProductForm({ categories, initialData }: ProductFormProps) {
                 required
                 value={formData.selling_price}
                 onChange={handleChange}
-                className="w-full pl-7 pr-3 py-2 text-xs sm:text-sm rounded-lg bg-slate-50 dark:bg-slate-800/60 border border-slate-200 dark:border-slate-700 focus:outline-none focus:ring-2 focus:ring-blue-500 font-semibold text-slate-900 dark:text-slate-100"
+                className="w-full pl-7 pr-3 py-2 text-xs sm:text-sm rounded-xl bg-white/40 dark:bg-slate-900/40 border border-white/60 dark:border-white/10 focus:outline-none focus:ring-2 focus:ring-blue-500 font-semibold text-slate-900 dark:text-slate-100 shadow-xs"
               />
             </div>
           </div>
@@ -303,15 +304,15 @@ export function ProductForm({ categories, initialData }: ProductFormProps) {
               name="currency"
               disabled
               value="INR (Indian Rupee)"
-              className="w-full px-3 py-2 text-xs sm:text-sm rounded-lg bg-slate-100 dark:bg-slate-800 text-slate-500 border border-slate-200 dark:border-slate-700 cursor-not-allowed"
+              className="w-full px-3 py-2 text-xs sm:text-sm rounded-xl bg-white/20 dark:bg-slate-800/40 text-slate-500 border border-white/40 dark:border-white/10 cursor-not-allowed shadow-xs"
             />
           </div>
         </div>
-      </div>
+      </LiquidGlassCard>
 
       {/* Section 3: Physical Details & Dimensions */}
-      <div className="p-6 rounded-xl bg-white dark:bg-[#0F172A] border border-slate-200 dark:border-slate-800 shadow-sm space-y-4">
-        <h2 className="text-sm font-bold uppercase tracking-wider text-slate-700 dark:text-slate-300 border-b border-slate-100 dark:border-slate-800 pb-2">
+      <LiquidGlassCard className="p-6 space-y-4">
+        <h2 className="text-sm font-bold uppercase tracking-wider text-slate-700 dark:text-slate-300 border-b border-white/50 dark:border-white/10 pb-2">
           3. Physical Specifications & Dimensions
         </h2>
 
@@ -328,13 +329,13 @@ export function ProductForm({ categories, initialData }: ProductFormProps) {
                 min="0"
                 value={formData.weight_value}
                 onChange={handleChange}
-                className="w-full px-3 py-2 text-xs sm:text-sm rounded-lg bg-slate-50 dark:bg-slate-800/60 border border-slate-200 dark:border-slate-700 focus:outline-none focus:ring-2 focus:ring-blue-500"
+                className="w-full px-3 py-2 text-xs sm:text-sm rounded-xl bg-white/40 dark:bg-slate-900/40 border border-white/60 dark:border-white/10 focus:outline-none focus:ring-2 focus:ring-blue-500 shadow-xs"
               />
               <select
                 name="weight_unit"
                 value={formData.weight_unit}
                 onChange={handleChange}
-                className="w-20 px-2 py-2 text-xs rounded-lg bg-slate-50 dark:bg-slate-800/60 border border-slate-200 dark:border-slate-700 focus:outline-none"
+                className="w-20 px-2 py-2 text-xs rounded-xl bg-white/40 dark:bg-slate-900/40 border border-white/60 dark:border-white/10 focus:outline-none shadow-xs"
               >
                 <option value="g">g</option>
                 <option value="kg">kg</option>
@@ -353,7 +354,7 @@ export function ProductForm({ categories, initialData }: ProductFormProps) {
               min="0"
               value={formData.length}
               onChange={handleChange}
-              className="w-full px-3 py-2 text-xs sm:text-sm rounded-lg bg-slate-50 dark:bg-slate-800/60 border border-slate-200 dark:border-slate-700 focus:outline-none focus:ring-2 focus:ring-blue-500"
+              className="w-full px-3 py-2 text-xs sm:text-sm rounded-xl bg-white/40 dark:bg-slate-900/40 border border-white/60 dark:border-white/10 focus:outline-none focus:ring-2 focus:ring-blue-500 shadow-xs"
             />
           </div>
 
@@ -368,7 +369,7 @@ export function ProductForm({ categories, initialData }: ProductFormProps) {
               min="0"
               value={formData.width}
               onChange={handleChange}
-              className="w-full px-3 py-2 text-xs sm:text-sm rounded-lg bg-slate-50 dark:bg-slate-800/60 border border-slate-200 dark:border-slate-700 focus:outline-none focus:ring-2 focus:ring-blue-500"
+              className="w-full px-3 py-2 text-xs sm:text-sm rounded-xl bg-white/40 dark:bg-slate-900/40 border border-white/60 dark:border-white/10 focus:outline-none focus:ring-2 focus:ring-blue-500 shadow-xs"
             />
           </div>
 
@@ -383,7 +384,7 @@ export function ProductForm({ categories, initialData }: ProductFormProps) {
               min="0"
               value={formData.height}
               onChange={handleChange}
-              className="w-full px-3 py-2 text-xs sm:text-sm rounded-lg bg-slate-50 dark:bg-slate-800/60 border border-slate-200 dark:border-slate-700 focus:outline-none focus:ring-2 focus:ring-blue-500"
+              className="w-full px-3 py-2 text-xs sm:text-sm rounded-xl bg-white/40 dark:bg-slate-900/40 border border-white/60 dark:border-white/10 focus:outline-none focus:ring-2 focus:ring-blue-500 shadow-xs"
             />
           </div>
 
@@ -395,7 +396,7 @@ export function ProductForm({ categories, initialData }: ProductFormProps) {
               name="dimension_unit"
               value={formData.dimension_unit}
               onChange={handleChange}
-              className="w-full px-3 py-2 text-xs rounded-lg bg-slate-50 dark:bg-slate-800/60 border border-slate-200 dark:border-slate-700 focus:outline-none"
+              className="w-full px-3 py-2 text-xs rounded-xl bg-white/40 dark:bg-slate-900/40 border border-white/60 dark:border-white/10 focus:outline-none shadow-xs"
             >
               <option value="cm">cm</option>
               <option value="mm">mm</option>
@@ -403,11 +404,11 @@ export function ProductForm({ categories, initialData }: ProductFormProps) {
             </select>
           </div>
         </div>
-      </div>
+      </LiquidGlassCard>
 
       {/* Section 4: Product Attributes */}
-      <div className="p-6 rounded-xl bg-white dark:bg-[#0F172A] border border-slate-200 dark:border-slate-800 shadow-sm space-y-4">
-        <h2 className="text-sm font-bold uppercase tracking-wider text-slate-700 dark:text-slate-300 border-b border-slate-100 dark:border-slate-800 pb-2">
+      <LiquidGlassCard className="p-6 space-y-4">
+        <h2 className="text-sm font-bold uppercase tracking-wider text-slate-700 dark:text-slate-300 border-b border-white/50 dark:border-white/10 pb-2">
           4. Product Attributes (Optional)
         </h2>
 
@@ -454,11 +455,11 @@ export function ProductForm({ categories, initialData }: ProductFormProps) {
             />
           </div>
         </div>
-      </div>
+      </LiquidGlassCard>
 
       {/* Section 5: Inventory & Thresholds */}
-      <div className="p-6 rounded-xl bg-white dark:bg-[#0F172A] border border-slate-200 dark:border-slate-800 shadow-sm space-y-4">
-        <h2 className="text-sm font-bold uppercase tracking-wider text-slate-700 dark:text-slate-300 border-b border-slate-100 dark:border-slate-800 pb-2">
+      <LiquidGlassCard className="p-6 space-y-4">
+        <h2 className="text-sm font-bold uppercase tracking-wider text-slate-700 dark:text-slate-300 border-b border-white/50 dark:border-white/10 pb-2">
           5. Inventory & Stock Controls
         </h2>
 
@@ -475,7 +476,7 @@ export function ProductForm({ categories, initialData }: ProductFormProps) {
               required
               value={formData.stock_quantity}
               onChange={handleChange}
-              className="w-full px-3 py-2 text-xs sm:text-sm rounded-lg bg-slate-50 dark:bg-slate-800/60 border border-slate-200 dark:border-slate-700 focus:outline-none focus:ring-2 focus:ring-blue-500"
+              className="w-full px-3 py-2 text-xs sm:text-sm rounded-xl bg-white/40 dark:bg-slate-900/40 border border-white/60 dark:border-white/10 focus:outline-none focus:ring-2 focus:ring-blue-500 shadow-xs"
             />
           </div>
 
@@ -491,18 +492,18 @@ export function ProductForm({ categories, initialData }: ProductFormProps) {
               required
               value={formData.low_stock_threshold}
               onChange={handleChange}
-              className="w-full px-3 py-2 text-xs sm:text-sm rounded-lg bg-slate-50 dark:bg-slate-800/60 border border-slate-200 dark:border-slate-700 focus:outline-none focus:ring-2 focus:ring-blue-500"
+              className="w-full px-3 py-2 text-xs sm:text-sm rounded-xl bg-white/40 dark:bg-slate-900/40 border border-white/60 dark:border-white/10 focus:outline-none focus:ring-2 focus:ring-blue-500 shadow-xs"
             />
             <p className="text-[11px] text-slate-500">
               An alert is triggered when available stock drops to or below this count.
             </p>
           </div>
         </div>
-      </div>
+      </LiquidGlassCard>
 
       {/* Section 6: Media & Listing Links (With Image Preview) */}
-      <div className="p-6 rounded-xl bg-white dark:bg-[#0F172A] border border-slate-200 dark:border-slate-800 shadow-sm space-y-4">
-        <h2 className="text-sm font-bold uppercase tracking-wider text-slate-700 dark:text-slate-300 border-b border-slate-100 dark:border-slate-800 pb-2">
+      <LiquidGlassCard className="p-6 space-y-4">
+        <h2 className="text-sm font-bold uppercase tracking-wider text-slate-700 dark:text-slate-300 border-b border-white/50 dark:border-white/10 pb-2">
           6. Media & Listing Links
         </h2>
 
@@ -578,11 +579,11 @@ export function ProductForm({ categories, initialData }: ProductFormProps) {
             </div>
           </div>
         </div>
-      </div>
+      </LiquidGlassCard>
 
       {/* Section 7: Tax Information */}
-      <div className="p-6 rounded-xl bg-white dark:bg-[#0F172A] border border-slate-200 dark:border-slate-800 shadow-sm space-y-4">
-        <h2 className="text-sm font-bold uppercase tracking-wider text-slate-700 dark:text-slate-300 border-b border-slate-100 dark:border-slate-800 pb-2">
+      <LiquidGlassCard className="p-6 space-y-4">
+        <h2 className="text-sm font-bold uppercase tracking-wider text-slate-700 dark:text-slate-300 border-b border-white/50 dark:border-white/10 pb-2">
           7. Tax & Compliance
         </h2>
 
@@ -597,7 +598,7 @@ export function ProductForm({ categories, initialData }: ProductFormProps) {
               value={formData.hsn_code}
               onChange={handleChange}
               placeholder="e.g. 85183000"
-              className="w-full px-3 py-2 text-xs sm:text-sm font-mono rounded-lg bg-slate-50 dark:bg-slate-800/60 border border-slate-200 dark:border-slate-700 focus:outline-none focus:ring-2 focus:ring-blue-500"
+              className="w-full px-3 py-2 text-xs sm:text-sm font-mono rounded-xl bg-white/40 dark:bg-slate-900/40 border border-white/60 dark:border-white/10 focus:outline-none focus:ring-2 focus:ring-blue-500 shadow-xs"
             />
           </div>
 
@@ -614,15 +615,15 @@ export function ProductForm({ categories, initialData }: ProductFormProps) {
               value={formData.gst_percentage}
               onChange={handleChange}
               placeholder="18"
-              className="w-full px-3 py-2 text-xs sm:text-sm rounded-lg bg-slate-50 dark:bg-slate-800/60 border border-slate-200 dark:border-slate-700 focus:outline-none focus:ring-2 focus:ring-blue-500"
+              className="w-full px-3 py-2 text-xs sm:text-sm rounded-xl bg-white/40 dark:bg-slate-900/40 border border-white/60 dark:border-white/10 focus:outline-none focus:ring-2 focus:ring-blue-500 shadow-xs"
             />
           </div>
         </div>
-      </div>
+      </LiquidGlassCard>
 
       {/* Section 8: Status & Internal Notes */}
-      <div className="p-6 rounded-xl bg-white dark:bg-[#0F172A] border border-slate-200 dark:border-slate-800 shadow-sm space-y-4">
-        <h2 className="text-sm font-bold uppercase tracking-wider text-slate-700 dark:text-slate-300 border-b border-slate-100 dark:border-slate-800 pb-2">
+      <LiquidGlassCard className="p-6 space-y-4">
+        <h2 className="text-sm font-bold uppercase tracking-wider text-slate-700 dark:text-slate-300 border-b border-white/50 dark:border-white/10 pb-2">
           8. Status & Remarks
         </h2>
 
@@ -635,7 +636,7 @@ export function ProductForm({ categories, initialData }: ProductFormProps) {
               name="status"
               value={formData.status}
               onChange={handleChange}
-              className="w-full px-3 py-2 text-xs sm:text-sm rounded-lg bg-slate-50 dark:bg-slate-800/60 border border-slate-200 dark:border-slate-700 focus:outline-none focus:ring-2 focus:ring-blue-500 font-medium"
+              className="w-full px-3 py-2 text-xs sm:text-sm rounded-xl bg-white/40 dark:bg-slate-900/40 border border-white/60 dark:border-white/10 focus:outline-none focus:ring-2 focus:ring-blue-500 font-medium shadow-xs"
             >
               <option value="Draft">Draft</option>
               <option value="Ready for Listing">Ready for Listing</option>
@@ -654,11 +655,11 @@ export function ProductForm({ categories, initialData }: ProductFormProps) {
               value={formData.internal_notes}
               onChange={handleChange}
               placeholder="Private team notes, supplier reorder info, warehouse batch numbers..."
-              className="w-full px-3 py-2 text-xs sm:text-sm rounded-lg bg-slate-50 dark:bg-slate-800/60 border border-slate-200 dark:border-slate-700 focus:outline-none focus:ring-2 focus:ring-blue-500"
+              className="w-full px-3 py-2 text-xs sm:text-sm rounded-xl bg-white/40 dark:bg-slate-900/40 border border-white/60 dark:border-white/10 focus:outline-none focus:ring-2 focus:ring-blue-500 shadow-xs"
             />
           </div>
         </div>
-      </div>
+      </LiquidGlassCard>
 
       {/* Bottom Action Footer */}
       <div className="flex items-center justify-end gap-3 pt-4">

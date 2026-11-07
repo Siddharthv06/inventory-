@@ -2,12 +2,14 @@ import Link from "next/link";
 import { ActivityLog } from "@/types";
 import { formatDateTime } from "@/lib/utils";
 import { PlusCircle, Edit3, Archive, RotateCcw, Trash2, ArrowUpDown, History } from "lucide-react";
+import { LiquidGlassCard } from "@/components/ui/liquid-glass";
 
 interface ActivityFeedProps {
   activities: ActivityLog[];
+  className?: string;
 }
 
-export function ActivityFeed({ activities }: ActivityFeedProps) {
+export function ActivityFeed({ activities, className = "" }: ActivityFeedProps) {
   const getActionIcon = (action: string) => {
     switch (action) {
       case "CREATE":
@@ -28,7 +30,7 @@ export function ActivityFeed({ activities }: ActivityFeedProps) {
   };
 
   return (
-    <div className="p-6 rounded-xl bg-white dark:bg-[#0F172A] border border-slate-200 dark:border-slate-800 shadow-sm flex flex-col h-full">
+    <LiquidGlassCard className={`p-6 flex flex-col h-full ${className}`}>
       <div className="flex items-center justify-between mb-4">
         <div>
           <h2 className="text-base font-semibold text-slate-900 dark:text-slate-100">
@@ -69,7 +71,7 @@ export function ActivityFeed({ activities }: ActivityFeedProps) {
           ))
         )}
       </div>
-    </div>
+    </LiquidGlassCard>
   );
 }
 

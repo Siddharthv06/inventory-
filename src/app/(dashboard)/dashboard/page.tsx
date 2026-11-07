@@ -36,22 +36,14 @@ export default async function DashboardPage() {
 
       {/* 2-Column: Inventory Distribution & Low Stock Alerts */}
       <LiquidGlassContainer className="grid grid-cols-1 lg:grid-cols-3 gap-6">
-        <div className="lg:col-span-2">
-          <InventoryOverviewCard stats={stats} />
-        </div>
-        <div className="lg:col-span-1">
-          <LowStockAlertCard products={lowStockProducts} />
-        </div>
+        <InventoryOverviewCard stats={stats} className="lg:col-span-2" />
+        <LowStockAlertCard products={lowStockProducts} className="lg:col-span-1" />
       </LiquidGlassContainer>
 
       {/* 2-Column: Recent Products Table & Activity Feed */}
       <LiquidGlassContainer className="grid grid-cols-1 lg:grid-cols-3 gap-6">
-        <div className="lg:col-span-2">
-          <RecentProductsTable products={recentProducts} />
-        </div>
-        <div className="lg:col-span-1">
-          <ActivityFeed activities={recentActivities} />
-        </div>
+        <RecentProductsTable products={recentProducts} className="lg:col-span-2" />
+        <ActivityFeed activities={recentActivities} className="lg:col-span-1" />
       </LiquidGlassContainer>
     </div>
   );

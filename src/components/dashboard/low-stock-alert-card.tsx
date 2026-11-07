@@ -5,11 +5,12 @@ import { LiquidGlassCard } from "@/components/ui/liquid-glass";
 
 interface LowStockAlertCardProps {
   products: Product[];
+  className?: string;
 }
 
-export function LowStockAlertCard({ products }: LowStockAlertCardProps) {
+export function LowStockAlertCard({ products, className = "" }: LowStockAlertCardProps) {
   return (
-    <LiquidGlassCard className="p-6 flex flex-col h-full">
+    <LiquidGlassCard className={`p-6 flex flex-col h-full ${className}`}>
       <div className="flex items-center justify-between mb-4">
         <div className="flex items-center gap-2">
           <div className="p-1.5 rounded-lg bg-rose-50 dark:bg-rose-950/40 text-rose-600 dark:text-rose-400">

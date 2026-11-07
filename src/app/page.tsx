@@ -17,11 +17,11 @@ import { LiquidGlassContainer } from "@/components/ui/liquid-glass-container";
 export default function LandingPage() {
   return (
     <div className="relative min-h-screen bg-slate-100/70 dark:bg-[#070B14] text-slate-900 dark:text-slate-100 flex flex-col overflow-x-hidden">
-      {/* Apple WWDC Liquid Glass Ambient Optical Refraction Mesh */}
+      {/* Apple WWDC 2025 Liquid Glass Ambient Optical Refraction Mesh */}
       <div className="fixed inset-0 pointer-events-none overflow-hidden z-0" aria-hidden="true">
-        <div className="absolute -top-[15%] -left-[10%] w-[55vw] h-[55vw] rounded-full bg-gradient-to-br from-blue-500/25 via-sky-400/20 to-transparent blur-[110px] dark:from-blue-600/20 dark:via-indigo-600/15 dark:to-transparent" />
-        <div className="absolute top-[30%] -right-[15%] w-[50vw] h-[50vw] rounded-full bg-gradient-to-bl from-indigo-500/20 via-purple-500/15 to-transparent blur-[130px] dark:from-indigo-600/20 dark:via-purple-800/15 dark:to-transparent" />
-        <div className="absolute -bottom-[15%] left-[20%] w-[60vw] h-[60vw] rounded-full bg-gradient-to-tr from-cyan-400/20 via-blue-500/15 to-transparent blur-[140px] dark:from-cyan-700/15 dark:via-blue-800/10 dark:to-transparent" />
+        <div className="absolute -top-[15%] -left-[10%] w-[55vw] h-[55vw] rounded-full bg-gradient-to-br from-blue-500/30 via-sky-400/25 to-transparent blur-[110px] dark:from-blue-600/30 dark:via-indigo-600/25 dark:to-transparent animate-ambient-slow" />
+        <div className="absolute top-[30%] -right-[15%] w-[50vw] h-[50vw] rounded-full bg-gradient-to-bl from-indigo-500/30 via-purple-500/25 to-transparent blur-[130px] dark:from-indigo-600/30 dark:via-purple-800/25 dark:to-transparent animate-ambient-reverse" />
+        <div className="absolute -bottom-[15%] left-[20%] w-[60vw] h-[60vw] rounded-full bg-gradient-to-tr from-cyan-400/30 via-blue-500/25 to-transparent blur-[140px] dark:from-cyan-700/25 dark:via-blue-800/20 dark:to-transparent" />
       </div>
 
       {/* Public Navbar */}

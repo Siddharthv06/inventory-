@@ -135,13 +135,23 @@ export function LiquidGlassCard({
   elevated = true,
   glassConfig,
   style,
+  onMouseMove,
   ...props
 }: LiquidGlassCardProps) {
   const intensityStyles = {
-    subtle: "bg-white/45 dark:bg-[#0F172A]/45",
-    medium: "bg-white/55 dark:bg-[#0F172A]/60",
-    vivid: "bg-white/70 dark:bg-[#0B1120]/75",
+    subtle: "bg-white/35 dark:bg-[#0F172A]/40",
+    medium: "bg-white/45 dark:bg-[#0F172A]/50",
+    vivid: "bg-white/60 dark:bg-[#0B1120]/65",
   }[intensity];
+
+  const handleMouseMove = (e: React.MouseEvent<HTMLDivElement>) => {
+    const rect = e.currentTarget.getBoundingClientRect();
+    const x = e.clientX - rect.left;
+    const y = e.clientY - rect.top;
+    e.currentTarget.style.setProperty("--mouse-x", `${x}px`);
+    e.currentTarget.style.setProperty("--mouse-y", `${y}px`);
+    onMouseMove?.(e);
+  };
 
   const configJson = JSON.stringify({
     cornerRadius: 20,
@@ -160,6 +170,7 @@ export function LiquidGlassCard({
   return (
     <div
       data-config={configJson}
+      onMouseMove={handleMouseMove}
       className={`liquid-glass-item liquid-glass-card relative rounded-2xl transition-all duration-300 ${intensityStyles} ${
         elevated ? "shadow-lg shadow-slate-900/5 dark:shadow-black/30 hover:-translate-y-0.5 hover:shadow-2xl" : ""
       } border border-white/70 dark:border-white/12 ${className}`}

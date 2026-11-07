@@ -180,14 +180,14 @@ export function CategoryManager({ categories }: CategoryManagerProps) {
 
       {/* Modal for Create/Edit */}
       {(modalState.type === "create" || modalState.type === "edit") && (
-        <div className="fixed inset-0 z-50 flex items-center justify-center p-4 bg-slate-900/50 backdrop-blur-sm animate-fade-in">
-          <div className="w-full max-w-md p-6 bg-white dark:bg-[#0F172A] border border-slate-200 dark:border-slate-800 rounded-2xl shadow-xl">
+        <div className="fixed inset-0 z-50 flex items-center justify-center p-4 bg-slate-900/50 backdrop-blur-md animate-fade-in">
+          <LiquidGlassCard className="w-full max-w-md p-6 shadow-2xl">
             <h3 className="text-base font-bold text-slate-900 dark:text-slate-100">
               {modalState.type === "create" ? "Create New Category" : "Edit Category"}
             </h3>
 
             {error && (
-              <div className="mt-3 p-3 rounded-lg bg-rose-50 dark:bg-rose-950/40 text-rose-700 dark:text-rose-300 text-xs flex items-center gap-2">
+              <div className="mt-3 p-3 rounded-xl bg-rose-50 dark:bg-rose-950/40 text-rose-700 dark:text-rose-300 text-xs flex items-center gap-2">
                 <AlertCircle className="w-4 h-4 shrink-0" />
                 <span>{error}</span>
               </div>
@@ -204,7 +204,7 @@ export function CategoryManager({ categories }: CategoryManagerProps) {
                   value={name}
                   onChange={(e) => setName(e.target.value)}
                   placeholder="e.g. Smart Home & Lighting"
-                  className="w-full px-3 py-2 text-xs sm:text-sm rounded-lg bg-slate-50 dark:bg-slate-800/60 border border-slate-200 dark:border-slate-700 focus:outline-none focus:ring-2 focus:ring-blue-500"
+                  className="w-full px-3 py-2 text-xs sm:text-sm rounded-xl bg-white/40 dark:bg-slate-900/40 border border-white/60 dark:border-white/10 focus:outline-none focus:ring-2 focus:ring-blue-500 shadow-xs"
                 />
               </div>
 
@@ -217,7 +217,7 @@ export function CategoryManager({ categories }: CategoryManagerProps) {
                   value={description}
                   onChange={(e) => setDescription(e.target.value)}
                   placeholder="Department scope, product classification rules..."
-                  className="w-full px-3 py-2 text-xs sm:text-sm rounded-lg bg-slate-50 dark:bg-slate-800/60 border border-slate-200 dark:border-slate-700 focus:outline-none focus:ring-2 focus:ring-blue-500"
+                  className="w-full px-3 py-2 text-xs sm:text-sm rounded-xl bg-white/40 dark:bg-slate-900/40 border border-white/60 dark:border-white/10 focus:outline-none focus:ring-2 focus:ring-blue-500 shadow-xs"
                 />
               </div>
 
@@ -225,7 +225,7 @@ export function CategoryManager({ categories }: CategoryManagerProps) {
                 <button
                   type="button"
                   onClick={() => setModalState({ type: null })}
-                  className="px-3.5 py-2 text-xs font-medium text-slate-600 dark:text-slate-300 hover:bg-slate-100 dark:hover:bg-slate-800 rounded-lg"
+                  className="px-3.5 py-2 text-xs font-medium text-slate-600 dark:text-slate-300 hover:bg-white/40 dark:hover:bg-slate-800 rounded-lg"
                 >
                   Cancel
                 </button>
@@ -238,20 +238,20 @@ export function CategoryManager({ categories }: CategoryManagerProps) {
                 </button>
               </div>
             </form>
-          </div>
+          </LiquidGlassCard>
         </div>
       )}
 
       {/* Delete Confirmation Modal */}
       {modalState.type === "delete" && modalState.category && (
-        <div className="fixed inset-0 z-50 flex items-center justify-center p-4 bg-slate-900/50 backdrop-blur-sm animate-fade-in">
-          <div className="w-full max-w-md p-6 bg-white dark:bg-[#0F172A] border border-slate-200 dark:border-slate-800 rounded-2xl shadow-xl">
+        <div className="fixed inset-0 z-50 flex items-center justify-center p-4 bg-slate-900/50 backdrop-blur-md animate-fade-in">
+          <LiquidGlassCard className="w-full max-w-md p-6 shadow-2xl">
             <h3 className="text-base font-bold text-slate-900 dark:text-slate-100">
               Delete Category
             </h3>
 
             {error ? (
-              <div className="mt-3 p-3 rounded-lg bg-rose-50 dark:bg-rose-950/40 text-rose-700 dark:text-rose-300 text-xs flex items-center gap-2">
+              <div className="mt-3 p-3 rounded-xl bg-rose-50 dark:bg-rose-950/40 text-rose-700 dark:text-rose-300 text-xs flex items-center gap-2">
                 <AlertCircle className="w-4 h-4 shrink-0" />
                 <span>{error}</span>
               </div>
@@ -265,7 +265,7 @@ export function CategoryManager({ categories }: CategoryManagerProps) {
               <button
                 type="button"
                 onClick={() => setModalState({ type: null })}
-                className="px-3.5 py-2 text-xs font-medium text-slate-600 dark:text-slate-300 hover:bg-slate-100 dark:hover:bg-slate-800 rounded-lg"
+                className="px-3.5 py-2 text-xs font-medium text-slate-600 dark:text-slate-300 hover:bg-white/40 dark:hover:bg-slate-800 rounded-lg"
               >
                 Close
               </button>
@@ -280,7 +280,7 @@ export function CategoryManager({ categories }: CategoryManagerProps) {
                 </button>
               )}
             </div>
-          </div>
+          </LiquidGlassCard>
         </div>
       )}
     </div>

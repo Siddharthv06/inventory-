@@ -2,15 +2,17 @@ import Link from "next/link";
 import { Product } from "@/types";
 import { formatCurrencyINR } from "@/lib/utils";
 import { Package, ArrowRight, ExternalLink } from "lucide-react";
+import { LiquidGlassCard } from "@/components/ui/liquid-glass";
 
 interface RecentProductsTableProps {
   products: Product[];
+  className?: string;
 }
 
-export function RecentProductsTable({ products }: RecentProductsTableProps) {
+export function RecentProductsTable({ products, className = "" }: RecentProductsTableProps) {
   return (
-    <div className="rounded-xl bg-white dark:bg-[#0F172A] border border-slate-200 dark:border-slate-800 shadow-sm overflow-hidden">
-      <div className="p-5 border-b border-slate-200 dark:border-slate-800 flex items-center justify-between">
+    <LiquidGlassCard className={`p-0 overflow-hidden ${className}`}>
+      <div className="p-5 border-b border-white/50 dark:border-white/10 flex items-center justify-between">
         <div>
           <h2 className="text-base font-semibold text-slate-900 dark:text-slate-100">
             Recently Added Products
@@ -29,7 +31,7 @@ export function RecentProductsTable({ products }: RecentProductsTableProps) {
 
       <div className="overflow-x-auto">
         <table className="w-full text-left text-xs">
-          <thead className="bg-slate-50 dark:bg-slate-800/50 text-slate-500 dark:text-slate-400 font-medium border-b border-slate-200 dark:border-slate-800">
+          <thead className="bg-white/40 dark:bg-slate-900/50 text-slate-500 dark:text-slate-400 font-semibold border-b border-white/50 dark:border-white/10">
             <tr>
               <th className="py-3 px-4">Product</th>
               <th className="py-3 px-4">SKU</th>
@@ -39,7 +41,7 @@ export function RecentProductsTable({ products }: RecentProductsTableProps) {
               <th className="py-3 px-4 text-right">Actions</th>
             </tr>
           </thead>
-          <tbody className="divide-y divide-slate-100 dark:divide-slate-800">
+          <tbody className="divide-y divide-white/40 dark:divide-white/10">
             {products.length === 0 ? (
               <tr>
                 <td colSpan={6} className="py-8 text-center text-slate-400">
@@ -120,7 +122,7 @@ export function RecentProductsTable({ products }: RecentProductsTableProps) {
           </tbody>
         </table>
       </div>
-    </div>
+    </LiquidGlassCard>
   );
 }
 
