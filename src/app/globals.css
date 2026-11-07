@@ -99,23 +99,23 @@ body {
  * Apple WWDC 2025 Liquid Glass & Optical Refraction System
  * ======================================================== */
 .liquid-glass {
-  background: rgba(255, 255, 255, 0.55);
-  backdrop-filter: blur(24px) saturate(200%) contrast(104%);
-  -webkit-backdrop-filter: blur(24px) saturate(200%) contrast(104%);
-  border: 1px solid rgba(255, 255, 255, 0.65);
+  background: rgba(255, 255, 255, 0.75);
+  backdrop-filter: blur(16px) saturate(190%) contrast(102%);
+  -webkit-backdrop-filter: blur(16px) saturate(190%);
+  border: 1px solid rgba(255, 255, 255, 0.7);
   box-shadow: 
-    inset 0 1.5px 1px 0 rgba(255, 255, 255, 0.85),
-    inset 0 -1.5px 1px 0 rgba(0, 0, 0, 0.04),
-    0 16px 36px -10px rgba(15, 23, 42, 0.09);
+    inset 0 1.5px 1px 0 rgba(255, 255, 255, 0.75),
+    inset 0 -1px 1px 0 rgba(0, 0, 0, 0.04),
+    0 10px 30px -10px rgba(15, 23, 42, 0.08);
 }
 
 .dark .liquid-glass {
-  background: rgba(15, 23, 42, 0.65);
+  background: rgba(15, 23, 42, 0.75);
   border: 1px solid rgba(255, 255, 255, 0.12);
   box-shadow: 
-    inset 0 1.5px 1px 0 rgba(255, 255, 255, 0.25),
-    inset 0 -1.5px 1px 0 rgba(0, 0, 0, 0.4),
-    0 20px 40px -10px rgba(0, 0, 0, 0.6);
+    inset 0 1.5px 1px 0 rgba(255, 255, 255, 0.2),
+    inset 0 -1px 1px 0 rgba(0, 0, 0, 0.4),
+    0 12px 32px -8px rgba(0, 0, 0, 0.5);
 }
 
 .liquid-glass-card {
@@ -130,30 +130,30 @@ body {
   top: 0;
   left: 0;
   right: 0;
-  height: 45%;
-  background: linear-gradient(135deg, rgba(255, 255, 255, 0.65) 0%, rgba(255, 255, 255, 0.05) 50%, rgba(255, 255, 255, 0) 100%);
+  height: 40%;
+  background: linear-gradient(180deg, rgba(255, 255, 255, 0.4) 0%, rgba(255, 255, 255, 0) 100%);
   pointer-events: none;
   border-radius: inherit;
-  opacity: 0.7;
+  opacity: 0.6;
 }
 
 .dark .liquid-glass-card::before {
-  background: linear-gradient(135deg, rgba(255, 255, 255, 0.15) 0%, rgba(255, 255, 255, 0.02) 50%, rgba(255, 255, 255, 0) 100%);
+  background: linear-gradient(180deg, rgba(255, 255, 255, 0.08) 0%, rgba(255, 255, 255, 0) 100%);
   opacity: 0.5;
 }
 
 .liquid-glass-card:hover {
   transform: translateY(-2px);
   box-shadow: 
-    inset 0 1.5px 1.5px 0 rgba(255, 255, 255, 0.95),
-    inset 0 -1.5px 1px 0 rgba(0, 0, 0, 0.04),
-    0 22px 45px -10px rgba(37, 99, 235, 0.16);
+    inset 0 1.5px 1.5px 0 rgba(255, 255, 255, 0.9),
+    inset 0 -1px 1px 0 rgba(0, 0, 0, 0.04),
+    0 16px 36px -10px rgba(37, 99, 235, 0.12);
 }
 
 .dark .liquid-glass-card:hover {
   box-shadow: 
-    inset 0 1.5px 1.5px 0 rgba(255, 255, 255, 0.35),
-    inset 0 -1.5px 1px 0 rgba(0, 0, 0, 0.5),
-    0 24px 48px -8px rgba(0, 0, 0, 0.75);
+    inset 0 1.5px 1.5px 0 rgba(255, 255, 255, 0.25),
+    inset 0 -1px 1px 0 rgba(0, 0, 0, 0.5),
+    0 18px 40px -8px rgba(0, 0, 0, 0.65);
 }
 

@@ -107,7 +107,7 @@ export default async function ProductDetailsPage({ params }: ProductDetailsPageP
         {/* Left Column (Image & Fast Specs) */}
         <div className="space-y-6">
           {/* Product Image Card */}
-          <div className="p-4 liquid-glass liquid-glass-card rounded-2xl">
+          <div className="p-4 rounded-xl bg-white dark:bg-[#0F172A] border border-slate-200 dark:border-slate-800 shadow-sm">
             <div className="w-full aspect-square rounded-lg bg-slate-50 dark:bg-slate-800 border border-slate-200 dark:border-slate-700 overflow-hidden flex items-center justify-center">
               {product.image_url ? (
                 <img
@@ -140,7 +140,7 @@ export default async function ProductDetailsPage({ params }: ProductDetailsPageP
 
           {/* Drive Asset Link */}
           {product.drive_url && (
-            <div className="p-4 liquid-glass liquid-glass-card rounded-2xl flex items-center justify-between">
+            <div className="p-4 rounded-xl bg-white dark:bg-[#0F172A] border border-slate-200 dark:border-slate-800 shadow-sm flex items-center justify-between">
               <div className="flex items-center gap-3">
                 <FolderOpen className="w-5 h-5 text-amber-500 shrink-0" />
                 <div>
@@ -162,7 +162,7 @@ export default async function ProductDetailsPage({ params }: ProductDetailsPageP
           )}
 
           {/* Metadata & Timestamps */}
-          <div className="p-4 liquid-glass liquid-glass-card rounded-2xl space-y-3 text-xs text-slate-500">
+          <div className="p-4 rounded-xl bg-white dark:bg-[#0F172A] border border-slate-200 dark:border-slate-800 shadow-sm space-y-3 text-xs text-slate-500">
             <div className="flex items-center justify-between">
               <span className="flex items-center gap-1.5">
                 <Calendar className="w-3.5 h-3.5" /> Created
@@ -193,7 +193,7 @@ export default async function ProductDetailsPage({ params }: ProductDetailsPageP
         {/* Right 2 Columns (Pricing, Stock, Specifications, Remarks) */}
         <div className="lg:col-span-2 space-y-6">
           {/* Pricing & Commercial Card */}
-          <div className="p-6 liquid-glass liquid-glass-card rounded-2xl">
+          <div className="p-6 rounded-xl bg-white dark:bg-[#0F172A] border border-slate-200 dark:border-slate-800 shadow-sm">
             <h2 className="text-xs font-semibold text-slate-500 uppercase tracking-wider mb-4 flex items-center gap-1.5">
               <Coins className="w-4 h-4 text-blue-500" /> Pricing & Profitability
             </h2>
@@ -228,7 +228,7 @@ export default async function ProductDetailsPage({ params }: ProductDetailsPageP
           </div>
 
           {/* Inventory & Stock Health Card */}
-          <div className="p-6 liquid-glass liquid-glass-card rounded-2xl">
+          <div className="p-6 rounded-xl bg-white dark:bg-[#0F172A] border border-slate-200 dark:border-slate-800 shadow-sm">
             <h2 className="text-xs font-semibold text-slate-500 uppercase tracking-wider mb-4 flex items-center gap-1.5">
               <Package className="w-4 h-4 text-indigo-500" /> Inventory & Warehousing
             </h2>
@@ -276,7 +276,7 @@ export default async function ProductDetailsPage({ params }: ProductDetailsPageP
           </div>
 
           {/* Physical Specifications & Attributes */}
-          <div className="p-6 liquid-glass liquid-glass-card rounded-2xl space-y-4">
+          <div className="p-6 rounded-xl bg-white dark:bg-[#0F172A] border border-slate-200 dark:border-slate-800 shadow-sm space-y-4">
             <h2 className="text-xs font-semibold text-slate-500 uppercase tracking-wider flex items-center gap-1.5">
               <Scale className="w-4 h-4 text-sky-500" /> Physical Specifications & Attributes
             </h2>
@@ -341,7 +341,7 @@ export default async function ProductDetailsPage({ params }: ProductDetailsPageP
           </div>
 
           {/* Description & Search Keywords */}
-          <div className="p-6 liquid-glass liquid-glass-card rounded-2xl space-y-3">
+          <div className="p-6 rounded-xl bg-white dark:bg-[#0F172A] border border-slate-200 dark:border-slate-800 shadow-sm space-y-3">
             <h2 className="text-xs font-semibold text-slate-500 uppercase tracking-wider flex items-center gap-1.5">
               <Tag className="w-4 h-4 text-emerald-500" /> Listing Description & SEO Copy
             </h2>

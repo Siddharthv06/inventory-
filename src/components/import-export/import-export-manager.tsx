@@ -14,7 +14,6 @@ import {
   AlertTriangle,
   RotateCcw,
 } from "lucide-react";
-import { LiquidGlassCard } from "@/components/ui/liquid-glass";
 
 export function ImportExportManager() {
   const router = useRouter();
@@ -107,7 +106,7 @@ DEMO-SKU-103,Nylon Braided USB-C Cable 2M,Accessories,150,499,120,25,Listed,60,g
       {/* 2-Column: Export Card & Import Card */}
       <div className="grid grid-cols-1 lg:grid-cols-2 gap-6">
         {/* Export Card */}
-        <LiquidGlassCard className="p-6 flex flex-col justify-between space-y-4">
+        <div className="p-6 rounded-xl bg-white dark:bg-[#0F172A] border border-slate-200 dark:border-slate-800 shadow-sm flex flex-col justify-between space-y-4">
           <div>
             <div className="p-2.5 rounded-lg bg-blue-50 dark:bg-blue-950/40 text-blue-600 dark:text-blue-400 w-fit mb-3">
               <Download className="w-5 h-5" />
@@ -133,16 +132,16 @@ DEMO-SKU-103,Nylon Braided USB-C Cable 2M,Accessories,150,499,120,25,Listed,60,g
             <a
               href="/api/export?includeArchived=false"
               download
-              className="w-full inline-flex items-center justify-center gap-2 px-4 py-2.5 text-xs sm:text-sm font-semibold rounded-lg text-slate-700 dark:text-slate-200 bg-slate-100/70 hover:bg-slate-200 dark:bg-slate-800/70 dark:hover:bg-slate-700 border border-slate-200 dark:border-slate-700 transition-colors"
+              className="w-full inline-flex items-center justify-center gap-2 px-4 py-2.5 text-xs sm:text-sm font-semibold rounded-lg text-slate-700 dark:text-slate-200 bg-slate-100 hover:bg-slate-200 dark:bg-slate-800 dark:hover:bg-slate-700 border border-slate-200 dark:border-slate-700 transition-colors"
             >
               <Download className="w-4 h-4" />
               <span>Export Active Products Only</span>
             </a>
           </div>
-        </LiquidGlassCard>
+        </div>
 
         {/* Template Download Card */}
-        <LiquidGlassCard className="p-6 flex flex-col justify-between space-y-4">
+        <div className="p-6 rounded-xl bg-white dark:bg-[#0F172A] border border-slate-200 dark:border-slate-800 shadow-sm flex flex-col justify-between space-y-4">
           <div>
             <div className="p-2.5 rounded-lg bg-emerald-50 dark:bg-emerald-950/40 text-emerald-600 dark:text-emerald-400 w-fit mb-3">
               <FileSpreadsheet className="w-5 h-5" />
@@ -157,16 +156,16 @@ DEMO-SKU-103,Nylon Braided USB-C Cable 2M,Accessories,150,499,120,25,Listed,60,g
 
           <button
             onClick={downloadSampleTemplate}
-            className="w-full inline-flex items-center justify-center gap-2 px-4 py-2.5 text-xs sm:text-sm font-semibold rounded-lg text-emerald-700 dark:text-emerald-300 bg-emerald-50/70 hover:bg-emerald-100 dark:bg-emerald-950/50 dark:hover:bg-emerald-900/50 border border-emerald-200 dark:border-emerald-800 transition-colors"
+            className="w-full inline-flex items-center justify-center gap-2 px-4 py-2.5 text-xs sm:text-sm font-semibold rounded-lg text-emerald-700 dark:text-emerald-300 bg-emerald-50 hover:bg-emerald-100 dark:bg-emerald-950/50 dark:hover:bg-emerald-900/50 border border-emerald-200 dark:border-emerald-800 transition-colors"
           >
             <FileText className="w-4 h-4" />
             <span>Download CSV Template (.csv)</span>
           </button>
-        </LiquidGlassCard>
+        </div>
       </div>
 
       {/* Import Section */}
-      <LiquidGlassCard className="p-6 space-y-4">
+      <div className="p-6 rounded-xl bg-white dark:bg-[#0F172A] border border-slate-200 dark:border-slate-800 shadow-sm space-y-4">
         <div className="flex items-center gap-2 mb-2">
           <Upload className="w-5 h-5 text-blue-500" />
           <h2 className="text-base font-bold text-slate-900 dark:text-slate-100">
@@ -320,7 +319,7 @@ DEMO-SKU-103,Nylon Braided USB-C Cable 2M,Accessories,150,499,120,25,Listed,60,g
             </div>
           </div>
         )}
-      </LiquidGlassCard>
+      </div>
     </div>
   );
 }

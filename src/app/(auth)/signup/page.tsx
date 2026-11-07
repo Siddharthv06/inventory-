@@ -5,6 +5,7 @@ import Link from "next/link";
 import { useRouter } from "next/navigation";
 import { signupAction } from "@/lib/actions/auth";
 import { AlertCircle, ArrowRight, CheckCircle2, Lock, Mail, User } from "lucide-react";
+import { LiquidGlassCard } from "@/components/ui/liquid-glass";
 
 export default function SignupPage() {
   const router = useRouter();
@@ -60,7 +61,7 @@ export default function SignupPage() {
   };
 
   return (
-    <div className="p-8 rounded-2xl bg-white dark:bg-[#0F172A] border border-slate-200 dark:border-slate-800 shadow-xl space-y-6">
+    <LiquidGlassCard className="p-8 space-y-6">
       <div>
         <h1 className="text-2xl font-bold tracking-tight text-slate-900 dark:text-slate-100">
           Create Workspace
@@ -191,7 +192,7 @@ export default function SignupPage() {
           Sign In
         </Link>
       </div>
-    </div>
+    </LiquidGlassCard>
   );
 }
 

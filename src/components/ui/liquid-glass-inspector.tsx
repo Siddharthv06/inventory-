@@ -235,17 +235,18 @@ export function LiquidGlassInspectorModal() {
               </div>
             </div>
 
-            {/* Browser Support Pill */}
+            {/* Browser & Shader Support Pill */}
             <div className="mt-5 p-3 rounded-2xl bg-blue-50/70 dark:bg-blue-950/40 border border-blue-200/50 dark:border-blue-900/40 flex items-start gap-2.5 text-[11px] text-slate-600 dark:text-slate-300">
               <Info className="w-4 h-4 text-blue-500 shrink-0 mt-0.5" />
               <div>
-                <div className="font-semibold text-slate-900 dark:text-slate-100">
-                  {isSupported ? "Chromium SVG Backdrop Filter Active" : "CSS Liquid Glass Active"}
+                <div className="font-semibold text-slate-900 dark:text-slate-100 flex items-center gap-1.5">
+                  <span>@ybouane/liquidglass WebGL Shader Engine</span>
+                  <span className="px-1.5 py-0.2 rounded bg-emerald-100 text-emerald-800 dark:bg-emerald-950 dark:text-emerald-300 text-[10px] font-bold">
+                    ACTIVE
+                  </span>
                 </div>
                 <div className="mt-0.5 text-slate-500 dark:text-slate-400">
-                  {isSupported
-                    ? "Full real-time Snell's law SVG displacement map refraction active on dashboard cards and topbar."
-                    : "Rendering multi-layered specular highlight and caustic refraction fallback for seamless 60fps performance."}
+                  Full physical WebGL shader pipeline active across dashboard cards: real-time ray refraction, chromatic aberration color fringing (0.08), Blinn-Phong specular lighting, and Fresnel edge reflection.
                 </div>
               </div>
             </div>

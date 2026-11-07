@@ -2,6 +2,7 @@ import { DashboardStats } from "@/types";
 import { formatCurrencyINR } from "@/lib/utils";
 import { Package, CheckCircle2, Clock, Boxes, AlertTriangle, Coins } from "lucide-react";
 import { LiquidGlassCard } from "@/components/ui/liquid-glass";
+import { LiquidGlassContainer } from "@/components/ui/liquid-glass-container";
 
 interface AnalyticsCardsProps {
   stats: DashboardStats;
@@ -60,7 +61,7 @@ export function AnalyticsCards({ stats }: AnalyticsCardsProps) {
   ];
 
   return (
-    <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4">
+    <LiquidGlassContainer className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4">
       {cards.map((c, i) => {
         const Icon = c.icon;
         return (
@@ -86,7 +87,7 @@ export function AnalyticsCards({ stats }: AnalyticsCardsProps) {
           </LiquidGlassCard>
         );
       })}
-    </div>
+    </LiquidGlassContainer>
   );
 }
 

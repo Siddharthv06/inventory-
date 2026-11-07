@@ -16,6 +16,7 @@ import {
 } from "lucide-react";
 import Link from "next/link";
 import { LiquidGlassCard } from "@/components/ui/liquid-glass";
+import { LiquidGlassContainer } from "@/components/ui/liquid-glass-container";
 
 interface CategoryManagerProps {
   categories: Category[];
@@ -123,7 +124,7 @@ export function CategoryManager({ categories }: CategoryManagerProps) {
       </div>
 
       {/* Categories Grid */}
-      <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4">
+      <LiquidGlassContainer className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4">
         {categories.map((cat) => (
           <LiquidGlassCard
             key={cat.id}
@@ -134,7 +135,7 @@ export function CategoryManager({ categories }: CategoryManagerProps) {
                 <div className="p-2 rounded-lg bg-blue-50 dark:bg-blue-950/40 text-blue-600 dark:text-blue-400">
                   <Layers className="w-4 h-4" />
                 </div>
-                <span className="text-xs font-semibold px-2 py-0.5 rounded-full bg-slate-100 dark:bg-slate-800 text-slate-600 dark:text-slate-300">
+                <span className="text-xs font-semibold px-2 py-0.5 rounded-full bg-slate-100/70 dark:bg-slate-800 text-slate-600 dark:text-slate-300">
                   {cat.product_count ?? 0} SKUs
                 </span>
               </div>
@@ -147,7 +148,7 @@ export function CategoryManager({ categories }: CategoryManagerProps) {
               </p>
             </div>
 
-            <div className="pt-4 mt-4 border-t border-slate-100 dark:border-slate-800 flex items-center justify-between">
+            <div className="pt-4 mt-4 border-t border-white/40 dark:border-white/10 flex items-center justify-between">
               <Link
                 href={`/dashboard/products?category=${cat.id}`}
                 className="text-xs text-blue-600 dark:text-blue-400 hover:underline inline-flex items-center gap-1"
@@ -175,7 +176,7 @@ export function CategoryManager({ categories }: CategoryManagerProps) {
             </div>
           </LiquidGlassCard>
         ))}
-      </div>
+      </LiquidGlassContainer>
 
       {/* Modal for Create/Edit */}
       {(modalState.type === "create" || modalState.type === "edit") && (

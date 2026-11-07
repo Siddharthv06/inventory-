@@ -11,7 +11,6 @@ import {
   CheckCircle2,
   DollarSign,
 } from "lucide-react";
-import { LiquidGlassCard } from "@/components/ui/liquid-glass";
 
 interface ReportsViewProps {
   data: {
@@ -42,7 +41,7 @@ export function ReportsView({ data }: ReportsViewProps) {
 
       {/* KPI Cards */}
       <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4">
-        <LiquidGlassCard className="p-5">
+        <div className="p-5 rounded-xl bg-white dark:bg-[#0F172A] border border-slate-200 dark:border-slate-800 shadow-sm">
           <div className="flex items-center justify-between mb-2">
             <span className="text-xs text-slate-500 font-semibold uppercase tracking-wider">
               Total Catalog Value
@@ -55,9 +54,9 @@ export function ReportsView({ data }: ReportsViewProps) {
           <span className="text-[11px] text-slate-500 mt-1 block">
             Procurement investment
           </span>
-        </LiquidGlassCard>
+        </div>
 
-        <LiquidGlassCard className="p-5">
+        <div className="p-5 rounded-xl bg-white dark:bg-[#0F172A] border border-slate-200 dark:border-slate-800 shadow-sm">
           <div className="flex items-center justify-between mb-2">
             <span className="text-xs text-slate-500 font-semibold uppercase tracking-wider">
               Avg. Selling Price
@@ -70,9 +69,9 @@ export function ReportsView({ data }: ReportsViewProps) {
           <span className="text-[11px] text-slate-500 mt-1 block">
             Across active listings
           </span>
-        </LiquidGlassCard>
+        </div>
 
-        <LiquidGlassCard className="p-5">
+        <div className="p-5 rounded-xl bg-white dark:bg-[#0F172A] border border-slate-200 dark:border-slate-800 shadow-sm">
           <div className="flex items-center justify-between mb-2">
             <span className="text-xs text-slate-500 font-semibold uppercase tracking-wider">
               Marketplace Ready Rate
@@ -90,9 +89,9 @@ export function ReportsView({ data }: ReportsViewProps) {
           <span className="text-[11px] text-slate-500 mt-1 block">
             Listed or approved
           </span>
-        </LiquidGlassCard>
+        </div>
 
-        <LiquidGlassCard className="p-5">
+        <div className="p-5 rounded-xl bg-white dark:bg-[#0F172A] border border-slate-200 dark:border-slate-800 shadow-sm">
           <div className="flex items-center justify-between mb-2">
             <span className="text-xs text-slate-500 font-semibold uppercase tracking-wider">
               Depletion Alert Rate
@@ -108,11 +107,11 @@ export function ReportsView({ data }: ReportsViewProps) {
           <span className="text-[11px] text-slate-500 mt-1 block">
             Low stock warning active
           </span>
-        </LiquidGlassCard>
+        </div>
       </div>
 
       {/* Category Performance Breakdown */}
-      <LiquidGlassCard className="p-6 space-y-4">
+      <div className="p-6 rounded-xl bg-white dark:bg-[#0F172A] border border-slate-200 dark:border-slate-800 shadow-sm space-y-4">
         <h2 className="text-base font-bold text-slate-900 dark:text-slate-100 flex items-center gap-2">
           <BarChart3 className="w-4 h-4 text-blue-500" /> Department / Category Distribution Analysis
         </h2>
@@ -158,12 +157,12 @@ export function ReportsView({ data }: ReportsViewProps) {
             );
           })}
         </div>
-      </LiquidGlassCard>
+      </div>
 
       {/* 2-Column: Status Health & Stock Distribution */}
       <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
         {/* Status Distribution */}
-        <LiquidGlassCard className="p-6 space-y-4">
+        <div className="p-6 rounded-xl bg-white dark:bg-[#0F172A] border border-slate-200 dark:border-slate-800 shadow-sm space-y-4">
           <h2 className="text-base font-bold text-slate-900 dark:text-slate-100 flex items-center gap-2">
             <PieChartIcon className="w-4 h-4 text-emerald-500" /> Lifecycle Status Breakdown
           </h2>
@@ -172,7 +171,7 @@ export function ReportsView({ data }: ReportsViewProps) {
             {statusStats.map((item, idx) => (
               <div
                 key={idx}
-                className="p-3 rounded-lg bg-slate-50/70 dark:bg-slate-800/40 border border-slate-200/60 dark:border-slate-700/50 flex items-center justify-between"
+                className="p-3 rounded-lg bg-slate-50 dark:bg-slate-800/40 border border-slate-200/60 dark:border-slate-700/50 flex items-center justify-between"
               >
                 <div className="flex items-center gap-2.5">
                   <span
@@ -189,10 +188,10 @@ export function ReportsView({ data }: ReportsViewProps) {
               </div>
             ))}
           </div>
-        </LiquidGlassCard>
+        </div>
 
         {/* Stock Health */}
-        <LiquidGlassCard className="p-6 space-y-4">
+        <div className="p-6 rounded-xl bg-white dark:bg-[#0F172A] border border-slate-200 dark:border-slate-800 shadow-sm space-y-4">
           <h2 className="text-base font-bold text-slate-900 dark:text-slate-100 flex items-center gap-2">
             <Boxes className="w-4 h-4 text-indigo-500" /> Stock Health Overview
           </h2>
@@ -201,7 +200,7 @@ export function ReportsView({ data }: ReportsViewProps) {
             {stockHealth.map((item, idx) => (
               <div
                 key={idx}
-                className="p-3 rounded-lg bg-slate-50/70 dark:bg-slate-800/40 border border-slate-200/60 dark:border-slate-700/50 flex items-center justify-between"
+                className="p-3 rounded-lg bg-slate-50 dark:bg-slate-800/40 border border-slate-200/60 dark:border-slate-700/50 flex items-center justify-between"
               >
                 <div className="flex items-center gap-2.5">
                   <span
@@ -218,7 +217,7 @@ export function ReportsView({ data }: ReportsViewProps) {
               </div>
             ))}
           </div>
-        </LiquidGlassCard>
+        </div>
       </div>
     </div>
   );

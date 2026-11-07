@@ -5,6 +5,7 @@ import Link from "next/link";
 import { useRouter, useSearchParams } from "next/navigation";
 import { loginAction } from "@/lib/actions/auth";
 import { AlertCircle, ArrowRight, Lock, Mail } from "lucide-react";
+import { LiquidGlassCard } from "@/components/ui/liquid-glass";
 
 function LoginForm() {
   const router = useRouter();
@@ -40,7 +41,7 @@ function LoginForm() {
   };
 
   return (
-    <div className="p-8 rounded-2xl bg-white dark:bg-[#0F172A] border border-slate-200 dark:border-slate-800 shadow-xl space-y-6">
+    <LiquidGlassCard className="p-8 space-y-6">
       <div>
         <h1 className="text-2xl font-bold tracking-tight text-slate-900 dark:text-slate-100">
           Welcome back
@@ -131,7 +132,7 @@ function LoginForm() {
           Create Workspace
         </Link>
       </div>
-    </div>
+    </LiquidGlassCard>
   );
 }
 
@@ -139,7 +140,7 @@ export default function LoginPage() {
   return (
     <Suspense
       fallback={
-        <div className="p-8 rounded-2xl bg-white dark:bg-[#0F172A] border border-slate-200 dark:border-slate-800 shadow-xl text-center text-xs text-slate-400">
+        <div className="p-8 rounded-2xl liquid-glass text-center text-xs text-slate-400">
           Loading sign in...
         </div>
       }

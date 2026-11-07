@@ -4,6 +4,7 @@ import { useState } from "react";
 import Link from "next/link";
 import { forgotPasswordAction } from "@/lib/actions/auth";
 import { AlertCircle, ArrowLeft, CheckCircle2, Mail } from "lucide-react";
+import { LiquidGlassCard } from "@/components/ui/liquid-glass";
 
 export default function ForgotPasswordPage() {
   const [email, setEmail] = useState("");
@@ -33,7 +34,7 @@ export default function ForgotPasswordPage() {
   };
 
   return (
-    <div className="p-8 rounded-2xl bg-white dark:bg-[#0F172A] border border-slate-200 dark:border-slate-800 shadow-xl space-y-6">
+    <LiquidGlassCard className="p-8 space-y-6">
       <div>
         <Link
           href="/login"
@@ -90,7 +91,7 @@ export default function ForgotPasswordPage() {
           <span>{isSubmitting ? "Sending..." : "Send Reset Link"}</span>
         </button>
       </form>
-    </div>
+    </LiquidGlassCard>
   );
 }
 
