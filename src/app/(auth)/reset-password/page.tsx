@@ -5,7 +5,6 @@ import Link from "next/link";
 import { useRouter } from "next/navigation";
 import { resetPasswordAction } from "@/lib/actions/auth";
 import { AlertCircle, CheckCircle2, Lock } from "lucide-react";
-import { LiquidGlassCard } from "@/components/ui/liquid-glass";
 
 export default function ResetPasswordPage() {
   const router = useRouter();
@@ -47,7 +46,7 @@ export default function ResetPasswordPage() {
   };
 
   return (
-    <LiquidGlassCard className="p-8 space-y-6">
+    <div className="p-8 rounded-2xl bg-white dark:bg-[#0F172A] border border-slate-200 dark:border-slate-800 shadow-xl space-y-6">
       <div>
         <h1 className="text-2xl font-bold tracking-tight text-slate-900 dark:text-slate-100">
           Create new password
@@ -114,7 +113,7 @@ export default function ResetPasswordPage() {
           <span>{isSubmitting ? "Updating..." : "Reset Password"}</span>
         </button>
       </form>
-    </LiquidGlassCard>
+    </div>
   );
 }
 

@@ -22,7 +22,6 @@ import {
   ShieldCheck,
 } from "lucide-react";
 import { StockAdjustmentDialog } from "@/components/products/stock-adjustment-dialog";
-import { LiquidGlassCard } from "@/components/ui/liquid-glass";
 
 export const metadata = {
   title: "Product Details | Innovexa",
@@ -108,8 +107,8 @@ export default async function ProductDetailsPage({ params }: ProductDetailsPageP
         {/* Left Column (Image & Fast Specs) */}
         <div className="space-y-6">
           {/* Product Image Card */}
-          <LiquidGlassCard className="p-4">
-            <div className="w-full aspect-square rounded-xl bg-white/30 dark:bg-slate-800/40 border border-white/60 dark:border-white/10 overflow-hidden flex items-center justify-center shadow-xs">
+          <div className="p-4 rounded-xl bg-white dark:bg-[#0F172A] border border-slate-200 dark:border-slate-800 shadow-sm">
+            <div className="w-full aspect-square rounded-lg bg-slate-50 dark:bg-slate-800 border border-slate-200 dark:border-slate-700 overflow-hidden flex items-center justify-center">
               {product.image_url ? (
                 <img
                   src={product.image_url}
@@ -137,11 +136,11 @@ export default async function ProductDetailsPage({ params }: ProductDetailsPageP
                 </a>
               </div>
             )}
-          </LiquidGlassCard>
+          </div>
 
           {/* Drive Asset Link */}
           {product.drive_url && (
-            <LiquidGlassCard className="p-4 flex items-center justify-between">
+            <div className="p-4 rounded-xl bg-white dark:bg-[#0F172A] border border-slate-200 dark:border-slate-800 shadow-sm flex items-center justify-between">
               <div className="flex items-center gap-3">
                 <FolderOpen className="w-5 h-5 text-amber-500 shrink-0" />
                 <div>
@@ -155,15 +154,15 @@ export default async function ProductDetailsPage({ params }: ProductDetailsPageP
                 href={product.drive_url}
                 target="_blank"
                 rel="noreferrer"
-                className="p-2 text-slate-400 hover:text-blue-600 rounded-lg hover:bg-white/40 dark:hover:bg-slate-800"
+                className="p-2 text-slate-400 hover:text-blue-600 rounded-lg hover:bg-slate-50 dark:hover:bg-slate-800"
               >
                 <ExternalLink className="w-4 h-4" />
               </a>
-            </LiquidGlassCard>
+            </div>
           )}
 
           {/* Metadata & Timestamps */}
-          <LiquidGlassCard className="p-4 space-y-3 text-xs text-slate-500">
+          <div className="p-4 rounded-xl bg-white dark:bg-[#0F172A] border border-slate-200 dark:border-slate-800 shadow-sm space-y-3 text-xs text-slate-500">
             <div className="flex items-center justify-between">
               <span className="flex items-center gap-1.5">
                 <Calendar className="w-3.5 h-3.5" /> Created
@@ -188,13 +187,13 @@ export default async function ProductDetailsPage({ params }: ProductDetailsPageP
                 <span className="font-medium">{formatDate(product.archived_at)}</span>
               </div>
             )}
-          </LiquidGlassCard>
+          </div>
         </div>
 
         {/* Right 2 Columns (Pricing, Stock, Specifications, Remarks) */}
         <div className="lg:col-span-2 space-y-6">
           {/* Pricing & Commercial Card */}
-          <LiquidGlassCard className="p-6">
+          <div className="p-6 rounded-xl bg-white dark:bg-[#0F172A] border border-slate-200 dark:border-slate-800 shadow-sm">
             <h2 className="text-xs font-semibold text-slate-500 uppercase tracking-wider mb-4 flex items-center gap-1.5">
               <Coins className="w-4 h-4 text-blue-500" /> Pricing & Profitability
             </h2>
@@ -226,16 +225,16 @@ export default async function ProductDetailsPage({ params }: ProductDetailsPageP
                 </span>
               </div>
             </div>
-          </LiquidGlassCard>
+          </div>
 
           {/* Inventory & Stock Health Card */}
-          <LiquidGlassCard className="p-6">
+          <div className="p-6 rounded-xl bg-white dark:bg-[#0F172A] border border-slate-200 dark:border-slate-800 shadow-sm">
             <h2 className="text-xs font-semibold text-slate-500 uppercase tracking-wider mb-4 flex items-center gap-1.5">
               <Package className="w-4 h-4 text-indigo-500" /> Inventory & Warehousing
             </h2>
 
             <div className="grid grid-cols-1 sm:grid-cols-2 gap-4 mb-4">
-              <div className="p-4 rounded-xl bg-white/40 dark:bg-slate-800/40 border border-white/60 dark:border-white/10 flex items-center justify-between shadow-xs">
+              <div className="p-4 rounded-lg bg-slate-50 dark:bg-slate-800/40 border border-slate-200/60 dark:border-slate-700/50 flex items-center justify-between">
                 <div>
                   <span className="text-xs text-slate-500 block">Stock Available</span>
                   <span
@@ -252,7 +251,7 @@ export default async function ProductDetailsPage({ params }: ProductDetailsPageP
                 </div>
                 {isLowStock && (
                   <span
-                    className={`px-2.5 py-1 rounded-full text-xs font-semibold flex items-center gap-1 ${
+                    className={`px-2.5 py-1 rounded text-xs font-semibold flex items-center gap-1 ${
                       isOutOfStock
                         ? "bg-rose-100 text-rose-700 dark:bg-rose-950 dark:text-rose-400"
                         : "bg-amber-100 text-amber-700 dark:bg-amber-950 dark:text-amber-400"
@@ -264,7 +263,7 @@ export default async function ProductDetailsPage({ params }: ProductDetailsPageP
                 )}
               </div>
 
-              <div className="p-4 rounded-xl bg-white/40 dark:bg-slate-800/40 border border-white/60 dark:border-white/10 shadow-xs">
+              <div className="p-4 rounded-lg bg-slate-50 dark:bg-slate-800/40 border border-slate-200/60 dark:border-slate-700/50">
                 <span className="text-xs text-slate-500 block">Reorder Alert Threshold</span>
                 <span className="text-2xl font-bold text-slate-900 dark:text-slate-100">
                   {product.low_stock_threshold} units
@@ -274,10 +273,10 @@ export default async function ProductDetailsPage({ params }: ProductDetailsPageP
                 </span>
               </div>
             </div>
-          </LiquidGlassCard>
+          </div>
 
           {/* Physical Specifications & Attributes */}
-          <LiquidGlassCard className="p-6 space-y-4">
+          <div className="p-6 rounded-xl bg-white dark:bg-[#0F172A] border border-slate-200 dark:border-slate-800 shadow-sm space-y-4">
             <h2 className="text-xs font-semibold text-slate-500 uppercase tracking-wider flex items-center gap-1.5">
               <Scale className="w-4 h-4 text-sky-500" /> Physical Specifications & Attributes
             </h2>
@@ -339,10 +338,10 @@ export default async function ProductDetailsPage({ params }: ProductDetailsPageP
                 </span>
               </div>
             </div>
-          </LiquidGlassCard>
+          </div>
 
           {/* Description & Search Keywords */}
-          <LiquidGlassCard className="p-6 space-y-3">
+          <div className="p-6 rounded-xl bg-white dark:bg-[#0F172A] border border-slate-200 dark:border-slate-800 shadow-sm space-y-3">
             <h2 className="text-xs font-semibold text-slate-500 uppercase tracking-wider flex items-center gap-1.5">
               <Tag className="w-4 h-4 text-emerald-500" /> Listing Description & SEO Copy
             </h2>
@@ -360,7 +359,7 @@ export default async function ProductDetailsPage({ params }: ProductDetailsPageP
                   {product.keywords.split(",").map((kw, i) => (
                     <span
                       key={i}
-                      className="px-2 py-0.5 rounded-md bg-white/40 dark:bg-slate-800 text-slate-600 dark:text-slate-300 text-[11px]"
+                      className="px-2 py-0.5 rounded-md bg-slate-100 dark:bg-slate-800 text-slate-600 dark:text-slate-300 text-[11px]"
                     >
                       {kw.trim()}
                     </span>
@@ -368,7 +367,7 @@ export default async function ProductDetailsPage({ params }: ProductDetailsPageP
                 </div>
               </div>
             )}
-          </LiquidGlassCard>
+          </div>
 
           {/* Internal Notes */}
           {product.internal_notes && (

@@ -3,10 +3,9 @@
 import { usePathname } from "next/navigation";
 import Link from "next/link";
 import { ThemeToggle } from "@/components/shared/theme-toggle";
-import { Plus, Database, Menu, ChevronRight, Sparkles } from "lucide-react";
+import { Plus, Database, Menu, ChevronRight } from "lucide-react";
 import { seedDemoData } from "@/lib/actions/products";
 import { useState } from "react";
-import { useLiquidGlass } from "@/components/ui/liquid-glass";
 
 interface TopbarProps {
   onOpenMobileNav?: () => void;
@@ -33,7 +32,6 @@ export function Topbar({ onOpenMobileNav, user }: TopbarProps) {
   const pathname = usePathname();
   const [isSeeding, setIsSeeding] = useState(false);
   const [seedMessage, setSeedMessage] = useState<string | null>(null);
-  const { showLens, setShowLens } = useLiquidGlass();
 
   const getPageTitle = () => {
     if (ROUTE_TITLES[pathname]) return ROUTE_TITLES[pathname];
@@ -57,7 +55,7 @@ export function Topbar({ onOpenMobileNav, user }: TopbarProps) {
   };
 
   return (
-    <header className="h-16 liquid-glass border-b border-slate-200/80 dark:border-white/10 sticky top-0 z-30 flex items-center justify-between px-4 sm:px-6 transition-colors">
+    <header className="h-16 border-b border-slate-200 dark:border-slate-800 bg-white/80 dark:bg-[#0B1120]/80 backdrop-blur-md sticky top-0 z-30 flex items-center justify-between px-4 sm:px-6">
       {/* Left Title & Breadcrumbs */}
       <div className="flex items-center gap-3">
         <button
@@ -81,20 +79,6 @@ export function Topbar({ onOpenMobileNav, user }: TopbarProps) {
 
       {/* Right Actions */}
       <div className="flex items-center gap-2 sm:gap-3">
-        {/* Toggle Draggable Liquid Glass Magnifier Lens */}
-        <button
-          onClick={() => setShowLens(!showLens)}
-          className={`inline-flex items-center gap-1.5 px-3 py-1.5 text-xs font-semibold rounded-lg transition-all ${
-            showLens
-              ? "bg-blue-600 text-white shadow-sm shadow-blue-500/20 ring-2 ring-blue-400/30"
-              : "bg-white/60 dark:bg-slate-800/80 text-slate-700 dark:text-slate-200 border border-slate-200/80 dark:border-white/10 hover:bg-white/90"
-          }`}
-          title="Toggle Draggable Liquid Glass Magnifier Lens"
-        >
-          <Sparkles className="w-3.5 h-3.5 text-blue-500 dark:text-blue-400" />
-          <span className="hidden sm:inline">Liquid Glass Lens</span>
-        </button>
-
         {/* Seed Sample Data Action Button for fast evaluation */}
         <button
           onClick={handleSeedDemo}
@@ -128,3 +112,4 @@ export function Topbar({ onOpenMobileNav, user }: TopbarProps) {
     </header>
   );
 }
+

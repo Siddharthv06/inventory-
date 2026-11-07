@@ -14,7 +14,6 @@ import {
   FileSpreadsheet,
   Filter,
 } from "lucide-react";
-import { LiquidGlassCard } from "@/components/ui/liquid-glass";
 
 interface ActivityViewProps {
   initialActivities: ActivityLog[];
@@ -99,7 +98,7 @@ export function ActivityView({ initialActivities }: ActivityViewProps) {
           <select
             value={selectedAction}
             onChange={(e) => setSelectedAction(e.target.value)}
-            className="px-3 py-2 text-xs rounded-xl bg-white/40 dark:bg-slate-900/40 border border-white/60 dark:border-white/10 text-slate-700 dark:text-slate-300 focus:outline-none focus:ring-2 focus:ring-blue-500 shadow-xs"
+            className="px-3 py-2 text-xs rounded-lg bg-white dark:bg-[#0F172A] border border-slate-200 dark:border-slate-800 text-slate-700 dark:text-slate-300 focus:outline-none focus:ring-2 focus:ring-blue-500"
           >
             <option value="ALL">All Action Types</option>
             <option value="CREATE">Created</option>
@@ -114,13 +113,13 @@ export function ActivityView({ initialActivities }: ActivityViewProps) {
       </div>
 
       {/* Activity Timeline List */}
-      <LiquidGlassCard className="p-0 overflow-hidden">
-        <div className="p-4 border-b border-white/50 dark:border-white/10 text-xs font-semibold text-slate-500 flex items-center justify-between">
+      <div className="rounded-xl bg-white dark:bg-[#0F172A] border border-slate-200 dark:border-slate-800 shadow-sm overflow-hidden">
+        <div className="p-4 border-b border-slate-100 dark:border-slate-800 text-xs font-semibold text-slate-500 flex items-center justify-between">
           <span>Logged Event</span>
           <span>Timestamp</span>
         </div>
 
-        <div className="divide-y divide-white/40 dark:divide-white/10">
+        <div className="divide-y divide-slate-100 dark:divide-slate-800">
           {filtered.length === 0 ? (
             <div className="py-16 text-center text-slate-400">
               <History className="w-10 h-10 mx-auto mb-2 opacity-30" />
@@ -153,7 +152,7 @@ export function ActivityView({ initialActivities }: ActivityViewProps) {
             ))
           )}
         </div>
-      </LiquidGlassCard>
+      </div>
     </div>
   );
 }

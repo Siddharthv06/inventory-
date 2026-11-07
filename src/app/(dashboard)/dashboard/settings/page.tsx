@@ -1,7 +1,6 @@
 import { getCurrentUser } from "@/lib/actions/auth";
 import { User, Database } from "lucide-react";
 import { ProfileForm } from "@/components/forms/profile-form";
-import { LiquidGlassCard } from "@/components/ui/liquid-glass";
 
 export const metadata = {
   title: "Settings | Innovexa",
@@ -27,8 +26,8 @@ export default async function SettingsPage() {
       </div>
 
       {/* Profile Card */}
-      <LiquidGlassCard className="p-6 space-y-4">
-        <div className="flex items-center justify-between pb-3 border-b border-white/50 dark:border-white/10">
+      <div className="p-6 rounded-xl bg-white dark:bg-[#0F172A] border border-slate-200 dark:border-slate-800 shadow-sm space-y-4">
+        <div className="flex items-center justify-between pb-3 border-b border-slate-100 dark:border-slate-800">
           <div className="flex items-center gap-2">
             <User className="w-4 h-4 text-blue-500" />
             <h2 className="text-base font-bold text-slate-900 dark:text-slate-100">
@@ -45,11 +44,11 @@ export default async function SettingsPage() {
           initialEmail={user.email}
           initialCompany={user.company_name || "Innovexa Technologies"}
         />
-      </LiquidGlassCard>
+      </div>
 
       {/* Database & Infrastructure Status */}
-      <LiquidGlassCard className="p-6 space-y-4">
-        <div className="flex items-center gap-2 pb-3 border-b border-white/50 dark:border-white/10">
+      <div className="p-6 rounded-xl bg-white dark:bg-[#0F172A] border border-slate-200 dark:border-slate-800 shadow-sm space-y-4">
+        <div className="flex items-center gap-2 pb-3 border-b border-slate-100 dark:border-slate-800">
           <Database className="w-4 h-4 text-emerald-500" />
           <h2 className="text-base font-bold text-slate-900 dark:text-slate-100">
             Database & Cloud Persistence
@@ -92,7 +91,7 @@ export default async function SettingsPage() {
             </p>
           </div>
         </div>
-      </LiquidGlassCard>
+      </div>
     </div>
   );
 }

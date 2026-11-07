@@ -5,7 +5,6 @@ import { InventoryOverviewCard } from "@/components/dashboard/inventory-overview
 import { LowStockAlertCard } from "@/components/dashboard/low-stock-alert-card";
 import { RecentProductsTable } from "@/components/dashboard/recent-products-table";
 import { ActivityFeed } from "@/components/dashboard/activity-feed";
-import { LiquidGlassContainer } from "@/components/ui/liquid-glass-container";
 
 export const metadata = {
   title: "Dashboard Overview | Innovexa",
@@ -35,16 +34,24 @@ export default async function DashboardPage() {
       <AnalyticsCards stats={stats} />
 
       {/* 2-Column: Inventory Distribution & Low Stock Alerts */}
-      <LiquidGlassContainer className="grid grid-cols-1 lg:grid-cols-3 gap-6">
-        <InventoryOverviewCard stats={stats} className="lg:col-span-2" />
-        <LowStockAlertCard products={lowStockProducts} className="lg:col-span-1" />
-      </LiquidGlassContainer>
+      <div className="grid grid-cols-1 lg:grid-cols-3 gap-6">
+        <div className="lg:col-span-2">
+          <InventoryOverviewCard stats={stats} />
+        </div>
+        <div className="lg:col-span-1">
+          <LowStockAlertCard products={lowStockProducts} />
+        </div>
+      </div>
 
       {/* 2-Column: Recent Products Table & Activity Feed */}
-      <LiquidGlassContainer className="grid grid-cols-1 lg:grid-cols-3 gap-6">
-        <RecentProductsTable products={recentProducts} className="lg:col-span-2" />
-        <ActivityFeed activities={recentActivities} className="lg:col-span-1" />
-      </LiquidGlassContainer>
+      <div className="grid grid-cols-1 lg:grid-cols-3 gap-6">
+        <div className="lg:col-span-2">
+          <RecentProductsTable products={recentProducts} />
+        </div>
+        <div className="lg:col-span-1">
+          <ActivityFeed activities={recentActivities} />
+        </div>
+      </div>
     </div>
   );
 }

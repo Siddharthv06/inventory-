@@ -24,7 +24,6 @@ import {
   ExternalLink,
 } from "lucide-react";
 import { archiveProduct, restoreProduct, deleteProduct, bulkArchiveProducts } from "@/lib/actions/products";
-import { LiquidGlassCard } from "@/components/ui/liquid-glass";
 
 interface ProductTableProps {
   initialProducts: Product[];
@@ -127,16 +126,16 @@ export function ProductTable({
   };
 
   const statusStyles: Record<string, string> = {
-    Listed: "liquid-glass-lens-tab px-2.5 py-0.5 text-[11px] font-semibold text-emerald-700 dark:text-emerald-300 border-emerald-400/40 bg-emerald-500/10 inline-block",
-    "Ready for Listing": "liquid-glass-lens-tab px-2.5 py-0.5 text-[11px] font-semibold text-amber-700 dark:text-amber-300 border-amber-400/40 bg-amber-500/10 inline-block",
-    Draft: "liquid-glass-lens-tab px-2.5 py-0.5 text-[11px] font-semibold text-slate-700 dark:text-slate-300 border-slate-400/30 bg-slate-500/10 inline-block",
-    Archived: "liquid-glass-lens-tab px-2.5 py-0.5 text-[11px] font-semibold text-zinc-500 dark:text-zinc-400 border-zinc-400/30 bg-zinc-500/10 inline-block",
+    Listed: "bg-emerald-50 text-emerald-700 dark:bg-emerald-950/40 dark:text-emerald-400 border-emerald-200 dark:border-emerald-800",
+    "Ready for Listing": "bg-amber-50 text-amber-700 dark:bg-amber-950/40 dark:text-amber-400 border-amber-200 dark:border-amber-800",
+    Draft: "bg-slate-100 text-slate-700 dark:bg-slate-800 dark:text-slate-300 border-slate-200 dark:border-slate-700",
+    Archived: "bg-zinc-100 text-zinc-500 dark:bg-zinc-800/80 dark:text-zinc-400 border-zinc-200 dark:border-zinc-700",
   };
 
   return (
     <div className="space-y-4">
       {/* Action Bar: Search, Filters & Export */}
-      <LiquidGlassCard className="p-4 flex flex-col lg:flex-row lg:items-center justify-between gap-3">
+      <div className="p-4 rounded-xl bg-white dark:bg-[#0F172A] border border-slate-200 dark:border-slate-800 shadow-sm flex flex-col lg:flex-row lg:items-center justify-between gap-3">
         {/* Search */}
         <form onSubmit={handleSearchSubmit} className="relative flex-1 max-w-md">
           <Search className="w-4 h-4 text-slate-400 absolute left-3 top-1/2 -translate-y-1/2" />
@@ -145,7 +144,7 @@ export function ProductTable({
             value={search}
             onChange={(e) => setSearch(e.target.value)}
             placeholder="Search by product name or SKU..."
-            className="w-full pl-9 pr-4 py-2 text-xs sm:text-sm rounded-xl bg-white/40 dark:bg-slate-900/40 border border-white/60 dark:border-white/10 text-slate-900 dark:text-slate-100 placeholder:text-slate-400 focus:outline-none focus:ring-2 focus:ring-blue-500 shadow-xs"
+            className="w-full pl-9 pr-4 py-2 text-xs sm:text-sm rounded-lg bg-slate-50 dark:bg-slate-800/50 border border-slate-200 dark:border-slate-700 text-slate-900 dark:text-slate-100 placeholder:text-slate-400 focus:outline-none focus:ring-2 focus:ring-blue-500"
           />
         </form>
 
@@ -158,7 +157,7 @@ export function ProductTable({
               setCategory(e.target.value);
               applyFilters({ category: e.target.value });
             }}
-            className="px-3 py-2 text-xs rounded-xl bg-white/40 dark:bg-slate-900/40 border border-white/60 dark:border-white/10 text-slate-700 dark:text-slate-300 focus:outline-none focus:ring-2 focus:ring-blue-500 shadow-xs"
+            className="px-3 py-2 text-xs rounded-lg bg-slate-50 dark:bg-slate-800/50 border border-slate-200 dark:border-slate-700 text-slate-700 dark:text-slate-300 focus:outline-none focus:ring-2 focus:ring-blue-500"
           >
             <option value="ALL">All Categories</option>
             {categories.map((c) => (
@@ -175,7 +174,7 @@ export function ProductTable({
               setStatus(e.target.value);
               applyFilters({ status: e.target.value });
             }}
-            className="px-3 py-2 text-xs rounded-xl bg-white/40 dark:bg-slate-900/40 border border-white/60 dark:border-white/10 text-slate-700 dark:text-slate-300 focus:outline-none focus:ring-2 focus:ring-blue-500 shadow-xs"
+            className="px-3 py-2 text-xs rounded-lg bg-slate-50 dark:bg-slate-800/50 border border-slate-200 dark:border-slate-700 text-slate-700 dark:text-slate-300 focus:outline-none focus:ring-2 focus:ring-blue-500"
           >
             <option value="ALL">All Statuses</option>
             <option value="Listed">Listed</option>
@@ -185,7 +184,7 @@ export function ProductTable({
           </select>
 
           {/* Include Archived toggle */}
-          <label className="flex items-center gap-1.5 px-3 py-2 text-xs text-slate-600 dark:text-slate-400 border border-white/60 dark:border-white/10 bg-white/30 dark:bg-slate-900/30 rounded-xl cursor-pointer hover:bg-white/50 dark:hover:bg-slate-800 shadow-xs">
+          <label className="flex items-center gap-1.5 px-3 py-2 text-xs text-slate-600 dark:text-slate-400 border border-slate-200 dark:border-slate-700 rounded-lg cursor-pointer hover:bg-slate-50 dark:hover:bg-slate-800">
             <input
               type="checkbox"
               checked={includeArchived}
@@ -204,7 +203,7 @@ export function ProductTable({
               category === "ALL" ? "" : category
             }&search=${encodeURIComponent(search)}&includeArchived=${includeArchived}`}
             download
-            className="inline-flex items-center gap-1.5 px-3 py-2 text-xs font-medium rounded-xl text-slate-700 dark:text-slate-200 bg-white/40 hover:bg-white/60 dark:bg-slate-800/60 dark:hover:bg-slate-700 transition-colors border border-white/60 dark:border-white/10 shadow-xs"
+            className="inline-flex items-center gap-1.5 px-3 py-2 text-xs font-medium rounded-lg text-slate-700 dark:text-slate-200 bg-slate-100 hover:bg-slate-200 dark:bg-slate-800 dark:hover:bg-slate-700 transition-colors border border-slate-200 dark:border-slate-700"
           >
             <Download className="w-3.5 h-3.5" />
             <span>Export CSV</span>
@@ -213,17 +212,17 @@ export function ProductTable({
           {/* Add Product Button */}
           <Link
             href="/dashboard/products/new"
-            className="inline-flex items-center gap-1.5 px-3 py-2 text-xs font-medium rounded-xl text-white bg-blue-600 hover:bg-blue-700 shadow-sm transition-colors"
+            className="inline-flex items-center gap-1.5 px-3 py-2 text-xs font-medium rounded-lg text-white bg-blue-600 hover:bg-blue-700 shadow-sm transition-colors"
           >
             <Plus className="w-3.5 h-3.5" />
             <span>New Product</span>
           </Link>
         </div>
-      </LiquidGlassCard>
+      </div>
 
       {/* Bulk Action Bar (when rows are selected) */}
       {selectedIds.length > 0 && (
-        <div className="p-3 rounded-xl bg-blue-50/80 dark:bg-blue-950/60 border border-blue-200/80 dark:border-blue-900/60 flex items-center justify-between animate-fade-in">
+        <div className="p-3 rounded-lg bg-blue-50 dark:bg-blue-950/40 border border-blue-200 dark:border-blue-900/60 flex items-center justify-between animate-fade-in">
           <div className="flex items-center gap-2 text-xs font-medium text-blue-900 dark:text-blue-300">
             <CheckSquare className="w-4 h-4 text-blue-600 dark:text-blue-400" />
             <span>{selectedIds.length} product(s) selected</span>
@@ -231,7 +230,7 @@ export function ProductTable({
           <div className="flex items-center gap-2">
             <button
               onClick={() => setActionModal({ type: "bulk-archive" })}
-              className="px-3 py-1.5 text-xs font-medium rounded-lg bg-rose-600 hover:bg-rose-700 text-white transition-colors"
+              className="px-3 py-1.5 text-xs font-medium rounded bg-rose-600 hover:bg-rose-700 text-white transition-colors"
             >
               Bulk Archive Selected
             </button>
@@ -246,10 +245,10 @@ export function ProductTable({
       )}
 
       {/* Products Table */}
-      <LiquidGlassCard className="p-0 overflow-hidden">
+      <div className="rounded-xl bg-white dark:bg-[#0F172A] border border-slate-200 dark:border-slate-800 shadow-sm overflow-hidden">
         <div className="overflow-x-auto">
           <table className="w-full text-left text-xs">
-            <thead className="bg-white/40 dark:bg-slate-900/50 text-slate-500 dark:text-slate-400 font-semibold border-b border-white/50 dark:border-white/10">
+            <thead className="bg-slate-50 dark:bg-slate-800/60 text-slate-500 dark:text-slate-400 font-semibold border-b border-slate-200 dark:border-slate-800">
               <tr>
                 <th className="py-3 px-3 w-10 text-center">
                   <button
@@ -505,7 +504,7 @@ export function ProductTable({
         </div>
 
         {/* Pagination Controls */}
-        <div className="p-4 border-t border-white/50 dark:border-white/10 flex items-center justify-between text-xs text-slate-500">
+        <div className="p-4 border-t border-slate-200 dark:border-slate-800 flex items-center justify-between text-xs text-slate-500">
           <span>
             Showing {initialProducts.length} of {totalCount} products
           </span>
@@ -514,28 +513,28 @@ export function ProductTable({
             <button
               disabled={currentPage <= 1}
               onClick={() => applyFilters({ page: currentPage - 1 })}
-              className="liquid-glass-lens-tab px-3 py-1 text-xs font-medium text-slate-700 dark:text-slate-300 disabled:opacity-40 disabled:cursor-not-allowed hover:scale-105 transition-all"
+              className="px-2.5 py-1.5 rounded border border-slate-200 dark:border-slate-700 disabled:opacity-40 disabled:cursor-not-allowed hover:bg-slate-50 dark:hover:bg-slate-800"
             >
               Previous
             </button>
-            <span className="liquid-glass-lens-tab px-3 py-1 font-medium text-xs text-slate-700 dark:text-slate-300">
+            <span className="px-2 font-medium">
               Page {currentPage} of {Math.max(totalPages, 1)}
             </span>
             <button
               disabled={currentPage >= totalPages}
               onClick={() => applyFilters({ page: currentPage + 1 })}
-              className="liquid-glass-lens-tab px-3 py-1 text-xs font-medium text-slate-700 dark:text-slate-300 disabled:opacity-40 disabled:cursor-not-allowed hover:scale-105 transition-all"
+              className="px-2.5 py-1.5 rounded border border-slate-200 dark:border-slate-700 disabled:opacity-40 disabled:cursor-not-allowed hover:bg-slate-50 dark:hover:bg-slate-800"
             >
               Next
             </button>
           </div>
         </div>
-      </LiquidGlassCard>
+      </div>
 
       {/* Confirmation Modal */}
       {actionModal.type && (
-        <div className="fixed inset-0 z-50 flex items-center justify-center p-4 bg-slate-900/50 backdrop-blur-md animate-fade-in">
-          <LiquidGlassCard className="w-full max-w-md p-6 shadow-2xl">
+        <div className="fixed inset-0 z-50 flex items-center justify-center p-4 bg-slate-900/50 backdrop-blur-sm animate-fade-in">
+          <div className="w-full max-w-md p-6 bg-white dark:bg-[#0F172A] border border-slate-200 dark:border-slate-800 rounded-2xl shadow-xl">
             <h3 className="text-base font-bold text-slate-900 dark:text-slate-100">
               {actionModal.type === "archive" && "Archive Product"}
               {actionModal.type === "delete" && "Permanently Delete Product"}
@@ -590,7 +589,7 @@ export function ProductTable({
                 </button>
               )}
             </div>
-          </LiquidGlassCard>
+          </div>
         </div>
       )}
     </div>

@@ -3,7 +3,6 @@ import { Geist, Geist_Mono } from "next/font/google";
 import "./globals.css";
 import { ThemeProvider } from "@/components/shared/theme-provider";
 import { SmoothScrollProvider } from "@/components/shared/smooth-scroll";
-import { LiquidGlassProvider } from "@/components/ui/liquid-glass";
 
 const geistSans = Geist({
   variable: "--font-geist-sans",
@@ -34,9 +33,7 @@ export default function RootLayout({
       <body className="min-h-full flex flex-col bg-slate-50 text-slate-900 dark:bg-[#090D16] dark:text-slate-100 selection:bg-blue-600 selection:text-white">
         <ThemeProvider>
           <SmoothScrollProvider>
-            <LiquidGlassProvider>
-              {children}
-            </LiquidGlassProvider>
+            {children}
           </SmoothScrollProvider>
         </ThemeProvider>
       </body>

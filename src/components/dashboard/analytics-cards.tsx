@@ -1,8 +1,6 @@
 import { DashboardStats } from "@/types";
 import { formatCurrencyINR } from "@/lib/utils";
 import { Package, CheckCircle2, Clock, Boxes, AlertTriangle, Coins } from "lucide-react";
-import { LiquidGlassCard } from "@/components/ui/liquid-glass";
-import { LiquidGlassContainer } from "@/components/ui/liquid-glass-container";
 
 interface AnalyticsCardsProps {
   stats: DashboardStats;
@@ -61,33 +59,32 @@ export function AnalyticsCards({ stats }: AnalyticsCardsProps) {
   ];
 
   return (
-    <LiquidGlassContainer className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4">
+    <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4">
       {cards.map((c, i) => {
         const Icon = c.icon;
         return (
-          <LiquidGlassCard
+          <div
             key={i}
-            className="p-5 liquid-glass-card"
-            intensity="medium"
+            className="p-5 rounded-xl bg-white dark:bg-[#0F172A] border border-slate-200 dark:border-slate-800 shadow-sm hover:border-slate-300 dark:hover:border-slate-700 transition-all hover:shadow-md"
           >
             <div className="flex items-center justify-between mb-3">
-              <span className="text-xs font-semibold text-slate-500 dark:text-slate-400 uppercase tracking-wider">
+              <span className="text-xs font-medium text-slate-500 dark:text-slate-400 uppercase tracking-wider">
                 {c.label}
               </span>
-              <div className={`p-2 rounded-xl ${c.bg} shadow-xs`}>
+              <div className={`p-2 rounded-lg ${c.bg}`}>
                 <Icon className={`w-4 h-4 ${c.color}`} />
               </div>
             </div>
-            <div className="text-2xl font-bold text-slate-900 dark:text-slate-100 tracking-tight font-sans">
+            <div className="text-2xl font-bold text-slate-900 dark:text-slate-100 tracking-tight">
               {c.value}
             </div>
             <div className="text-xs text-slate-500 dark:text-slate-400 mt-1">
               {c.subtext}
             </div>
-          </LiquidGlassCard>
+          </div>
         );
       })}
-    </LiquidGlassContainer>
+    </div>
   );
 }
 
