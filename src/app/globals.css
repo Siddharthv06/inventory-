@@ -8,48 +8,49 @@
 }
 
 :root {
-  --background: #f8fafc;
-  --foreground: #0f172a;
+  /* Reference Design: Soft neutral canvas & crisp pure white cards */
+  --background: #ededf0;
+  --foreground: #111111;
   --card: #ffffff;
-  --card-foreground: #0f172a;
+  --card-foreground: #111111;
   --popover: #ffffff;
-  --popover-foreground: #0f172a;
-  --primary: #1e3a8a;
+  --popover-foreground: #111111;
+  --primary: #111111;
   --primary-foreground: #ffffff;
-  --secondary: #f1f5f9;
-  --secondary-foreground: #1e293b;
-  --muted: #f1f5f9;
-  --muted-foreground: #64748b;
-  --accent: #2563eb;
-  --accent-foreground: #ffffff;
+  --secondary: #f4f5f7;
+  --secondary-foreground: #111111;
+  --muted: #f4f5f7;
+  --muted-foreground: #71717a;
+  --accent: #d4f94a;
+  --accent-foreground: #111111;
   --destructive: #ef4444;
   --destructive-foreground: #ffffff;
-  --border: #e2e8f0;
-  --input: #cbd5e1;
-  --ring: #2563eb;
-  --radius: 0.625rem;
+  --border: #e2e4e8;
+  --input: #e2e4e8;
+  --ring: #72cbf6;
+  --radius: 1.75rem; /* 28px rounded corners from reference design */
 }
 
 .dark {
-  --background: #090d16;
+  --background: #121316;
   --foreground: #f8fafc;
-  --card: #0f172a;
+  --card: #1c1e22;
   --card-foreground: #f8fafc;
-  --popover: #0f172a;
+  --popover: #1c1e22;
   --popover-foreground: #f8fafc;
-  --primary: #3b82f6;
-  --primary-foreground: #ffffff;
-  --secondary: #1e293b;
+  --primary: #d4f94a;
+  --primary-foreground: #111111;
+  --secondary: #252830;
   --secondary-foreground: #f8fafc;
-  --muted: #1e293b;
-  --muted-foreground: #94a3b8;
-  --accent: #3b82f6;
-  --accent-foreground: #ffffff;
+  --muted: #252830;
+  --muted-foreground: #a1a1aa;
+  --accent: #72cbf6;
+  --accent-foreground: #111111;
   --destructive: #dc2626;
   --destructive-foreground: #ffffff;
-  --border: #1e293b;
-  --input: #334155;
-  --ring: #3b82f6;
+  --border: #282a30;
+  --input: #282a30;
+  --ring: #d4f94a;
 }
 
 body {
@@ -58,6 +59,155 @@ body {
   font-family: var(--font-geist-sans), system-ui, -apple-system, sans-serif;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
+}
+
+/* ========================================================
+ * Reference Design UI: 28px Smooth Cards, Soft Shadows & Color Accents
+ * ======================================================== */
+
+/* All cards: 28px corner radius and clean soft floating elevation */
+.rounded-2xl, 
+.rounded-3xl, 
+[class*="rounded-2xl"], 
+[class*="rounded-3xl"] {
+  border-radius: 28px !important;
+}
+
+.shadow-xs, 
+.shadow-sm, 
+.shadow-md, 
+.shadow-lg {
+  box-shadow: 0 4px 20px -4px rgba(0, 0, 0, 0.04), 0 2px 8px -2px rgba(0, 0, 0, 0.02) !important;
+}
+
+/* Card surfaces: pure crisp white with ultra-subtle border */
+.bg-white, 
+.dark .bg-slate-900, 
+.dark .bg-\[\#0f172a\], 
+.dark .bg-\[\#0D1527\] {
+  border-color: rgba(0, 0, 0, 0.04) !important;
+}
+
+.dark .bg-white, 
+.dark .bg-slate-900, 
+.dark .bg-\[\#0f172a\] {
+  border-color: rgba(255, 255, 255, 0.07) !important;
+}
+
+/* Topbar Header: Floating rounded container */
+header {
+  border-radius: 24px !important;
+  margin: 12px 16px 0 16px !important;
+  border: 1px solid rgba(0, 0, 0, 0.04) !important;
+  background-color: #ffffff !important;
+  box-shadow: 0 4px 20px -4px rgba(0, 0, 0, 0.04) !important;
+}
+
+.dark header {
+  background-color: #1c1e22 !important;
+  border-color: rgba(255, 255, 255, 0.07) !important;
+}
+
+/* Sidebar: Floating rounded white card */
+aside {
+  margin: 12px 0 12px 16px !important;
+  height: calc(100vh - 24px) !important;
+  border-radius: 28px !important;
+  background-color: #ffffff !important;
+  border: 1px solid rgba(0, 0, 0, 0.04) !important;
+  box-shadow: 0 4px 20px -4px rgba(0, 0, 0, 0.04) !important;
+}
+
+.dark aside {
+  background-color: #1c1e22 !important;
+  border-color: rgba(255, 255, 255, 0.07) !important;
+}
+
+/* Active navigation pill: Vibrant Lime Green pill with bold black text */
+aside nav a[class*="bg-blue"] {
+  background-color: #d4f94a !important;
+  color: #111111 !important;
+  border-radius: 9999px !important;
+  font-weight: 700 !important;
+}
+
+aside nav a[class*="bg-blue"] svg {
+  color: #111111 !important;
+}
+
+/* Primary Action Buttons: Solid Black pill hovering to Lime Green */
+.bg-blue-600 {
+  background-color: #111111 !important;
+  color: #ffffff !important;
+  border-radius: 9999px !important;
+  font-weight: 600 !important;
+  transition: all 0.2s ease !important;
+}
+
+.bg-blue-600:hover {
+  background-color: #d4f94a !important;
+  color: #111111 !important;
+  transform: translateY(-1px);
+}
+
+.dark .bg-blue-600 {
+  background-color: #d4f94a !important;
+  color: #111111 !important;
+}
+
+.dark .bg-blue-600:hover {
+  background-color: #72cbf6 !important;
+  color: #111111 !important;
+}
+
+/* Reference Design Status Badges: Fresh Mint, Lime, Pale Yellow, and Sky Blue */
+.bg-emerald-50, 
+[class*="bg-emerald-50"] {
+  background-color: #a6f4b8 !important;
+  color: #111111 !important;
+  border-radius: 9999px !important;
+  font-weight: 600 !important;
+  border: none !important;
+}
+
+.bg-amber-50, 
+[class*="bg-amber-50"] {
+  background-color: #fef08a !important;
+  color: #111111 !important;
+  border-radius: 9999px !important;
+  font-weight: 600 !important;
+  border: none !important;
+}
+
+.bg-blue-50, 
+[class*="bg-blue-50"] {
+  background-color: #72cbf6 !important;
+  color: #111111 !important;
+  border-radius: 9999px !important;
+  font-weight: 600 !important;
+  border: none !important;
+}
+
+.bg-slate-100, 
+[class*="bg-slate-100"] {
+  background-color: #f4f5f7 !important;
+  border-radius: 9999px !important;
+}
+
+/* Inputs & Search Pills */
+input[type="text"], 
+input[type="search"], 
+select {
+  border-radius: 16px !important;
+  background-color: #f5f6f8 !important;
+  border-color: transparent !important;
+}
+
+.dark input[type="text"], 
+.dark input[type="search"], 
+.dark select {
+  background-color: #252830 !important;
+  border-color: transparent !important;
 }
 
 /* Subtle, polished animations */
