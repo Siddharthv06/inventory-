@@ -1,6 +1,7 @@
 import { DashboardStats } from "@/types";
 import { formatCurrencyINR } from "@/lib/utils";
 import { Package, CheckCircle2, Clock, Boxes, AlertTriangle, Coins } from "lucide-react";
+import { LiquidGlassCard } from "@/components/ui/liquid-glass";
 
 interface AnalyticsCardsProps {
   stats: DashboardStats;
@@ -63,25 +64,26 @@ export function AnalyticsCards({ stats }: AnalyticsCardsProps) {
       {cards.map((c, i) => {
         const Icon = c.icon;
         return (
-          <div
+          <LiquidGlassCard
             key={i}
-            className="p-5 rounded-xl bg-white dark:bg-[#0F172A] border border-slate-200 dark:border-slate-800 shadow-sm hover:border-slate-300 dark:hover:border-slate-700 transition-all hover:shadow-md"
+            className="p-5 liquid-glass-card"
+            intensity="medium"
           >
             <div className="flex items-center justify-between mb-3">
-              <span className="text-xs font-medium text-slate-500 dark:text-slate-400 uppercase tracking-wider">
+              <span className="text-xs font-semibold text-slate-500 dark:text-slate-400 uppercase tracking-wider">
                 {c.label}
               </span>
-              <div className={`p-2 rounded-lg ${c.bg}`}>
+              <div className={`p-2 rounded-xl ${c.bg} shadow-xs`}>
                 <Icon className={`w-4 h-4 ${c.color}`} />
               </div>
             </div>
-            <div className="text-2xl font-bold text-slate-900 dark:text-slate-100 tracking-tight">
+            <div className="text-2xl font-bold text-slate-900 dark:text-slate-100 tracking-tight font-sans">
               {c.value}
             </div>
             <div className="text-xs text-slate-500 dark:text-slate-400 mt-1">
               {c.subtext}
             </div>
-          </div>
+          </LiquidGlassCard>
         );
       })}
     </div>

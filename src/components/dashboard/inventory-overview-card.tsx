@@ -1,4 +1,5 @@
 import { DashboardStats } from "@/types";
+import { LiquidGlassCard } from "@/components/ui/liquid-glass";
 
 interface InventoryOverviewProps {
   stats: DashboardStats;
@@ -44,7 +45,7 @@ export function InventoryOverviewCard({ stats }: InventoryOverviewProps) {
   );
 
   return (
-    <div className="p-6 rounded-xl bg-white dark:bg-[#0F172A] border border-slate-200 dark:border-slate-800 shadow-sm">
+    <LiquidGlassCard className="p-6">
       <div className="flex items-center justify-between mb-4">
         <div>
           <h2 className="text-base font-semibold text-slate-900 dark:text-slate-100">
@@ -126,7 +127,7 @@ export function InventoryOverviewCard({ stats }: InventoryOverviewProps) {
           </span>
         </div>
       </div>
-    </div>
+    </LiquidGlassCard>
   );
 }
 

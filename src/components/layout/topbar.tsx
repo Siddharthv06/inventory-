@@ -55,7 +55,7 @@ export function Topbar({ onOpenMobileNav, user }: TopbarProps) {
   };
 
   return (
-    <header className="h-16 border-b border-slate-200 dark:border-slate-800 bg-white/80 dark:bg-[#0B1120]/80 backdrop-blur-md sticky top-0 z-30 flex items-center justify-between px-4 sm:px-6">
+    <header className="h-16 liquid-glass border-b border-slate-200/80 dark:border-white/10 sticky top-0 z-30 flex items-center justify-between px-4 sm:px-6 transition-colors">
       {/* Left Title & Breadcrumbs */}
       <div className="flex items-center gap-3">
         <button

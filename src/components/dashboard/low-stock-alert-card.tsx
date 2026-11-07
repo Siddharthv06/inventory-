@@ -1,6 +1,7 @@
 import Link from "next/link";
 import { Product } from "@/types";
 import { AlertCircle, ChevronRight, Boxes } from "lucide-react";
+import { LiquidGlassCard } from "@/components/ui/liquid-glass";
 
 interface LowStockAlertCardProps {
   products: Product[];
@@ -8,7 +9,7 @@ interface LowStockAlertCardProps {
 
 export function LowStockAlertCard({ products }: LowStockAlertCardProps) {
   return (
-    <div className="p-6 rounded-xl bg-white dark:bg-[#0F172A] border border-slate-200 dark:border-slate-800 shadow-sm flex flex-col h-full">
+    <LiquidGlassCard className="p-6 flex flex-col h-full">
       <div className="flex items-center justify-between mb-4">
         <div className="flex items-center gap-2">
           <div className="p-1.5 rounded-lg bg-rose-50 dark:bg-rose-950/40 text-rose-600 dark:text-rose-400">
@@ -79,7 +80,7 @@ export function LowStockAlertCard({ products }: LowStockAlertCardProps) {
           })
         )}
       </div>
-    </div>
+    </LiquidGlassCard>
   );
 }
 
