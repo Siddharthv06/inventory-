@@ -131,7 +131,7 @@ export const INITIAL_PRODUCTS: Product[] = [
     size: "10000 mAh",
     description: "MagSafe-compatible 15W wireless powerbank with 20W wired USB-C output and kickstand.",
     keywords: "magsafe powerbank, wireless portable battery, fast charging",
-    image_url: "https://images.unsplash.com/photo-1609592426868-b3bfbe28a68a?w=600&auto=format&fit=crop&q=80",
+    image_url: "https://images.unsplash.com/photo-1583863788434-e58a36330cf0?w=600&auto=format&fit=crop&q=80",
     drive_url: "https://drive.google.com/drive/folders/innovexa-demo-003",
     hsn_code: "85044090",
     gst_percentage: 18,

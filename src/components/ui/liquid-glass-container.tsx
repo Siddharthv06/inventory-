@@ -28,32 +28,41 @@ export function LiquidGlassContainer({
     if (!hasAmbientMesh) return;
     const canvas = canvasRef.current;
     if (!canvas) return;
-    const ctx = canvas.getContext("2d");
-    if (!ctx) return;
 
-    const w = (canvas.width = canvas.offsetWidth || 800);
-    const h = (canvas.height = canvas.offsetHeight || 600);
+    const drawMesh = () => {
+      const ctx = canvas.getContext("2d");
+      if (!ctx) return;
 
-    // Draw chromatic mesh gradient for WebGL shader refraction sampling
-    const g1 = ctx.createRadialGradient(w * 0.2, h * 0.3, 10, w * 0.2, h * 0.3, w * 0.6);
-    g1.addColorStop(0, "rgba(59, 130, 246, 0.45)");
-    g1.addColorStop(0.5, "rgba(14, 165, 233, 0.25)");
-    g1.addColorStop(1, "rgba(59, 130, 246, 0)");
-    ctx.fillStyle = g1;
-    ctx.fillRect(0, 0, w, h);
+      const w = (canvas.width = canvas.offsetWidth || 800);
+      const h = (canvas.height = canvas.offsetHeight || 600);
 
-    const g2 = ctx.createRadialGradient(w * 0.8, h * 0.6, 10, w * 0.8, h * 0.6, w * 0.6);
-    g2.addColorStop(0, "rgba(139, 92, 246, 0.40)");
-    g2.addColorStop(0.5, "rgba(168, 85, 247, 0.20)");
-    g2.addColorStop(1, "rgba(139, 92, 246, 0)");
-    ctx.fillStyle = g2;
-    ctx.fillRect(0, 0, w, h);
+      ctx.clearRect(0, 0, w, h);
 
-    const g3 = ctx.createRadialGradient(w * 0.5, h * 0.9, 10, w * 0.5, h * 0.9, w * 0.5);
-    g3.addColorStop(0, "rgba(6, 182, 212, 0.35)");
-    g3.addColorStop(1, "rgba(6, 182, 212, 0)");
-    ctx.fillStyle = g3;
-    ctx.fillRect(0, 0, w, h);
+      // Draw chromatic mesh gradient for WebGL shader refraction sampling
+      const g1 = ctx.createRadialGradient(w * 0.2, h * 0.3, 10, w * 0.2, h * 0.3, w * 0.6);
+      g1.addColorStop(0, "rgba(59, 130, 246, 0.45)");
+      g1.addColorStop(0.5, "rgba(14, 165, 233, 0.25)");
+      g1.addColorStop(1, "rgba(59, 130, 246, 0)");
+      ctx.fillStyle = g1;
+      ctx.fillRect(0, 0, w, h);
+
+      const g2 = ctx.createRadialGradient(w * 0.8, h * 0.6, 10, w * 0.8, h * 0.6, w * 0.6);
+      g2.addColorStop(0, "rgba(139, 92, 246, 0.40)");
+      g2.addColorStop(0.5, "rgba(168, 85, 247, 0.20)");
+      g2.addColorStop(1, "rgba(139, 92, 246, 0)");
+      ctx.fillStyle = g2;
+      ctx.fillRect(0, 0, w, h);
+
+      const g3 = ctx.createRadialGradient(w * 0.5, h * 0.9, 10, w * 0.5, h * 0.9, w * 0.5);
+      g3.addColorStop(0, "rgba(6, 182, 212, 0.35)");
+      g3.addColorStop(1, "rgba(6, 182, 212, 0)");
+      ctx.fillStyle = g3;
+      ctx.fillRect(0, 0, w, h);
+    };
+
+    drawMesh();
+    window.addEventListener("resize", drawMesh);
+    return () => window.removeEventListener("resize", drawMesh);
   }, [hasAmbientMesh]);
 
   useEffect(() => {
@@ -77,6 +86,7 @@ export function LiquidGlassContainer({
           fresnel: 1.0,
           tintStrength: 0.08,
           shadowOpacity: 0.25,
+          button: true,
           ...config,
         },
       });
@@ -106,4 +116,3 @@ export function LiquidGlassContainer({
     </div>
   );
 }
-

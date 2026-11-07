@@ -13,6 +13,9 @@ import {
 } from "lucide-react";
 import { LiquidGlassCard } from "@/components/ui/liquid-glass";
 import { LiquidGlassContainer } from "@/components/ui/liquid-glass-container";
+import { LiquidGlassLens } from "@/components/ui/liquid-glass-lens";
+import { LiquidGlassControls } from "@/components/ui/liquid-glass-controls";
+import { LensHeroTrigger } from "@/components/ui/lens-hero-trigger";
 
 export default function LandingPage() {
   return (
@@ -86,18 +89,13 @@ export default function LandingPage() {
             <ArrowRight className="w-4 h-4" />
           </Link>
 
+          <LensHeroTrigger />
+
           <Link
             href="/login"
             className="inline-flex items-center gap-2 px-6 py-3 text-sm font-semibold rounded-xl text-slate-800 dark:text-slate-200 liquid-glass hover:bg-white/80 dark:hover:bg-slate-800/80 shadow-sm transition-all"
           >
             <span>Sign In to Account</span>
-          </Link>
-
-          <Link
-            href="/signup"
-            className="inline-flex items-center gap-2 px-6 py-3 text-sm font-semibold rounded-xl text-slate-600 dark:text-slate-400 hover:text-slate-900 dark:hover:text-slate-100 transition-colors"
-          >
-            <span>Create New Workspace</span>
           </Link>
         </div>
 
@@ -157,6 +155,12 @@ export default function LandingPage() {
       <footer className="relative z-10 border-t border-white/60 dark:border-white/10 py-6 text-center text-xs text-slate-500 dark:text-slate-400">
         <p>Innovexa Technologies • Product Inventory & Listing Manager Assessment</p>
       </footer>
+
+      {/* Interactive Draggable Liquid Glass Magnifier Lens */}
+      <LiquidGlassLens />
+
+      {/* Floating Liquid Glass Physics Lab Dock */}
+      <LiquidGlassControls />
     </div>
   );
 }
