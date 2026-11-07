@@ -55,8 +55,8 @@ export default function SignupPage() {
     setIsSubmitting(false);
 
     setTimeout(() => {
-      router.push("/dashboard");
-    }, 1500);
+      window.location.href = "/dashboard";
+    }, 600);
   };
 
   return (
