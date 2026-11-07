@@ -11,9 +11,9 @@ function LoginForm() {
   const searchParams = useSearchParams();
   const redirectUrl = searchParams.get("redirect") || "/dashboard";
 
-  const [email, setEmail] = useState("reviewer@innovexa.tech");
-  const [password, setPassword] = useState("demo12345");
-  const [rememberMe, setRememberMe] = useState(true);
+  const [email, setEmail] = useState("");
+  const [password, setPassword] = useState("");
+  const [rememberMe, setRememberMe] = useState(false);
   const [isSubmitting, setIsSubmitting] = useState(false);
   const [error, setError] = useState<string | null>(null);
 
@@ -39,26 +39,6 @@ function LoginForm() {
     window.location.href = redirectUrl;
   };
 
-  const handleQuickDemo = async () => {
-    setIsSubmitting(true);
-    setError(null);
-    setEmail("reviewer@innovexa.tech");
-    setPassword("demo12345");
-
-    const formData = new FormData();
-    formData.append("email", "reviewer@innovexa.tech");
-    formData.append("password", "demo12345");
-    formData.append("rememberMe", "on");
-
-    const res = await loginAction(formData);
-    if (res?.error) {
-      setError(res.error);
-      setIsSubmitting(false);
-    } else {
-      window.location.href = redirectUrl;
-    }
-  };
-
   return (
     <div className="p-8 rounded-2xl bg-white dark:bg-[#0F172A] border border-slate-200 dark:border-slate-800 shadow-xl space-y-6">
       <div>
@@ -77,7 +57,7 @@ function LoginForm() {
         </div>
       )}
 
-      <form onSubmit={handleSubmit} className="space-y-4">
+      <form onSubmit={handleSubmit} autoComplete="off" className="space-y-4">
         <div className="space-y-1">
           <label className="text-xs font-semibold text-slate-700 dark:text-slate-300">
             Email Address
@@ -86,6 +66,10 @@ function LoginForm() {
             <Mail className="w-4 h-4 text-slate-400 absolute left-3 top-1/2 -translate-y-1/2" />
             <input
               type="email"
+              name="email"
+              autoComplete="off"
+              data-lpignore="true"
+              data-1p-ignore="true"
               required
               value={email}
               onChange={(e) => setEmail(e.target.value)}
@@ -111,6 +95,10 @@ function LoginForm() {
             <Lock className="w-4 h-4 text-slate-400 absolute left-3 top-1/2 -translate-y-1/2" />
             <input
               type="password"
+              name="password"
+              autoComplete="new-password"
+              data-lpignore="true"
+              data-1p-ignore="true"
               required
               value={password}
               onChange={(e) => setPassword(e.target.value)}

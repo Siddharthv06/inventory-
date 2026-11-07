@@ -70,7 +70,7 @@ export default function ResetPasswordPage() {
         </div>
       )}
 
-      <form onSubmit={handleSubmit} className="space-y-4">
+      <form onSubmit={handleSubmit} autoComplete="off" className="space-y-4">
         <div className="space-y-1">
           <label className="text-xs font-semibold text-slate-700 dark:text-slate-300">
             New Password
@@ -79,6 +79,10 @@ export default function ResetPasswordPage() {
             <Lock className="w-4 h-4 text-slate-400 absolute left-3 top-1/2 -translate-y-1/2" />
             <input
               type="password"
+              name="password"
+              autoComplete="new-password"
+              data-lpignore="true"
+              data-1p-ignore="true"
               required
               value={password}
               onChange={(e) => setPassword(e.target.value)}
@@ -96,6 +100,10 @@ export default function ResetPasswordPage() {
             <Lock className="w-4 h-4 text-slate-400 absolute left-3 top-1/2 -translate-y-1/2" />
             <input
               type="password"
+              name="confirmPassword"
+              autoComplete="new-password"
+              data-lpignore="true"
+              data-1p-ignore="true"
               required
               value={confirmPassword}
               onChange={(e) => setConfirmPassword(e.target.value)}

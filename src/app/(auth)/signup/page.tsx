@@ -55,8 +55,8 @@ export default function SignupPage() {
     setIsSubmitting(false);
 
     setTimeout(() => {
-      window.location.href = "/dashboard";
-    }, 600);
+      router.push("/dashboard");
+    }, 1500);
   };
 
   return (
@@ -84,7 +84,7 @@ export default function SignupPage() {
         </div>
       )}
 
-      <form onSubmit={handleSubmit} className="space-y-4">
+      <form onSubmit={handleSubmit} autoComplete="off" className="space-y-4">
         <div className="space-y-1">
           <label className="text-xs font-semibold text-slate-700 dark:text-slate-300">
             Full Name
@@ -93,6 +93,8 @@ export default function SignupPage() {
             <User className="w-4 h-4 text-slate-400 absolute left-3 top-1/2 -translate-y-1/2" />
             <input
               type="text"
+              name="fullName"
+              autoComplete="off"
               required
               value={fullName}
               onChange={(e) => setFullName(e.target.value)}
@@ -110,6 +112,10 @@ export default function SignupPage() {
             <Mail className="w-4 h-4 text-slate-400 absolute left-3 top-1/2 -translate-y-1/2" />
             <input
               type="email"
+              name="email"
+              autoComplete="off"
+              data-lpignore="true"
+              data-1p-ignore="true"
               required
               value={email}
               onChange={(e) => setEmail(e.target.value)}
@@ -128,6 +134,10 @@ export default function SignupPage() {
               <Lock className="w-4 h-4 text-slate-400 absolute left-3 top-1/2 -translate-y-1/2" />
               <input
                 type="password"
+                name="password"
+                autoComplete="new-password"
+                data-lpignore="true"
+                data-1p-ignore="true"
                 required
                 value={password}
                 onChange={(e) => setPassword(e.target.value)}
@@ -145,6 +155,10 @@ export default function SignupPage() {
               <Lock className="w-4 h-4 text-slate-400 absolute left-3 top-1/2 -translate-y-1/2" />
               <input
                 type="password"
+                name="confirmPassword"
+                autoComplete="new-password"
+                data-lpignore="true"
+                data-1p-ignore="true"
                 required
                 value={confirmPassword}
                 onChange={(e) => setConfirmPassword(e.target.value)}
